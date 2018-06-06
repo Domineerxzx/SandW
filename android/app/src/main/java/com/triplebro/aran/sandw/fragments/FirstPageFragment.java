@@ -39,7 +39,7 @@ public class FirstPageFragment extends Fragment{
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "FragmentWithRN", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "SandW", null);
         return mReactRootView;
 
         /*fragment_firstpage = inflater.inflate(R.layout.fragment_firstpage, null);
