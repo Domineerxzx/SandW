@@ -164,6 +164,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private void changeImageForButton(Button lastFunctionButton, Button onClickButton) {
         switch (lastFunctionButton.getId()) {
             case R.id.bt_first:
+                lastFunctionButton.setBackgroundResource(R.mipmap.ic_launcher);
                 break;
             case R.id.bt_type:
                 lastFunctionButton.setBackgroundResource(R.mipmap.type_unclick);
@@ -180,6 +181,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         }
         switch (onClickButton.getId()) {
             case R.id.bt_first:
+                onClickButton.setBackgroundResource(R.mipmap.ic_launcher_round);
                 break;
             case R.id.bt_type:
                 onClickButton.setBackgroundResource(R.mipmap.type_click);

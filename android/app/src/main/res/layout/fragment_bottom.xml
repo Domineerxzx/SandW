@@ -21,7 +21,7 @@
                 android:id="@+id/bt_first"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/ic_launcher_round" />
 
             <TextView
                 android:id="@+id/tv_first"
@@ -46,7 +46,7 @@
                 android:id="@+id/bt_type"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/type_unclick" />
 
             <TextView
                 android:id="@+id/tv_type"
@@ -70,7 +70,7 @@
                 android:id="@+id/bt_brand"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/brand_unclick" />
 
             <TextView
                 android:id="@+id/tv_brand"
@@ -94,7 +94,7 @@
                 android:id="@+id/bt_loves"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/type_unclick" />
 
             <TextView
                 android:id="@+id/tv_loves"
@@ -118,7 +118,7 @@
                 android:id="@+id/bt_myself"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/ic_launcher" />
+                android:background="@mipmap/myself_unclick" />
 
             <TextView
                 android:id="@+id/tv_myself"
