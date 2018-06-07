@@ -18,8 +18,8 @@ import com.triplebro.aran.sandw.R;
  * Created by Domineer on 2018/6/6.
  */
 
-public class BottomFragment extends Fragment implements View.OnClickListener {
-    private View fragment_bottom;
+public class BottomFragment extends Fragment implements View.OnClickListener{
+
     private LinearLayout ll_first;
     private LinearLayout ll_type;
     private LinearLayout ll_brand;
@@ -37,7 +37,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private TextView tv_brand;
     private TextView tv_loves;
     private TextView tv_myself;
-
+    private View fragment_bottom;
 
     private Button lastFunctionButton;
     private TextView lastFunctionTextView;
@@ -92,6 +92,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         tv_myself.setOnClickListener(this);
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -148,4 +149,5 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 }
