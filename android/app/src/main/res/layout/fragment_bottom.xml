@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="47dp"
         android:layout_alignParentBottom="true"
-        android:id="@+id/ll_first"
+        android:background="#fff"
+        android:id="@+id/ll_bottom"
         >
 
         <LinearLayout
@@ -94,7 +95,7 @@
                 android:id="@+id/bt_loves"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/type_unclick" />
+                android:background="@mipmap/loves_unclick" />
 
             <TextView
                 android:id="@+id/tv_loves"

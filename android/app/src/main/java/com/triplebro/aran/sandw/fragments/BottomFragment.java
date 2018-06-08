@@ -22,7 +22,7 @@ import com.triplebro.aran.sandw.R;
 public class BottomFragment extends Fragment implements View.OnClickListener {
 
     private View fragment_bottom;
-    private LinearLayout ll_first;
+    private LinearLayout ll_bottom;
     private LinearLayout ll_type;
     private LinearLayout ll_brand;
     private LinearLayout ll_loves;
@@ -54,7 +54,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView() {
-        ll_first = fragment_bottom.findViewById(R.id.ll_first);
+        ll_bottom = fragment_bottom.findViewById(R.id.ll_bottom);
         ll_type = fragment_bottom.findViewById(R.id.ll_type);
         ll_brand = fragment_bottom.findViewById(R.id.ll_brand);
         ll_loves = fragment_bottom.findViewById(R.id.ll_loves);
@@ -81,7 +81,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
 
     public void setOnClick() {
 
-        ll_first.setOnClickListener(this);
+        ll_bottom.setOnClickListener(this);
         ll_type.setOnClickListener(this);
         ll_brand.setOnClickListener(this);
         ll_loves.setOnClickListener(this);
@@ -103,7 +103,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ll_first:
+            case R.id.ll_bottom:
             case R.id.bt_first:
             case R.id.tv_first:
                 transaction = fragmentManager.beginTransaction();
