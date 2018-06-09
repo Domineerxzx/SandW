@@ -1,15 +1,12 @@
 package com.triplebro.aran.sandw.utils.httpUtils;
 
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.builder.PostFormBuilder;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import android.content.Context;
 
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * Created by Domineer on 2018/3/23.
@@ -23,15 +20,16 @@ public class HttpUtils {
         client.newCall(request).enqueue(callback);
     }
 
-    public static void sendOkHttpRequest(final String address, final com.zhy
-            .http.okhttp.callback.Callback callback, HashMap<String, String>
-            param) {
-        PostFormBuilder url = OkHttpUtils.post().url(address);
-        Iterator<Map.Entry<String, String>> iterator = param.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<String, String> next = iterator.next();
-            url.addParams(next.getKey(), next.getValue());
-        }
-        url.build().execute(callback);
+    public static void sendSessionOkHttpRequest(final String address, final Callback callback) {
+
+        String session = "";
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody requestBody = new FormBody.Builder().add( "session", session ).build();
+
+        Request request = new Request.Builder()
+                .url( address ).post( requestBody )
+                .build();
+        client.newCall( request ).enqueue( callback );
     }
 }
