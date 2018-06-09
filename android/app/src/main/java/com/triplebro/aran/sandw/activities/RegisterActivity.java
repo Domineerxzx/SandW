@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
@@ -26,6 +28,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private String nickname;
     private String email;
     private String password;
+    private CheckBox cb_agree;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
         et_username = (EditText) findViewById(R.id.et_username);
         et_email = (EditText) findViewById(R.id.et_email);
         et_password = (EditText) findViewById(R.id.et_password);
+        cb_agree = (CheckBox) findViewById(R.id.cb_agree);
     }
 
     @Override
@@ -66,8 +70,38 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 nickname = et_username.getText().toString().trim();
                 email = et_email.getText().toString().trim();
                 password = et_password.getText().toString().trim();
-                registerManager.register(nickname,email,password);
-                break;
+                boolean checked = cb_agree.isChecked();
+                if(!checked){
+                    Toast.makeText(this, "请阅读并同意条款", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (email.length() == 0) {
+                    Toast.makeText(this, "电子邮箱不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (password.length() == 0) {
+                    Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (nickname.length() == 0) {
+                    Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (nickname.length() > 20) {
+                    Toast.makeText(this, "用户名太长啦！！！", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (email.length() > 20) {
+                    Toast.makeText(this, "电子邮箱太长啦！！！", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                if (password.length() > 20) {
+                    Toast.makeText(this, "密码太长啦！！！", Toast.LENGTH_SHORT).show();
+                    break;
+                }else{
+                    registerManager.register(nickname,email,password);
+                    break;
+                }
             case R.id.bt_login:
                 Intent login = new Intent(this, LoginActivity.class);
                 startActivity(login);
