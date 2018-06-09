@@ -1,7 +1,7 @@
 package com.triplebro.aran.sandw.utils.ossUtils;
 
 /**
- * Created by 37444 on 2018/3/23.
+ * Created by Domineer on 2018/3/23.
  */
 
 public class ConfigOfOssClient {

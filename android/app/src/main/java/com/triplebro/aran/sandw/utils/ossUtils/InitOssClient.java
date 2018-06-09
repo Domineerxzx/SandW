@@ -7,7 +7,8 @@ import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.google.gson.Gson;
-import com.tts.oss_1.beans.OssBean;
+import com.triplebro.aran.sandw.beans.OssBean;
+import com.triplebro.aran.sandw.utils.httpUtils.HttpUtils;
 
 import java.io.IOException;
 
@@ -16,7 +17,7 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 /**
- * Created by 37444 on 2018/3/23.
+ * Created by Domineer on 2018/3/23.
  */
 
 public class InitOssClient {
