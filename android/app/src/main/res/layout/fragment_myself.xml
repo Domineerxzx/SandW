@@ -54,7 +54,7 @@
                 android:background="#cfcfcf"
                 android:orientation="vertical"
                 android:padding="20dp"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/tv_unlogin"
@@ -101,7 +101,7 @@
                 android:id="@+id/ll_login"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:visibility="visible">
+                android:visibility="gone">
 
 
                 <LinearLayout
