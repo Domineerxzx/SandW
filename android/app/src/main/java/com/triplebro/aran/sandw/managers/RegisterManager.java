@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Message;
 import android.util.Log;
 
-import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
 
 import java.io.IOException;
@@ -42,6 +41,7 @@ public class RegisterManager {
                     if (response.isSuccessful()) {
                         String res = response.body().string();
                         Log.i("ServerBackCode(服务器返回):", res);
+                        //TODO 判断服务器返回值
                         Message message = new Message();
                         message.obj = res;
                         registerHandler.sendMessage(message);

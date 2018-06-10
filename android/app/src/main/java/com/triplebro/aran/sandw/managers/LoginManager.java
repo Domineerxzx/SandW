@@ -40,6 +40,7 @@ public class LoginManager {
                     Response response = client.newCall(request).execute();
                     if (response.isSuccessful()) {
                         String res = response.body().string();
+                        //TODO 判断服务器返回值
                         Log.i("ServerBackCode(服务器返回):", res);
                         Message message = new Message();
                         message.obj = res;

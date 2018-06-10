@@ -310,19 +310,22 @@
                     android:layout_height="55dp"
                     android:layout_marginTop="10dp">
 
-                    <TextView
-                        android:id="@+id/tv_sex_f"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:text="女士"
-                        android:textSize="12dp" />
-
                     <RadioButton
                         android:id="@+id/rbt_sex_f"
                         android:layout_width="30dp"
                         android:layout_height="20dp"
                         android:layout_alignBottom="@id/tv_sex_f"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:checked="true"
+                        android:clickable="true"/>
+                    <TextView
+                        android:id="@+id/tv_sex_f"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_toLeftOf="@id/rbt_sex_f"
+                        android:text="女士"
+                        android:textSize="12dp" />
+
 
                     <View
                         android:id="@+id/v_sex_f"
@@ -331,6 +334,13 @@
                         android:layout_below="@id/tv_sex_f"
                         android:layout_marginTop="2dp"
                         android:background="#9dbebebe" />
+                    <RadioButton
+                        android:id="@+id/rbt_sex_m"
+                        android:layout_width="30dp"
+                        android:layout_height="20dp"
+                        android:layout_alignBottom="@id/tv_sex_m"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"/>
 
                     <TextView
                         android:id="@+id/tv_sex_m"
@@ -338,16 +348,11 @@
                         android:layout_height="20dp"
                         android:layout_below="@id/v_sex_f"
                         android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/rbt_sex_m"
                         android:layout_marginTop="5dp"
                         android:text="男士"
                         android:textSize="12dp" />
 
-                    <RadioButton
-                        android:id="@+id/rbt_sex_m"
-                        android:layout_width="30dp"
-                        android:layout_height="20dp"
-                        android:layout_alignBottom="@id/tv_sex_m"
-                        android:layout_alignParentRight="true" />
 
                     <View
                         android:id="@+id/v_sex_m"
@@ -655,7 +660,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_below="@id/ll_contact_us"
-                android:visibility="visible">
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_cancellation"
