@@ -42,6 +42,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     private LinearLayout ll_contact_email;
     private ImageView iv_contact_email;
     private TextView tv_contact_email;
+    private TextView tv_title;
 
 
     @Override
@@ -49,7 +50,12 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         fragment_myself = inflater.inflate(R.layout.fragment_myself, null);
         initView();
         setOnClickListener();
+        initData();
         return fragment_myself;
+    }
+
+    private void initData() {
+        tv_title.setText(R.string.title_myself);
     }
 
     @Override
@@ -89,6 +95,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         ll_contact_email = (LinearLayout) fragment_myself.findViewById(R.id.ll_contact_email);
         iv_contact_email = (ImageView) fragment_myself.findViewById(R.id.iv_contact_email);
         tv_contact_email = (TextView) fragment_myself.findViewById(R.id.tv_contact_email);
+        tv_title = getActivity().findViewById(R.id.tv_title);
     }
 
     @Override

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactRootView;
 import com.facebook.react.common.LifecycleState;
 import com.facebook.react.shell.MainReactPackage;
 import com.triplebro.aran.sandw.BuildConfig;
+import com.triplebro.aran.sandw.R;
 
 
 public class FirstPageFragment extends Fragment{
@@ -19,6 +21,7 @@ public class FirstPageFragment extends Fragment{
 
     ReactRootView mReactRootView;
     ReactInstanceManager mReactInstanceManager;
+    private TextView tv_title;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,23 +35,16 @@ public class FirstPageFragment extends Fragment{
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
         mReactRootView.startReactApplication(mReactInstanceManager, "SandW", null);
+        initView();
+        initData();
         return mReactRootView;
-
-        /*fragment_firstpage = inflater.inflate(R.layout.fragment_firstpage, null);
-        return fragment_firstpage;*/
     }
 
-    /*@Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Button button = getActivity().findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(getActivity(), ReactActivity.class);
-                startActivity(intent);
-            }
-        });
-    }*/
+    private void initData() {
+        tv_title.setText(R.string.title_first_page);
+    }
+
+    private void initView() {
+        tv_title = getActivity().findViewById(R.id.tv_title);
+    }
 }
