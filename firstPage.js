@@ -6,12 +6,27 @@
  *我觉得这世间再没有别的东西比它值得被如此依靠。
  */
 import React from "react";
-import {Button, Image, Text, View} from "react-native";
-import AransModules from "./AransModules";
+import {Button, Image, ScrollView, Text, TouchableHighlight, StyleSheet, View} from "react-native";
 import * as ToastAndroid from "react-native/Libraries/Components/ToastAndroid/ToastAndroid.android";
 
 export default class Firstpage extends React.Component{
+
+
+    constructor(aranToast: Firstpage.aranToast) {
+        super();
+        this.aranToast = aranToast;
+        this.state = {
+            number:0,
+        }
+    }
+
     aranToast: Firstpage.aranToast;
+
+    componentWillMount(){
+        let recriveValues = ToastAndroid.Constant;
+        return recriveValues;
+
+    }
 
      static aranToast(){
         /*AransModules.show('Awesome', AransModules.SHORT);*/
@@ -21,12 +36,14 @@ export default class Firstpage extends React.Component{
 
     render(){
         return(
-            <View>
+            <ScrollView>
+                <Text>{this.state.number}</Text>
                 <View>
-                    <Text
+                    <TouchableHighlight
+                        style={styles.aaaa}
                         onPress={this.aranToast}>
-                        ON PRESS
-                    </Text>
+                        <Text>onClick</Text>
+                    </TouchableHighlight>
                 </View>
                 <View>
                     <Image
@@ -39,14 +56,48 @@ export default class Firstpage extends React.Component{
                     <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
                            style={{width: 100, height: 100}}
                     />
+                    <Image
+                        source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                        style={{width: 100, height: 100}}
+                    />
+                    <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                           style={{width: 100, height: 100}}
+                    />
+                    <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                           style={{width: 100, height: 100}}
+                    />
+                    <Image
+                        source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                        style={{width: 100, height: 100}}
+                    />
+                    <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                           style={{width: 100, height: 100}}
+                    />
+                    <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                           style={{width: 100, height: 100}}
+                    />
+                    <Image
+                        source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                        style={{width: 100, height: 100}}
+                    />
+                    <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                           style={{width: 100, height: 100}}
+                    />
+                    <Image source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
+                           style={{width: 100, height: 100}}
+                    />
                 </View>
                 <View>
                     <Text>dsygaidgyijbhdusijdgbdufsi</Text>
                     <Text>dsygaidgyijbhdusijdgbdufsi</Text>
-                    <Text>dsygaidgyijbhdusijdgbdufsi</Text>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 
 }
+const styles = StyleSheet.create({
+   aaaa:{
+       backgroundColor: '#ff0d00',
+   }
+});

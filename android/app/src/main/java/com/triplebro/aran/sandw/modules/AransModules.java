@@ -30,6 +30,7 @@ public class AransModules extends ReactContextBaseJavaModule {
         this.mContext=reactContext;
     }
 
+    @ReactMethod
     public void show(String message, int duration) {
         Toast.makeText(getReactApplicationContext(), message, duration).show();
     }
