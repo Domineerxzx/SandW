@@ -19,8 +19,6 @@ import java.util.List;
 
 public class MainActivity extends Activity{
 
-
-
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private static final AransPackage mAranPackage = new AransPackage();

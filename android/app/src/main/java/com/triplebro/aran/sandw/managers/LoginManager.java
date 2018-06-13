@@ -1,10 +1,16 @@
 package com.triplebro.aran.sandw.managers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Message;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.triplebro.aran.sandw.activities.LoginActivity;
+import com.triplebro.aran.sandw.beans.LoginInfo;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
+
 import java.io.IOException;
 
 import okhttp3.FormBody;
@@ -34,17 +40,30 @@ public class LoginManager {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request;
-                    request = new Request.Builder().url("https://thethreestooges.cn:1225/login/change/pwd")
-                            .post(new FormBody.Builder().add("email", email)
-                                    .add("password", password).build()).build();
+                    request = new Request.Builder().url("http://120.25.96.141:8080/login/loginprove")
+                            .post(new FormBody.Builder().add("userName", email)
+                                    .add("passWord", password).build()).build();
                     Response response = client.newCall(request).execute();
-                    if (response.isSuccessful()) {
-                        String res = response.body().string();
-                        //TODO 判断服务器返回值
-                        Log.i("ServerBackCode(服务器返回):", res);
+                    String res = response.body().string();
+                    Gson gson = new Gson();
+                    LoginInfo loginInfo = gson.fromJson(res, LoginInfo.class);
+                    if (loginInfo.isResult()) {
+                        Log.i("ServerBackCode(服务器返回):", "登录成功");
+                        SharedPreferences sharedPreferences = context.getSharedPreferences("session", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sharedPreferences.edit();
+                        edit.putString("session", loginInfo.getSession());
+                        edit.commit();
                         Message message = new Message();
                         message.obj = res;
                         loginHandler.sendMessage(message);
+                    } else {
+                        Log.i("ServerBackCode(服务器返回):", "登录失败");
+                        ((LoginActivity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "登录失败", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">SandW</string>
-    <string name="title_first_page">首页</string>
+    <string name="app_name">S&amp;W</string>
+    <string name="title_first_page">S&amp;W</string>
     <string name="title_type">商品类别</string>
     <string name="title_brand">品牌</string>
     <string name="title_loves">愿望单</string>
     <string name="title_myself">我的账户</string>
+    <string name="title_userInfo">个人信息与密码</string>
 </resources>

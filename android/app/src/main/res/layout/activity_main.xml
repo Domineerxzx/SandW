@@ -15,8 +15,9 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:text="首页"
-            android:textSize="16dp" />
+            android:text="@string/title_first_page"
+            android:textSize="16dp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/iv_search"
