@@ -27,6 +27,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     private String email;
     private String password;
     private CheckBox cb_agree;
+    private RegisterHandler registerHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     }
 
     private void initData() {
-        RegisterHandler registerHandler = new RegisterHandler(this);
-        registerManager = new RegisterManager(this, registerHandler);
+        registerHandler = new RegisterHandler(this);
     }
 
     private void setOnClickListener() {
@@ -97,7 +97,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                     Toast.makeText(this, "密码太长啦！！！", Toast.LENGTH_SHORT).show();
                     break;
                 }else{
-                    registerManager.register(nickname,email,password);
+                    registerManager = new RegisterManager(this, registerHandler,nickname,email,password);
+                    registerManager.register();
                     break;
                 }
             case R.id.bt_login:
@@ -106,5 +107,11 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 finish();
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(registerManager);
     }
 }

@@ -24,6 +24,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private LoginManager loginManager;
     private Button bt_create;
     private Button bt_forget;
+    private LoginHandler loginHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +36,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     private void initData() {
-        LoginHandler loginHandler = new LoginHandler(this);
-        loginManager = new LoginManager(this, loginHandler);
+        loginHandler = new LoginHandler(this);
     }
 
     private void setOnClickListener() {
@@ -80,7 +80,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(this, "密码太长啦！！！", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
-                    loginManager.login(email, password);
+                    loginManager = new LoginManager(this,loginHandler,email,password);
+                    loginManager.login();
                     break;
                 }
             case R.id.bt_create:
@@ -92,5 +93,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 //TODO 跳转到忘记密码页面
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(loginManager);
     }
 }

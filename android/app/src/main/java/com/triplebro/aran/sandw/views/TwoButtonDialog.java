@@ -7,6 +7,8 @@ import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.triplebro.aran.sandw.R;
+
 public class TwoButtonDialog extends DialogFragment {
 
     private DialogInterface.OnClickListener positiveCallback;
@@ -28,7 +30,7 @@ public class TwoButtonDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_Dialog);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setPositiveButton("确定", positiveCallback);

@@ -27,6 +27,7 @@ import com.triplebro.aran.sandw.activities.ChangeUserInfoActivity;
 import com.triplebro.aran.sandw.activities.LoginActivity;
 import com.triplebro.aran.sandw.activities.RegisterActivity;
 import com.triplebro.aran.sandw.managers.UserManager;
+import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.utils.permissionUtils.PermissionUtils;
 import com.triplebro.aran.sandw.views.TwoButtonDialog;
 
@@ -88,9 +89,10 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
             ll_unlogin.setVisibility(View.GONE);
             rl_login.setVisibility(View.VISIBLE);
             ll_cancellation.setVisibility(View.VISIBLE);
-            UserHandler userHandler = new UserHandler(getActivity(), tv_username, tv_email, tv_cancellation);
-            UserManager userManager = new UserManager(getActivity(),userHandler);
-            userManager.updateUserInfo(session_now);
+            UserHandler userHandler = new UserHandler(getActivity(),tv_username, tv_email, tv_cancellation);
+            UserManager userManager = new UserManager(getActivity(),userHandler,session_now,AppProperties.UPDATE_USER_INFO_WHAT_OUTSIDE);
+            userHandler.setUserManager(userManager);
+            userManager.showUserInfo();
         }
     }
 

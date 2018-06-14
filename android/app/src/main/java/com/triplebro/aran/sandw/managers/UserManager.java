@@ -1,67 +1,40 @@
 package com.triplebro.aran.sandw.managers;
 
+import android.content.ComponentName;
 import android.content.Context;
-import android.os.Message;
-import android.util.Log;
-import android.widget.Toast;
-import com.google.gson.Gson;
-import com.triplebro.aran.sandw.activities.LoginActivity;
-import com.triplebro.aran.sandw.beans.UserInfo;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import com.triplebro.aran.sandw.handlers.UserHandler;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.triplebro.aran.sandw.services.NetworkCommunicationService;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-public class UserManager {
+public class UserManager implements ServiceConnection{
 
     private Context context;
     private UserHandler userHandler;
+    private String session;
+    private int messageWhat;
 
-    public UserManager(Context context, UserHandler userHandler) {
+    public UserManager(Context context, UserHandler userHandler, String session, int messageWhat) {
         this.context = context;
         this.userHandler = userHandler;
+        this.session = session;
+        this.messageWhat = messageWhat;
     }
 
-    public void updateUserInfo(String session) {
-        sendRequest(session);
+    public void showUserInfo() {
+        Intent show = new Intent(context, NetworkCommunicationService.class);
+        context.bindService(show,this,Context.BIND_AUTO_CREATE);
     }
 
-    private void sendRequest(final String session) {
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    OkHttpClient client = new OkHttpClient();
-                    Request request;
-                    request = new Request.Builder().url("http://120.25.96.141:8080/login/userInit")
-                            .post(new FormBody.Builder().add("session", session).build()).build();
-                    Response response = client.newCall(request).execute();
-                    String res = response.body().string();
-                    Gson gson = new Gson();
-                    UserInfo userInfo = gson.fromJson(res, UserInfo.class);
-                    if (userInfo.isSessionProve()) {
-                        Log.i("ServerBackCode(服务器返回):", "更新成功");
-                        Message message = new Message();
-                        message.obj = userInfo.getUserInfo();
-                        userHandler.sendMessage(message);
-                    } else {
-                        Log.i("ServerBackCode(服务器返回):", "更新失败");
-                        ((LoginActivity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context, "更新失败", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        NetworkCommunicationService.MyBinder myBinder = (NetworkCommunicationService.MyBinder) service;
+        myBinder.showUserInfo(context,userHandler,session,messageWhat);
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+
     }
 }
