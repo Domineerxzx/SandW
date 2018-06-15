@@ -1,11 +1,13 @@
 package com.triplebro.aran.sandw.activities;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 import com.triplebro.aran.sandw.BuildConfig;
 import com.triplebro.aran.sandw.modules.AransPackage;
 
@@ -23,6 +25,16 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
+    public static Context appContext;
+    private static MainApplication instance;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        instance = this;
+        appContext = getApplicationContext();
+        SoLoader.init(this,false);
+    }
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
@@ -32,7 +44,8 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
-                    new MainReactPackage(),new AransPackage()
+                    new MainReactPackage(),
+                    new AransPackage()
             );
         }
     };
