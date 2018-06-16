@@ -32,11 +32,7 @@ public class AransPackage implements ReactPackage {
         modules.add(mModule);
         return modules;
     }
-    protected List<ReactPackage> getPackages() {
-        return Arrays.<ReactPackage>asList(
-                new MainReactPackage(),
-                new AransPackage()); // <-- 添加这一行，类名替换成你的Package类的名字.
-    }
+
 
 
     @Override
