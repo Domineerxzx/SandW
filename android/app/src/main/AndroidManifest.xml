@@ -31,9 +31,12 @@
         <activity android:name=".activities.ReactActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.ChangeUserInfoActivity"/>
-        <activity android:name=".activities.ChangePassWordActivity"/>
-        <service android:name=".services.NetworkCommunicationService"/>
+        <activity android:name=".activities.ChangeUserInfoActivity" />
+        <activity android:name=".activities.ChangePassWordActivity" />
+
+        <service android:name=".services.NetworkCommunicationService" />
+
+        <activity android:name=".activities.ShopBagActivity"></activity>
     </application>
 
 </manifest>

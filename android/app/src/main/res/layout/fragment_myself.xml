@@ -281,9 +281,7 @@
                         android:layout_width="30dp"
                         android:layout_height="20dp"
                         android:layout_alignBottom="@id/tv_sex_f"
-                        android:layout_alignParentRight="true"
-                        android:checked="true"
-                        android:clickable="true"/>
+                        android:layout_alignParentRight="true"/>
                     <TextView
                         android:id="@+id/tv_sex_f"
                         android:layout_width="match_parent"
@@ -305,8 +303,7 @@
                         android:layout_width="30dp"
                         android:layout_height="20dp"
                         android:layout_alignBottom="@id/tv_sex_m"
-                        android:layout_alignParentRight="true"
-                        android:clickable="true"/>
+                        android:layout_alignParentRight="true"/>
 
                     <TextView
                         android:id="@+id/tv_sex_m"

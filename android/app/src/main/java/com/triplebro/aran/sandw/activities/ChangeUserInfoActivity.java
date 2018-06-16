@@ -12,7 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.handlers.ChangeInfoHandler;
 import com.triplebro.aran.sandw.handlers.UserHandler;
+import com.triplebro.aran.sandw.managers.ChangeInfoManager;
 import com.triplebro.aran.sandw.managers.UserManager;
 import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.views.DatePickerListener;
@@ -32,6 +34,16 @@ public class ChangeUserInfoActivity extends Activity implements View.OnClickList
     private Button bt_change_password;
     private UserHandler userHandler;
     private UserManager userManager;
+    private Button bt_change_info;
+    private String nickname;
+    private String email;
+    private String birthday;
+    private ChangeInfoHandler changeInfoHandler;
+    private ChangeInfoManager changeInfoManager;
+    private String sessionInfo;
+    private SharedPreferences session;
+    private SharedPreferences sex;
+    private String sexInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +60,19 @@ public class ChangeUserInfoActivity extends Activity implements View.OnClickList
         tv_birth.setOnClickListener(this);
         iv_birth.setOnClickListener(this);
         bt_change_password.setOnClickListener(this);
+        bt_change_info.setOnClickListener(this);
     }
 
     private void initData() {
-        SharedPreferences session = getSharedPreferences("session", MODE_PRIVATE);
-        String sessions = session.getString("session", null);
-        if (sessions != null) {
+        session = getSharedPreferences("session", MODE_PRIVATE);
+        sessionInfo = session.getString("session", null);
+        if (sessionInfo != null) {
             userHandler = new UserHandler(this, tv_birth, et_username, et_email);
-            userManager = new UserManager(this, userHandler,sessions, AppProperties.UPDATE_USER_INFO_WHAT_INSIDE);
+            userManager = new UserManager(this, userHandler, sessionInfo, AppProperties.UPDATE_USER_INFO_WHAT_INSIDE);
             userManager.showUserInfo();
         }
+        sex = getSharedPreferences("sex", MODE_PRIVATE);
+        sexInfo = sex.getString("sex", null);
         Calendar calendar = Calendar.getInstance();
         year_now = calendar.get(Calendar.YEAR);
         month_now = calendar.get(Calendar.MONTH);
@@ -72,6 +87,7 @@ public class ChangeUserInfoActivity extends Activity implements View.OnClickList
         iv_birth = (ImageView) findViewById(R.id.iv_birth);
         iv_close_user_info = (ImageView) findViewById(R.id.iv_close_user_info);
         bt_change_password = (Button) findViewById(R.id.bt_change_password);
+        bt_change_info = (Button) findViewById(R.id.bt_change_info);
     }
 
     @Override
@@ -83,12 +99,21 @@ public class ChangeUserInfoActivity extends Activity implements View.OnClickList
             case R.id.tv_birth:
             case R.id.iv_birth:
                 DatePickerDialog datePickerDialog = new DatePickerDialog(this, R.style.MyDatePickerDialogTheme,
-                        new DatePickerListener(tv_birth,year_now,month_now,day_now), year_now, month_now, day_now);
+                        new DatePickerListener(tv_birth, year_now, month_now, day_now), year_now, month_now, day_now);
                 datePickerDialog.show();
+
                 break;
             case R.id.bt_change_password:
                 Intent intent = new Intent(this, ChangePassWordActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.bt_change_info:
+                nickname = et_username.getText().toString().trim();
+                email = et_email.getText().toString().trim();
+                birthday = tv_birth.getText().toString().trim();
+                changeInfoHandler = new ChangeInfoHandler(this);
+                changeInfoManager = new ChangeInfoManager(this, changeInfoHandler, nickname, email, birthday, sexInfo, sessionInfo);
+                changeInfoManager.changeInfo();
                 break;
         }
     }
@@ -97,5 +122,8 @@ public class ChangeUserInfoActivity extends Activity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         unbindService(userManager);
+        if (changeInfoManager != null) {
+            unbindService(changeInfoManager);
+        }
     }
 }

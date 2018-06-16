@@ -9,7 +9,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+
 import com.triplebro.aran.sandw.handlers.UserHandler;
+
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +63,18 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     private TextView tv_user;
     private ImageView iv_user_more;
     private TextView tv_cancellation;
+    private RelativeLayout rl_clause;
+    private TextView tv_clause;
+    private ImageView iv_clause_more;
+    private RelativeLayout rl_privacy;
+    private TextView tv_privacy;
+    private ImageView iv_privacy_more;
+    private RelativeLayout rl_guide;
+    private TextView tv_guide;
+    private ImageView iv_guide_more;
+    private RelativeLayout rl_partner;
+    private TextView tv_partner;
+    private ImageView iv_partner_more;
 
 
     @Override
@@ -74,6 +88,10 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
 
     private void initData() {
         tv_title.setText(R.string.title_myself);
+        SharedPreferences sex = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sex.edit();
+        edit.putString("sex","Girl");
+        edit.commit();
     }
 
     @Override
@@ -83,14 +101,14 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         //TODO 重新请求，查看本地是否存在session,如果有就请求加载个人信息
         //TODO 同时更新UI.可视化注销及个人信息控件
 
-        session = getActivity().getBaseContext().getSharedPreferences("session", Context.MODE_PRIVATE);
+        session = getActivity().getSharedPreferences("session", Context.MODE_PRIVATE);
         String session_now = session.getString("session", null);
         if (session_now != null) {
             ll_unlogin.setVisibility(View.GONE);
             rl_login.setVisibility(View.VISIBLE);
             ll_cancellation.setVisibility(View.VISIBLE);
-            UserHandler userHandler = new UserHandler(getActivity(),tv_username, tv_email, tv_cancellation);
-            UserManager userManager = new UserManager(getActivity(),userHandler,session_now,AppProperties.UPDATE_USER_INFO_WHAT_OUTSIDE);
+            UserHandler userHandler = new UserHandler(getActivity(), tv_username, tv_email, tv_cancellation,rbt_sex_f,rbt_sex_m);
+            UserManager userManager = new UserManager(getActivity(), userHandler, session_now, AppProperties.UPDATE_USER_INFO_WHAT_OUTSIDE);
             userHandler.setUserManager(userManager);
             userManager.showUserInfo();
         }
@@ -113,6 +131,18 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         rl_about_us.setOnClickListener(this);
         tv_about_us.setOnClickListener(this);
         iv_about_us_more.setOnClickListener(this);
+        rl_clause.setOnClickListener(this);
+        tv_clause.setOnClickListener(this);
+        iv_clause_more.setOnClickListener(this);
+        rl_privacy.setOnClickListener(this);
+        tv_privacy.setOnClickListener(this);
+        iv_privacy_more.setOnClickListener(this);
+        rl_guide.setOnClickListener(this);
+        tv_guide.setOnClickListener(this);
+        iv_guide_more.setOnClickListener(this);
+        rl_partner.setOnClickListener(this);
+        tv_partner.setOnClickListener(this);
+        iv_partner_more.setOnClickListener(this);
         bt_cancellation.setOnClickListener(this);
         tv_user.setOnClickListener(this);
         iv_user_more.setOnClickListener(this);
@@ -144,6 +174,18 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         tv_user = fragment_myself.findViewById(R.id.tv_user);
         iv_user_more = fragment_myself.findViewById(R.id.iv_user_more);
         tv_cancellation = fragment_myself.findViewById(R.id.tv_cancellation);
+        rl_clause = fragment_myself.findViewById(R.id.rl_clause);
+        tv_clause = fragment_myself.findViewById(R.id.tv_clause);
+        iv_clause_more = fragment_myself.findViewById(R.id.iv_clause_more);
+        rl_privacy = fragment_myself.findViewById(R.id.rl_privacy);
+        tv_privacy = fragment_myself.findViewById(R.id.tv_privacy);
+        iv_privacy_more = fragment_myself.findViewById(R.id.iv_privacy_more);
+        rl_guide = fragment_myself.findViewById(R.id.rl_guide);
+        tv_guide = fragment_myself.findViewById(R.id.tv_guide);
+        iv_guide_more = fragment_myself.findViewById(R.id.iv_guide_more);
+        rl_partner = fragment_myself.findViewById(R.id.rl_partner);
+        tv_partner = fragment_myself.findViewById(R.id.tv_partner);
+        iv_partner_more = fragment_myself.findViewById(R.id.iv_partner_more);
     }
 
     @Override
@@ -179,26 +221,54 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.tv_sex_f:
             case R.id.rbt_sex_f:
-                boolean checked_f = rbt_sex_f.isChecked();
-                if (checked_f) {
-                    rbt_sex_m.setChecked(false);
-                    break;
-                } else {
-                    rbt_sex_f.setChecked(true);
-                    rbt_sex_m.setChecked(false);
-                    break;
-                }
+                TwoButtonDialog choose_sex_f = new TwoButtonDialog();
+                choose_sex_f.show("修改性别为女", "我们将优先展示女士单品，确定要修改吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean checked_f = rbt_sex_f.isChecked();
+                        if (checked_f) {
+                            rbt_sex_m.setChecked(false);
+                        } else {
+                            rbt_sex_f.setChecked(true);
+                            rbt_sex_m.setChecked(false);
+                        }
+                        SharedPreferences sex = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sex.edit();
+                        edit.putString("sex","Girl");
+                        edit.commit();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "取消修改", Toast.LENGTH_SHORT).show();
+                    }
+                }, getActivity().getFragmentManager());
+                break;
             case R.id.tv_sex_m:
             case R.id.rbt_sex_m:
-                boolean checked_m = rbt_sex_m.isChecked();
-                if (checked_m) {
-                    rbt_sex_f.setChecked(false);
-                    break;
-                } else {
-                    rbt_sex_f.setChecked(false);
-                    rbt_sex_m.setChecked(true);
-                    break;
-                }
+                TwoButtonDialog choose_sex_m = new TwoButtonDialog();
+                choose_sex_m.show("修改性别为男", "我们将优先展示男士单品，确定要修改吗？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        boolean checked_m = rbt_sex_m.isChecked();
+                        if (checked_m) {
+                            rbt_sex_f.setChecked(false);
+                        } else {
+                            rbt_sex_f.setChecked(false);
+                            rbt_sex_m.setChecked(true);
+                        }
+                        SharedPreferences sex = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor edit = sex.edit();
+                        edit.putString("sex","Man");
+                        edit.commit();
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "取消修改", Toast.LENGTH_SHORT).show();
+                    }
+                }, getActivity().getFragmentManager());
+                break;
             case R.id.ll_contact_phone:
             case R.id.iv_contact_phone:
             case R.id.tv_contact_phone:
@@ -260,6 +330,78 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
             case R.id.iv_user_more:
                 Intent intent = new Intent(getActivity(), ChangeUserInfoActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.rl_clause:
+            case R.id.tv_clause:
+            case R.id.iv_clause_more:
+                TwoButtonDialog clause = new TwoButtonDialog();
+                clause.show("您即将退出应用程序，前往S&W官网", "确定？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("http://www.thethreestooges.cn");
+                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(it);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "取消访问", Toast.LENGTH_SHORT).show();
+                    }
+                }, getActivity().getFragmentManager());
+                break;
+            case R.id.rl_privacy:
+            case R.id.tv_privacy:
+            case R.id.iv_privacy_more:
+                TwoButtonDialog privacy = new TwoButtonDialog();
+                privacy.show("您即将退出应用程序，前往S&W官网", "确定？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("http://www.thethreestooges.cn");
+                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(it);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "取消访问", Toast.LENGTH_SHORT).show();
+                    }
+                }, getActivity().getFragmentManager());
+                break;
+            case R.id.rl_guide:
+            case R.id.tv_guide:
+            case R.id.iv_guide_more:
+                TwoButtonDialog guide = new TwoButtonDialog();
+                guide.show("您即将退出应用程序，前往S&W官网", "确定？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("http://www.thethreestooges.cn");
+                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(it);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "取消访问", Toast.LENGTH_SHORT).show();
+                    }
+                }, getActivity().getFragmentManager());
+                break;
+            case R.id.rl_partner:
+            case R.id.tv_partner:
+            case R.id.iv_partner_more:
+                TwoButtonDialog partner = new TwoButtonDialog();
+                partner.show("您即将退出应用程序，前往S&W官网", "确定？", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Uri uri = Uri.parse("http://www.thethreestooges.cn");
+                        Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(it);
+                    }
+                }, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "取消访问", Toast.LENGTH_SHORT).show();
+                    }
+                }, getActivity().getFragmentManager());
                 break;
         }
     }

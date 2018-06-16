@@ -1,6 +1,7 @@
 package com.triplebro.aran.sandw.activities;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.handlers.ChangePassWordHandler;
+import com.triplebro.aran.sandw.managers.ChangePassWordManager;
 
 public class ChangePassWordActivity extends Activity implements View.OnClickListener {
 
@@ -20,6 +23,10 @@ public class ChangePassWordActivity extends Activity implements View.OnClickList
     private String old_password;
     private String new_password;
     private String new_password_r;
+    private ChangePassWordHandler changePassWordHandler;
+    private SharedPreferences sessionInfo;
+    private String session;
+    private ChangePassWordManager changePassWordManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +46,8 @@ public class ChangePassWordActivity extends Activity implements View.OnClickList
     }
 
     private void initData() {
-
-        old_password = et_old_password.getText().toString().trim();
-        new_password = et_new_password.getText().toString().trim();
-        new_password_r = et_new_password_r.getText().toString().trim();
-
-
+        sessionInfo = getSharedPreferences("session", MODE_PRIVATE);
+        session = sessionInfo.getString("session", null);
     }
 
     private void setOnClickListener() {
@@ -57,23 +60,38 @@ public class ChangePassWordActivity extends Activity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_close_change_password:
                 finish();
                 break;
             case R.id.bt_change_password:
-                if(old_password.length()==0||new_password.length()==0||new_password_r.length()==0){
+                old_password = et_old_password.getText().toString().trim();
+                new_password = et_new_password.getText().toString().trim();
+                new_password_r = et_new_password_r.getText().toString().trim();
+                if (old_password.length() == 0 || new_password.length() == 0 || new_password_r.length() == 0) {
                     Toast.makeText(this, "信息不能为空！", Toast.LENGTH_SHORT).show();
                 }
-                if(new_password.equals(old_password)){
+                if (new_password.equals(old_password)) {
                     Toast.makeText(this, "新密码不能与旧密码相同！", Toast.LENGTH_SHORT).show();
                 }
-                if(!new_password.equals(new_password_r)){
+                if (!new_password.equals(new_password_r)) {
                     Toast.makeText(this, "新密码与确认新密码不相同！", Toast.LENGTH_SHORT).show();
                 } else {
-                    //TODO 服务器通信修改密码
+                    changePassWordHandler = new ChangePassWordHandler(this);
+                    changePassWordManager = new ChangePassWordManager(this, changePassWordHandler, old_password, new_password, session);
+                    changePassWordManager.changePassword();
                 }
                 break;
+        }
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (changePassWordManager != null) {
+
+            unbindService(changePassWordManager);
         }
 
     }

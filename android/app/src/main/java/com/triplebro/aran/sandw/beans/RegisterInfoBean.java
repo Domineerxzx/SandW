@@ -1,6 +1,6 @@
 package com.triplebro.aran.sandw.beans;
 
-public class RegisterInfo {
+public class RegisterInfoBean {
 
     /**
      * result : true

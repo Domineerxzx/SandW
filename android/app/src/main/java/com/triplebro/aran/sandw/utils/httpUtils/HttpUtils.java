@@ -22,6 +22,7 @@ public class HttpUtils {
 
         OkHttpClient okHttpClient = new OkHttpClient();
         Request request = new Request.Builder().url(address).post(param.build()).build();
+        System.out.println(request.toString());
         Call call = okHttpClient.newCall(request);
         call.enqueue(callback);
     }

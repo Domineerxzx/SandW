@@ -2,8 +2,9 @@ package com.triplebro.aran.sandw.beans;
 
 public class UserInfo {
 
+
     /**
-     * userInfo : {"userNum":"SandW000050","sex":null,"birthday":null,"nickname":"aaaa","userName":"aaabc"}
+     * userInfo : {"userNum":"SandW000050","sex":null,"birthday":null,"nickName":"aaaa","userName":"aaabc"}
      * sessionProve : true
      */
 
@@ -31,14 +32,14 @@ public class UserInfo {
          * userNum : SandW000050
          * sex : null
          * birthday : null
-         * nickname : aaaa
+         * nickName : aaaa
          * userName : aaabc
          */
 
         private String userNum;
         private Object sex;
         private Object birthday;
-        private String nickname;
+        private String nickName;
         private String userName;
 
         public String getUserNum() {
@@ -65,12 +66,12 @@ public class UserInfo {
             this.birthday = birthday;
         }
 
-        public String getNickname() {
-            return nickname;
+        public String getNickName() {
+            return nickName;
         }
 
-        public void setNickname(String nickname) {
-            this.nickname = nickname;
+        public void setNickName(String nickName) {
+            this.nickName = nickName;
         }
 
         public String getUserName() {
