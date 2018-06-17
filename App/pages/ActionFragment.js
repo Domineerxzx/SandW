@@ -8,7 +8,7 @@
 
 import React, {Component} from "react";
 import {Image, Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
-import SwiperModules from "../modules/SwiperModules";
+import DataSwiperModules from "../modules/dataSwiperModules";
 
 
 export default class ActionFragment extends Component {
@@ -24,12 +24,13 @@ export default class ActionFragment extends Component {
                             <Text style={styles.BuyJewelry}>
                                 选购首饰
                             </Text>
-                            <SwiperModules style={styles.SwiperView}/>
+                            <DataSwiperModules/>
                         </View>
                         <View>
                             <Image
                                 source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
                                 style={{width: 100, height: 100}}
+
                             />
                         </View>
                     </View>

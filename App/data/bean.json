@@ -1,0 +1,11 @@
+{
+  "adInfo":[
+
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"aaaaaa"},
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"bbbbbb"},
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"cccccc"},
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"dddddd"}
+
+  ],
+  "test":[{"testResult":"result"}]
+}
