@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.triplebro.aran.sandw.activities.AddressActivity;
 import com.triplebro.aran.sandw.handlers.UserHandler;
 
 import android.support.v4.content.ContextCompat;
@@ -75,6 +76,9 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout rl_partner;
     private TextView tv_partner;
     private ImageView iv_partner_more;
+    private TextView tv_address;
+    private ImageView iv_address_more;
+    private String session_now;
 
 
     @Override
@@ -101,8 +105,10 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         //TODO 重新请求，查看本地是否存在session,如果有就请求加载个人信息
         //TODO 同时更新UI.可视化注销及个人信息控件
 
-        session = getActivity().getSharedPreferences("session", Context.MODE_PRIVATE);
-        String session_now = session.getString("session", null);
+        if(session == null){
+            session = getActivity().getSharedPreferences("session", Context.MODE_PRIVATE);
+            session_now = session.getString("session", null);
+        }
         if (session_now != null) {
             ll_unlogin.setVisibility(View.GONE);
             rl_login.setVisibility(View.VISIBLE);
@@ -146,6 +152,8 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         bt_cancellation.setOnClickListener(this);
         tv_user.setOnClickListener(this);
         iv_user_more.setOnClickListener(this);
+        tv_address.setOnClickListener(this);
+        iv_address_more.setOnClickListener(this);
     }
 
     private void initView() {
@@ -186,6 +194,8 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         rl_partner = fragment_myself.findViewById(R.id.rl_partner);
         tv_partner = fragment_myself.findViewById(R.id.tv_partner);
         iv_partner_more = fragment_myself.findViewById(R.id.iv_partner_more);
+        tv_address = fragment_myself.findViewById(R.id.tv_address);
+        iv_address_more = fragment_myself.findViewById(R.id.iv_address_more);
     }
 
     @Override
@@ -402,6 +412,11 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
                         Toast.makeText(getActivity(), "取消访问", Toast.LENGTH_SHORT).show();
                     }
                 }, getActivity().getFragmentManager());
+                break;
+            case R.id.tv_address:
+            case R.id.iv_address_more:
+                Intent address = new Intent(getActivity(), AddressActivity.class);
+                getActivity().startActivity(address);
                 break;
         }
     }

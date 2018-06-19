@@ -13,22 +13,33 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.triplebro.aran.sandw.activities.ChangeUserInfoActivity;
 import com.triplebro.aran.sandw.activities.LoginActivity;
 import com.triplebro.aran.sandw.activities.RegisterActivity;
+import com.triplebro.aran.sandw.beans.AddAddressInfoBean;
+import com.triplebro.aran.sandw.beans.AddressInfoBean;
+import com.triplebro.aran.sandw.beans.ChangeAddressInfoBean;
 import com.triplebro.aran.sandw.beans.ChangePasswordBean;
 import com.triplebro.aran.sandw.beans.ChangeUserInfoBean;
 import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
+import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
 import com.triplebro.aran.sandw.beans.UserInfo;
+import com.triplebro.aran.sandw.handlers.AddAddressHandler;
+import com.triplebro.aran.sandw.handlers.AddressHandler;
+import com.triplebro.aran.sandw.handlers.ChangeAddressHandler;
 import com.triplebro.aran.sandw.handlers.ChangeInfoHandler;
 import com.triplebro.aran.sandw.handlers.ChangePassWordHandler;
+import com.triplebro.aran.sandw.handlers.DeleteAddressHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
+import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
 import com.triplebro.aran.sandw.handlers.UserHandler;
 import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.utils.httpUtils.HttpUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -68,6 +79,203 @@ public class NetworkCommunicationService extends Service {
         public void changePassword(Context context, ChangePassWordHandler changePassWordHandler, String old_password, String new_password, String session) {
             NetworkCommunicationService.this.changePassword(context, changePassWordHandler, old_password, new_password, session);
         }
+
+        public void showAddress(Context context, AddressHandler addressHandler,String session) {
+            NetworkCommunicationService.this.showAddress(context,addressHandler,session);
+        }
+
+        public void addAddress(Context context, AddAddressHandler addAddressHandler, AddAddressInfoBean addAddressInfoBean, String session) {
+            NetworkCommunicationService.this.addAddress(context,addAddressHandler,addAddressInfoBean,session);
+        }
+
+        public void changeAddress(Context context, ChangeAddressHandler changeAddressHandler, ChangeAddressInfoBean changeAddressInfoBean, String session) {
+            NetworkCommunicationService.this.changeAddress(context,changeAddressHandler,changeAddressInfoBean,session);
+        }
+
+        public void showAddressInfo(Context context, ShowAddressInfoHandler showAddressInfoHandler, String address_id) {
+            NetworkCommunicationService.this.showAddressInfo(context,showAddressInfoHandler,address_id);
+        }
+
+        public void deleteAddress(Context context, DeleteAddressHandler deleteAddressHandler, String session, String address_id) {
+            NetworkCommunicationService.this.deleteAddress(context,deleteAddressHandler,session,address_id);
+        }
+    }
+
+    private void deleteAddress(final Context context, final DeleteAddressHandler deleteAddressHandler, String session, String address_id) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session",session);
+        builder.add("addressId",address_id);
+        new Thread(){
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_DELETE_ADDRESS, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Message message = Message.obtain();
+                        deleteAddressHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "删除地址成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void showAddressInfo(final Context context, final ShowAddressInfoHandler showAddressInfoHandler, String address_id) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("addressId",address_id);
+        new Thread(){
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SHOW_ADDRESS_MORE, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().toString();
+                        ShowAddressInfoBean showAddressInfoBean = gson.fromJson(res, ShowAddressInfoBean.class);
+                        Message message = Message.obtain();
+                        message.obj = showAddressInfoBean;
+                        showAddressInfoHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "显示详细地址成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void changeAddress(final Context context, final ChangeAddressHandler changeAddressHandler, ChangeAddressInfoBean changeAddressInfoBean, String session) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session", session);
+        builder.add("addressId",changeAddressInfoBean.getAddressId());
+        builder.add("surName",changeAddressInfoBean.getSurName());
+        builder.add("name",changeAddressInfoBean.getName());
+        builder.add("country",changeAddressInfoBean.getCountry());
+        builder.add("province",changeAddressInfoBean.getProvince());
+        builder.add("city",changeAddressInfoBean.getCity());
+        builder.add("address",changeAddressInfoBean.getAddress());
+        builder.add("postCode",changeAddressInfoBean.getPostCode());
+        builder.add("phone",changeAddressInfoBean.getPhone());
+        builder.add("option",changeAddressInfoBean.getOption());
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_ADD_ADDRESS, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Message message = new Message();
+                        changeAddressHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "修改地址成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void addAddress(final Context context, final AddAddressHandler addAddressHandler, AddAddressInfoBean addAddressInfoBean, String session) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session", session);
+        builder.add("surName",addAddressInfoBean.getSurName());
+        builder.add("name",addAddressInfoBean.getName());
+        builder.add("country",addAddressInfoBean.getCountry());
+        builder.add("province",addAddressInfoBean.getProvince());
+        builder.add("city",addAddressInfoBean.getCity());
+        builder.add("address",addAddressInfoBean.getAddress());
+        builder.add("postCode",addAddressInfoBean.getPostCode());
+        builder.add("phone",addAddressInfoBean.getPhone());
+        builder.add("option",addAddressInfoBean.getOption());
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_ADD_ADDRESS, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        Message message = new Message();
+                        addAddressHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "添加地址成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void showAddress(final Context context, final AddressHandler addressHandler, String session) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session", session);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SHOW_ADDRESS, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().toString();
+                        if(res.indexOf("\"ListNull\":false") == -1){
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "地址列表为空", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }else{
+                            AddressInfoBean addressInfoBean = gson.fromJson(res, AddressInfoBean.class);
+                            if (!addressInfoBean.isListNull()) {
+                                Message message = new Message();
+                                message.obj = addressInfoBean;
+                                addressHandler.sendMessage(message);
+                                ((Activity) context).runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context, "显示地址成功", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 
     private void changePassword(final Context context, final ChangePassWordHandler changePassWordHandler, String old_password, String new_password, String session) {
@@ -156,7 +364,7 @@ public class NetworkCommunicationService extends Service {
                             userHandler.sendMessage(message);
                         } else {
                             Log.i("ServerBackCode(服务器返回):", "显示失败");
-                            ((LoginActivity) context).runOnUiThread(new Runnable() {
+                            ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(context, "显示失败", Toast.LENGTH_SHORT).show();

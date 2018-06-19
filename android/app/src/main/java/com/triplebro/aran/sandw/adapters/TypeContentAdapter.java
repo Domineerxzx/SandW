@@ -56,8 +56,18 @@ public class TypeContentAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.tv_item_type.setText(types[position]);
-        TypeMoreAdapter typeMoreAdapter = new TypeMoreAdapter(context,type_more.get(position));
+        TypeMoreAdapter typeMoreAdapter = new TypeMoreAdapter(context, type_more.get(position));
         viewHolder.lv_type_more.setAdapter(typeMoreAdapter);
+        viewHolder.tv_item_type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.ll_type_more.getVisibility() == View.GONE) {
+                    viewHolder.ll_type_more.setVisibility(View.VISIBLE);
+                }else{
+                    viewHolder.ll_type_more.setVisibility(View.GONE);
+                }
+            }
+        });
         viewHolder.lv_type_more.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

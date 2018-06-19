@@ -36,7 +36,10 @@
 
         <service android:name=".services.NetworkCommunicationService" />
 
-        <activity android:name=".activities.ShopBagActivity"></activity>
+        <activity android:name=".activities.ShopBagActivity" />
+        <activity android:name=".activities.AddressActivity" />
+        <activity android:name=".activities.ChangeAddressActivity" />
+        <activity android:name=".activities.AddAddressActivity"></activity>
     </application>
 
 </manifest>
