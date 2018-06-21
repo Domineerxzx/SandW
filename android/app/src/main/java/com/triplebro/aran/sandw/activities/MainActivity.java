@@ -9,6 +9,7 @@ import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragments.BottomFragment;
 import com.triplebro.aran.sandw.fragments.FirstPageFragment;
 import com.triplebro.aran.sandw.modules.AransPackage;
+import com.triplebro.aran.sandw.widgets.FirstFragment;
 
 
 public class MainActivity extends Activity{

@@ -9,12 +9,25 @@
 import React, {Component} from "react";
 
 import Swiper from 'react-native-swiper';
-import {Text, Dimensions, StyleSheet, View, Image} from "react-native";
+import {Text, Dimensions, StyleSheet, View, Image, TouchableHighlight} from "react-native";
+import TheFirstPageForAndroid from "../pages/TheFirstPageForAndroid";
 
 let beanJson = require("../data/bean.json");
 
 
 export default class DataSwiperModules extends Component{
+    jumpClick(){
+        const{navigator} = this.props;
+        /*that存储了上一个this*/
+        if(navigator){
+            /*push主要掌管页面跳转 返回的component属性决定了呈现哪一个class*/
+            navigator.push({
+                name : "SecondPageComponent",
+                component : TheFirstPageForAndroid,
+            })
+        }
+
+    }
 
 
     render(){

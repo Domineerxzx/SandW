@@ -7,11 +7,19 @@
  */
 
 import React, {Component} from "react";
-import {Image, Dimensions, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Image, Dimensions, ScrollView, StyleSheet, Text, View, TouchableHighlight} from "react-native";
+import SwiperModules from "../modules/SwiperModules";
+import DynamicImgesModules from "../modules/DynamicImgesModules";
 import DataSwiperModules from "../modules/DataSwiperModules";
 
 
-export default class ActionFragment extends Component {
+export default class TheFirstPageForAndroid extends Component {
+
+    static jumpOnclick(){
+        alert("???")
+    }
+
+
     render() {
         return (
             <View>
@@ -24,14 +32,18 @@ export default class ActionFragment extends Component {
                             <Text style={styles.BuyJewelry}>
                                 选购首饰
                             </Text>
-                            <DataSwiperModules/>
+                            <DataSwiperModules style={styles.SwiperView}/>
                         </View>
-                        <View>
-                            <Image
-                                source={{uri:'http://thethreestooges.cn/aran/cloth.png'}}
-                                style={{width: 100, height: 100}}
-
-                            />
+                        <View style={{justifyContent:'space-between',flexDirection:'row'}}>
+                            <Text style={{marginRight:20,color:'#000', fontSize:15,fontWeight:'bold'}}>特别为您推荐的上衣</Text>
+                            <View  style={{marginRight:20,justifyContent:'flex-end'}}>
+                                <TouchableHighlight onPress={TheFirstPageForAndroid.jumpOnclick()}>
+                                <Text>选购全部 ></Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                        <View style={{flexDirection:'column',alignItems:'center'}}>
+                            <DynamicImgesModules style={{flexDirection:'row'}}/>
                         </View>
                     </View>
 

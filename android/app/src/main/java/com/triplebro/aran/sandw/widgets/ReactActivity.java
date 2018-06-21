@@ -1,4 +1,4 @@
-package com.triplebro.aran.sandw.activities;
+package com.triplebro.aran.sandw.widgets;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -55,6 +55,31 @@ public class ReactActivity extends Activity implements DefaultHardwareBackBtnHan
         mReactRootView.startReactApplication(mReactInstanceManager, "SandW", null);
 
         setContentView(mReactRootView);
+    }
+
+    //生命周期代码
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(mReactInstanceManager!=null){
+            mReactInstanceManager.onHostPause();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onHostResume(this, this);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (mReactInstanceManager != null) {
+            mReactInstanceManager.onBackPressed();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

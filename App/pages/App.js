@@ -10,7 +10,7 @@ import React, {Component} from "react";
 import {Button, Text, TouchableHighlight, View} from "react-native";
 import {Navigator} from "react-native-deprecated-custom-components";
 
-import DataSwiperModules from "../modules/dataSwiperModules";
+import DataSwiperModules from "../modules/DataSwiperModules";
 import ActionFragment from "./ActionFragment";
 
 export default class FirstPage extends Component{

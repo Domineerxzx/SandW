@@ -1,4 +1,4 @@
-package com.triplebro.aran.sandw.activities;
+package com.triplebro.aran.sandw.widgets;
 
 import android.app.Application;
 import android.content.Context;
@@ -41,6 +41,13 @@ public class MainApplication extends Application implements ReactApplication {
             return BuildConfig.DEBUG;
         }
 
+
+//        加载JS文件所用
+        @Override
+        protected String getJSMainModuleName() {
+            return "index";
+        }
+
         @Override
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
@@ -50,8 +57,10 @@ public class MainApplication extends Application implements ReactApplication {
         }
     };
 
+
     @Override
     public ReactNativeHost getReactNativeHost() {
         return mReactNativeHost;
     }
+
 }
