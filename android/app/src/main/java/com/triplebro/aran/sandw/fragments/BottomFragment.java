@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.widgets.FirstFragment;
 
 /**
  * Created by Domineer on 2018/6/6.

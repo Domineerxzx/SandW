@@ -7,16 +7,27 @@
  */
 
 import React, {Component} from "react";
-import {Image, Dimensions, ScrollView, StyleSheet, Text, View, TouchableHighlight} from "react-native";
+import {Image, Alert, Dimensions, ScrollView, StyleSheet, Text, View, TouchableHighlight} from "react-native";
 import SwiperModules from "../modules/SwiperModules";
 import DynamicImgesModules from "../modules/DynamicImgesModules";
 import DataSwiperModules from "../modules/DataSwiperModules";
+import App from "./App";
 
 
 export default class TheFirstPageForAndroid extends Component {
 
-    static jumpOnclick(){
-        alert("???")
+
+
+    jumpClick(){
+        const{navigator} = this.props;
+        /*that存储了上一个this*/
+        if(navigator){
+            /*push主要掌管页面跳转 返回的component属性决定了呈现哪一个class*/
+            navigator.push({
+                name : "SecondPageComponent",
+                component : App,
+            })
+        }
     }
 
 
@@ -37,8 +48,8 @@ export default class TheFirstPageForAndroid extends Component {
                         <View style={{justifyContent:'space-between',flexDirection:'row'}}>
                             <Text style={{marginRight:20,color:'#000', fontSize:15,fontWeight:'bold'}}>特别为您推荐的上衣</Text>
                             <View  style={{marginRight:20,justifyContent:'flex-end'}}>
-                                <TouchableHighlight onPress={TheFirstPageForAndroid.jumpOnclick()}>
-                                <Text>选购全部 ></Text>
+                                <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                    <Text>选购全部 ></Text>
                                 </TouchableHighlight>
                             </View>
                         </View>

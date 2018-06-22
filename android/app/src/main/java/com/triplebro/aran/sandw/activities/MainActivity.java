@@ -28,8 +28,4 @@ public class MainActivity extends Activity{
         transaction.commit();
 
     }
-
-    public String getAppPackageName(){
-        return this.getPackageName();
-    }
 }
