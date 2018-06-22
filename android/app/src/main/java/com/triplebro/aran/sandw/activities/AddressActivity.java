@@ -40,6 +40,7 @@ public class AddressActivity extends Activity implements View.OnClickListener{
     protected void onStart() {
         super.onStart();
         //TODO 获取地址信息从服务器上
+        addressManager = new AddressManager(this, addressHandler, session);
         addressManager.showAddress();
     }
 
@@ -72,5 +73,11 @@ public class AddressActivity extends Activity implements View.OnClickListener{
                 startActivity(addAddress);
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(addressManager);
     }
 }

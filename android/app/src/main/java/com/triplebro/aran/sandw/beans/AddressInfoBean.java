@@ -7,7 +7,7 @@ public class AddressInfoBean{
 
     /**
      * ListNull : false
-     * addressBookList : [{"address":"大连外国语大学","city":"大连市","country":"中国","deleSign":0,"id":50,"name":"钧元","phone":"15141433601","postCode":"117000","province":"辽宁省","surName":"罗","userNum":"SandW001"},{"address":"大连外国语大学","city":"大连市","country":"中国","deleSign":0,"id":51,"name":"钧元","phone":"15141433601","postCode":"117000","province":"辽宁省","surName":"罗","userNum":"SandW001"},{"address":"大连外国语大学","city":"大连市","country":"中国","deleSign":0,"id":52,"name":"钧元","phone":"15141433601","postCode":"117000","province":"辽宁省","surName":"罗","userNum":"SandW001"}]
+     * addressBookList : [{"address":"ddd","city":"ccc","country":"中国内地","deleSign":0,"id":56,"name":"aaa","phone":"18840919546","postCode":"116044","province":"辽宁省","surName":"bb","userNum":"SandW000051"},{"address":"a","city":"a","country":"中国内地","deleSign":0,"id":57,"name":"a","phone":"a","postCode":"a","province":"辽宁省","surName":"a","userNum":"SandW000051"}]
      */
 
     private boolean ListNull;
@@ -31,17 +31,17 @@ public class AddressInfoBean{
 
     public static class AddressBookListBean {
         /**
-         * address : 大连外国语大学
-         * city : 大连市
-         * country : 中国
+         * address : ddd
+         * city : ccc
+         * country : 中国内地
          * deleSign : 0
-         * id : 50
-         * name : 钧元
-         * phone : 15141433601
-         * postCode : 117000
+         * id : 56
+         * name : aaa
+         * phone : 18840919546
+         * postCode : 116044
          * province : 辽宁省
-         * surName : 罗
-         * userNum : SandW001
+         * surName : bb
+         * userNum : SandW000051
          */
 
         private String address;

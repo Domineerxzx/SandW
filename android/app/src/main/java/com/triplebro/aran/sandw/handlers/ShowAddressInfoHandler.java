@@ -40,6 +40,8 @@ public class ShowAddressInfoHandler extends Handler {
         ShowAddressInfoBean showAddressInfoBean = (ShowAddressInfoBean) msg.obj;
         ShowAddressInfoBean.AddressBookInfoBean addressBookInfo = showAddressInfoBean.getAddressBookInfo();
         et_address_name.setText(addressBookInfo.getName());
+        String city = addressBookInfo.getCity();
+        System.out.println(city);
         et_address_area_city.setText(addressBookInfo.getCity());
         et_address_detailed.setText(addressBookInfo.getAddress());
         et_address_postcode.setText(addressBookInfo.getPostCode());

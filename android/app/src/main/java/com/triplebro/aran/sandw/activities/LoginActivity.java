@@ -80,7 +80,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(this, "密码太长啦！！！", Toast.LENGTH_SHORT).show();
                     break;
                 } else {
-                    loginManager = new LoginManager(this,loginHandler,email,password);
+                    loginManager = new LoginManager(this, loginHandler, email, password);
                     loginManager.login();
                     break;
                 }
@@ -98,6 +98,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(loginManager);
+        if (loginManager != null) {
+            unbindService(loginManager);
+        }
     }
 }

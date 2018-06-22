@@ -68,7 +68,7 @@
             android:id="@+id/bt_add_address"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:background="@drawable/shap_background_login"
+            android:background="@drawable/shape_background_login"
             android:text="添加新地址"
             android:textSize="12dp"
             android:textColor="#fff"

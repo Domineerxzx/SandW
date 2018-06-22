@@ -94,7 +94,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         tv_title.setText(R.string.title_myself);
         SharedPreferences sex = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sex.edit();
-        edit.putString("sex","Girl");
+        edit.putString("sex", "Girl");
         edit.commit();
     }
 
@@ -105,15 +105,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         //TODO 重新请求，查看本地是否存在session,如果有就请求加载个人信息
         //TODO 同时更新UI.可视化注销及个人信息控件
 
-        if(session == null){
+        if (session == null) {
             session = getActivity().getSharedPreferences("session", Context.MODE_PRIVATE);
-            session_now = session.getString("session", null);
         }
+        session_now = session.getString("session", null);
         if (session_now != null) {
             ll_unlogin.setVisibility(View.GONE);
             rl_login.setVisibility(View.VISIBLE);
             ll_cancellation.setVisibility(View.VISIBLE);
-            UserHandler userHandler = new UserHandler(getActivity(), tv_username, tv_email, tv_cancellation,rbt_sex_f,rbt_sex_m);
+            UserHandler userHandler = new UserHandler(getActivity(), tv_username, tv_email, tv_cancellation, rbt_sex_f, rbt_sex_m);
             UserManager userManager = new UserManager(getActivity(), userHandler, session_now, AppProperties.UPDATE_USER_INFO_WHAT_OUTSIDE);
             userHandler.setUserManager(userManager);
             userManager.showUserInfo();
@@ -244,7 +244,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
                         }
                         SharedPreferences sex = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sex.edit();
-                        edit.putString("sex","Girl");
+                        edit.putString("sex", "Girl");
                         edit.commit();
                     }
                 }, new DialogInterface.OnClickListener() {
@@ -269,7 +269,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
                         }
                         SharedPreferences sex = getActivity().getSharedPreferences("sex", Context.MODE_PRIVATE);
                         SharedPreferences.Editor edit = sex.edit();
-                        edit.putString("sex","Man");
+                        edit.putString("sex", "Man");
                         edit.commit();
                     }
                 }, new DialogInterface.OnClickListener() {

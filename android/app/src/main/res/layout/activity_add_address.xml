@@ -85,7 +85,7 @@
                     android:layout_below="@id/tv_address_name"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:hint="   请输入您的名字"
                     android:inputType="text"
                     android:textSize="12dp" />
@@ -108,7 +108,7 @@
                     android:layout_below="@id/tv_address_surname"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:hint="   姓氏"
                     android:inputType="textEmailAddress"
                     android:textSize="12dp" />
@@ -131,7 +131,7 @@
                     android:layout_below="@id/tv_address_area_title"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:gravity="center_vertical"
                     android:hint="   请选择地区"
                     android:textSize="12dp" />
@@ -164,7 +164,7 @@
                     android:layout_below="@id/tv_address_area_province_title"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:gravity="center_vertical"
                     android:hint="   请选择省/直辖市"
                     android:textSize="12dp" />
@@ -197,7 +197,7 @@
                     android:layout_below="@id/tv_address_area_city_title"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:gravity="center_vertical"
                     android:hint="   城市"
                     android:textSize="12dp" />
@@ -220,7 +220,7 @@
                     android:layout_below="@id/tv_address_detailed"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:gravity="center_vertical"
                     android:hint="   地址"
                     android:textSize="12dp" />
@@ -243,7 +243,7 @@
                     android:layout_below="@id/tv_address_postcode"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:gravity="center_vertical"
                     android:hint="   邮编"
                     android:textSize="12dp" />
@@ -266,7 +266,7 @@
                     android:layout_below="@id/tv_address_telephone"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/shap_background_input"
+                    android:background="@drawable/shape_background_input"
                     android:gravity="center_vertical"
                     android:hint="   电话"
                     android:textSize="12dp" />
@@ -299,7 +299,7 @@
                     android:layout_marginTop="5dp"
                     android:text="保存地址"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/shap_background_login"
+                    android:background="@drawable/shape_background_login"
                     android:textColor="#FFF"
                     android:textSize="12dp"
                     android:layout_marginBottom="20dp"/>

@@ -103,7 +103,7 @@
             android:layout_below="@id/tv_username"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/shap_background_input"
+            android:background="@drawable/shape_background_input"
             android:hint="   请输入用户名(长度小于20个字符)"
             android:textSize="12dp"
             android:inputType="text" />
@@ -125,7 +125,7 @@
             android:layout_below="@id/tv_email"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/shap_background_input"
+            android:background="@drawable/shape_background_input"
             android:hint="   请输入电子邮箱"
             android:textSize="12dp"
             android:inputType="textEmailAddress" />
@@ -147,7 +147,7 @@
             android:layout_below="@id/tv_birthday"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/shap_background_input"
+            android:background="@drawable/shape_background_input"
             android:hint="   请选择生日"
             android:gravity="center_vertical"
             android:textSize="12dp"/>
@@ -193,7 +193,7 @@
         android:textColor="#fff"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/shap_background_login"/>
+        android:background="@drawable/shape_background_login"/>
     <TextView
         android:id="@+id/tv_password"
         android:layout_width="wrap_content"
@@ -212,7 +212,7 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:text="更新个人资料"
-        android:background="@drawable/shap_background_login"
+        android:background="@drawable/shape_background_login"
         android:layout_margin="2dp"
         android:textColor="#FFF"
         android:textSize="12dp"/>

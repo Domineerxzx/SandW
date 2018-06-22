@@ -45,7 +45,7 @@
         android:layout_below="@id/tv_email"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shap_background_input"
+        android:background="@drawable/shape_background_input"
         android:hint="   请输入电子邮箱"
         android:inputType="textEmailAddress"
         android:textSize="12dp" />
@@ -67,7 +67,7 @@
         android:layout_below="@id/tv_password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shap_background_input"
+        android:background="@drawable/shape_background_input"
         android:hint="   请输入密码"
         android:inputType="textPassword"
         android:textSize="12dp" />
@@ -80,7 +80,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/shap_background_login"
+        android:background="@drawable/shape_background_login"
         android:text="登录"
         android:textColor="#fff"
         android:textSize="12dp" />
@@ -108,7 +108,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/shap_background_create"
+        android:background="@drawable/shape_background_create"
         android:text="创建新账户"
         android:textColor="#000"
         android:textSize="12dp" />

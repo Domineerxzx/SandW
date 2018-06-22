@@ -23,7 +23,17 @@ public class AppProperties {
     //TODO 新增地址
     public static final String SERVER_ADDRESS_OF_ADD_ADDRESS = "http://120.25.96.141:8080/address/save";
     //TODO 修改地址
-    public static final String SERVER_ADDRESS_OF_CHANGE_ADDRESS = "http://120.25.96.141:8080/login/changepasswd";
+    public static final String SERVER_ADDRESS_OF_CHANGE_ADDRESS = "http://120.25.96.141:8080/address/save";
     //TODO 删除地址
     public static final String SERVER_ADDRESS_OF_DELETE_ADDRESS = "http://120.25.96.141:8080/address/dele";
+    //TODO 国家及地区
+    public static final String[] COUNTRY_OR_AREA = {"中国内地"};
+    //TODO 省
+    public static final String[] PROVINCE = {"上海市","云南省","内蒙古自治区","北京市","吉林省","四川省","天津市",
+            "宁夏回族自治区","安徽省","山东省","山西省","广东省","广西壮族自治区","新疆维吾尔自治区","江苏省",
+            "江西省","河北省","河南省","浙江省","海南省","湖北省","湖南省","甘肃省","福建省","西藏自治区","贵州省","辽宁省",
+            "重庆市","陕西省","青海省","黑龙江省"};
+    //TODO 字母表
+    public static final String[] BRAND_WORD_LIST = {"A","B","C","D","E","F","G", "H","I","J","K","L","M","N","O",
+            "P","Q","R","S","T","U","V","W","X","Y","Z"};
 }

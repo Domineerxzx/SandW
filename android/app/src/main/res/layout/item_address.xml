@@ -68,7 +68,7 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:id="@+id/bt_change_address_info"
-            android:background="@drawable/shap_background_input"
+            android:background="@drawable/shape_background_input"
             android:text="修改"
             android:textSize="12dp"
             android:textColor="#000"

@@ -1,6 +1,8 @@
 package com.triplebro.aran.sandw.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
 import com.triplebro.aran.sandw.managers.ChangeAddressManager;
 import com.triplebro.aran.sandw.managers.DeleteAddressManager;
 import com.triplebro.aran.sandw.managers.ShowAddressInfoManager;
+import com.triplebro.aran.sandw.properties.AppProperties;
 
 public class ChangeAddressActivity extends Activity implements View.OnClickListener {
 
@@ -106,10 +109,29 @@ public class ChangeAddressActivity extends Activity implements View.OnClickListe
             case R.id.tv_address_area:
             case R.id.bt_address_area:
                 //TODO 添加Dialog，用来选择国家/地区
+                AlertDialog.Builder chooseCountry = new AlertDialog.Builder(this,R.style.Theme_AppCompat_Dialog);
+                chooseCountry.setTitle("选择国家和地区");
+                chooseCountry.setSingleChoiceItems(AppProperties.COUNTRY_OR_AREA, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tv_address_area.setText(AppProperties.COUNTRY_OR_AREA[which]);
+                        dialog.dismiss();
+                    }
+                });
+                chooseCountry.show();
                 break;
             case R.id.tv_address_area_province:
             case R.id.bt_address_area_province:
                 //TODO 添加Dialog，用来选择省/直辖市
+                AlertDialog.Builder chooseProvince = new AlertDialog.Builder(this,R.style.Theme_AppCompat_Dialog);
+                chooseProvince.setTitle("选择省");
+                chooseProvince.setSingleChoiceItems(AppProperties.PROVINCE, -1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tv_address_area_province.setText(AppProperties.PROVINCE[which]);
+                        dialog.dismiss();
+                    }
+                });
                 break;
             case R.id.bt_change_address:
                 //TODO 修改地址信息到服务器

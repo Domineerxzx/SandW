@@ -10,4 +10,5 @@
     <string name="title_address_manager">地址簿</string>
     <string name="title_change_address">修改地址信息</string>
     <string name="title_add_address">添加新地址</string>
+    <string name="title_brand_list">品牌列表</string>
 </resources>

@@ -39,7 +39,8 @@
         <activity android:name=".activities.ShopBagActivity" />
         <activity android:name=".activities.AddressActivity" />
         <activity android:name=".activities.ChangeAddressActivity" />
-        <activity android:name=".activities.AddAddressActivity"></activity>
+        <activity android:name=".activities.AddAddressActivity" />
+        <activity android:name=".activities.BrandListActivity"></activity>
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 import com.triplebro.aran.sandw.activities.ChangeUserInfoActivity;
 import com.triplebro.aran.sandw.activities.LoginActivity;
@@ -80,32 +81,32 @@ public class NetworkCommunicationService extends Service {
             NetworkCommunicationService.this.changePassword(context, changePassWordHandler, old_password, new_password, session);
         }
 
-        public void showAddress(Context context, AddressHandler addressHandler,String session) {
-            NetworkCommunicationService.this.showAddress(context,addressHandler,session);
+        public void showAddress(Context context, AddressHandler addressHandler, String session) {
+            NetworkCommunicationService.this.showAddress(context, addressHandler, session);
         }
 
         public void addAddress(Context context, AddAddressHandler addAddressHandler, AddAddressInfoBean addAddressInfoBean, String session) {
-            NetworkCommunicationService.this.addAddress(context,addAddressHandler,addAddressInfoBean,session);
+            NetworkCommunicationService.this.addAddress(context, addAddressHandler, addAddressInfoBean, session);
         }
 
         public void changeAddress(Context context, ChangeAddressHandler changeAddressHandler, ChangeAddressInfoBean changeAddressInfoBean, String session) {
-            NetworkCommunicationService.this.changeAddress(context,changeAddressHandler,changeAddressInfoBean,session);
+            NetworkCommunicationService.this.changeAddress(context, changeAddressHandler, changeAddressInfoBean, session);
         }
 
         public void showAddressInfo(Context context, ShowAddressInfoHandler showAddressInfoHandler, String address_id) {
-            NetworkCommunicationService.this.showAddressInfo(context,showAddressInfoHandler,address_id);
+            NetworkCommunicationService.this.showAddressInfo(context, showAddressInfoHandler, address_id);
         }
 
         public void deleteAddress(Context context, DeleteAddressHandler deleteAddressHandler, String session, String address_id) {
-            NetworkCommunicationService.this.deleteAddress(context,deleteAddressHandler,session,address_id);
+            NetworkCommunicationService.this.deleteAddress(context, deleteAddressHandler, session, address_id);
         }
     }
 
     private void deleteAddress(final Context context, final DeleteAddressHandler deleteAddressHandler, String session, String address_id) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("session",session);
-        builder.add("addressId",address_id);
-        new Thread(){
+        builder.add("session", session);
+        builder.add("addressId", address_id);
+        new Thread() {
             @Override
             public void run() {
                 HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_DELETE_ADDRESS, builder, new Callback() {
@@ -132,8 +133,8 @@ public class NetworkCommunicationService extends Service {
 
     private void showAddressInfo(final Context context, final ShowAddressInfoHandler showAddressInfoHandler, String address_id) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("addressId",address_id);
-        new Thread(){
+        builder.add("addressId", address_id);
+        new Thread() {
             @Override
             public void run() {
                 HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SHOW_ADDRESS_MORE, builder, new Callback() {
@@ -144,7 +145,7 @@ public class NetworkCommunicationService extends Service {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        String res = response.body().toString();
+                        String res = response.body().string();
                         ShowAddressInfoBean showAddressInfoBean = gson.fromJson(res, ShowAddressInfoBean.class);
                         Message message = Message.obtain();
                         message.obj = showAddressInfoBean;
@@ -164,20 +165,20 @@ public class NetworkCommunicationService extends Service {
     private void changeAddress(final Context context, final ChangeAddressHandler changeAddressHandler, ChangeAddressInfoBean changeAddressInfoBean, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
         builder.add("session", session);
-        builder.add("addressId",changeAddressInfoBean.getAddressId());
-        builder.add("surName",changeAddressInfoBean.getSurName());
-        builder.add("name",changeAddressInfoBean.getName());
-        builder.add("country",changeAddressInfoBean.getCountry());
-        builder.add("province",changeAddressInfoBean.getProvince());
-        builder.add("city",changeAddressInfoBean.getCity());
-        builder.add("address",changeAddressInfoBean.getAddress());
-        builder.add("postCode",changeAddressInfoBean.getPostCode());
-        builder.add("phone",changeAddressInfoBean.getPhone());
-        builder.add("option",changeAddressInfoBean.getOption());
+        builder.add("addressId", changeAddressInfoBean.getAddressId());
+        builder.add("surName", changeAddressInfoBean.getSurName());
+        builder.add("name", changeAddressInfoBean.getName());
+        builder.add("country", changeAddressInfoBean.getCountry());
+        builder.add("province", changeAddressInfoBean.getProvince());
+        builder.add("city", changeAddressInfoBean.getCity());
+        builder.add("address", changeAddressInfoBean.getAddress());
+        builder.add("postCode", changeAddressInfoBean.getPostCode());
+        builder.add("phone", changeAddressInfoBean.getPhone());
+        builder.add("option", changeAddressInfoBean.getOption());
         new Thread() {
             @Override
             public void run() {
-                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_ADD_ADDRESS, builder, new Callback() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_CHANGE_ADDRESS, builder, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
 
@@ -202,15 +203,15 @@ public class NetworkCommunicationService extends Service {
     private void addAddress(final Context context, final AddAddressHandler addAddressHandler, AddAddressInfoBean addAddressInfoBean, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
         builder.add("session", session);
-        builder.add("surName",addAddressInfoBean.getSurName());
-        builder.add("name",addAddressInfoBean.getName());
-        builder.add("country",addAddressInfoBean.getCountry());
-        builder.add("province",addAddressInfoBean.getProvince());
-        builder.add("city",addAddressInfoBean.getCity());
-        builder.add("address",addAddressInfoBean.getAddress());
-        builder.add("postCode",addAddressInfoBean.getPostCode());
-        builder.add("phone",addAddressInfoBean.getPhone());
-        builder.add("option",addAddressInfoBean.getOption());
+        builder.add("surName", addAddressInfoBean.getSurName());
+        builder.add("name", addAddressInfoBean.getName());
+        builder.add("country", addAddressInfoBean.getCountry());
+        builder.add("province", addAddressInfoBean.getProvince());
+        builder.add("city", addAddressInfoBean.getCity());
+        builder.add("address", addAddressInfoBean.getAddress());
+        builder.add("postCode", addAddressInfoBean.getPostCode());
+        builder.add("phone", addAddressInfoBean.getPhone());
+        builder.add("option", addAddressInfoBean.getOption());
         new Thread() {
             @Override
             public void run() {
@@ -250,27 +251,25 @@ public class NetworkCommunicationService extends Service {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
-                        String res = response.body().toString();
-                        if(res.indexOf("\"ListNull\":false") == -1){
+                        String res = response.body().string();
+                        if (!res.contains("\"ListNull\":false")) {
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(context, "地址列表为空", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }else{
+                        } else {
                             AddressInfoBean addressInfoBean = gson.fromJson(res, AddressInfoBean.class);
-                            if (!addressInfoBean.isListNull()) {
-                                Message message = new Message();
-                                message.obj = addressInfoBean;
-                                addressHandler.sendMessage(message);
-                                ((Activity) context).runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Toast.makeText(context, "显示地址成功", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
+                            Message message = new Message();
+                            message.obj = addressInfoBean;
+                            addressHandler.sendMessage(message);
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "显示地址成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     }
                 });
