@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_search"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#000">
+
+                <RelativeLayout
+                    android:id="@+id/rl_search_input"
+                    android:layout_width="300dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/shape_background_search_input">
+
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:background="@mipmap/find" />
+
+                    <EditText
+                        android:id="@+id/et_search_input"
+                        android:layout_width="300dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/iv_search"
+                        android:background="#fff"
+                        android:hint="搜索"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/rl_search_input"
+                    android:background="@drawable/shape_background_input"
+                    android:gravity="center"
+                    android:text="取消"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_search_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_search"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_search_title_f"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/bt_search_title_f"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#fff"
+                        android:text="女士"
+                        android:textColor="#000"
+                        android:textSize="12dp" />
+
+                    <View
+                        android:id="@+id/v_search_title_f"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_search_title_m"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/bt_search_title_m"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#fff"
+                        android:text="男士"
+                        android:textColor="#888888"
+                        android:textSize="12dp" />
+
+                    <View
+                        android:id="@+id/v_search_title_m"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#888888" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_search_title_c"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/bt_search_title_c"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#fff"
+                        android:text="儿童"
+                        android:textColor="#888888"
+                        android:textSize="12dp" />
+
+                    <View
+                        android:id="@+id/v_search_title_c"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="#888888" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_maybe"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ll_search_title">
+
+                <TextView
+                    android:id="@+id/tv_maybe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="您可能会喜欢......"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:id="@+id/lv_maybe_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_maybe"
+                    android:scrollbars="horizontal"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/rl_maybe">
+
+                <TextView
+                    android:id="@+id/tv_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="最近的搜索结果"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:id="@+id/lv_history_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_history"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_sale"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/rl_history">
+
+                <TextView
+                    android:id="@+id/tv_sale"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="搜索畅销单品"
+                    android:textSize="10dp"
+                    android:textStyle="bold" />
+
+                <ListView
+                    android:id="@+id/lv_sale_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tv_sale"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
