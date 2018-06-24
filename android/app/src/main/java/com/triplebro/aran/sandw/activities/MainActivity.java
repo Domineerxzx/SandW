@@ -3,7 +3,10 @@ package com.triplebro.aran.sandw.activities;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragments.BottomFragment;
@@ -12,11 +15,13 @@ import com.triplebro.aran.sandw.modules.AransPackage;
 import com.triplebro.aran.sandw.widgets.FirstFragment;
 
 
-public class MainActivity extends Activity{
+public class MainActivity extends Activity implements View.OnClickListener{
 
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
     private static final AransPackage mAranPackage = new AransPackage();
+    private ImageView iv_search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,30 @@ public class MainActivity extends Activity{
         transaction.replace(R.id.fl_content, new FirstPageFragment());
         transaction.replace(R.id.fl_bottom, new BottomFragment());
         transaction.commit();
+        initView();
+        initData();
+        setOnClickListener();
+    }
 
+    private void setOnClickListener() {
+        iv_search.setOnClickListener(this);
+    }
+
+    private void initData() {
+
+    }
+
+    private void initView() {
+        iv_search = (ImageView) findViewById(R.id.iv_search);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.iv_search:
+                Intent intent = new Intent(this, SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
