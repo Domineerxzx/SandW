@@ -40,7 +40,8 @@
         <activity android:name=".activities.AddressActivity" />
         <activity android:name=".activities.ChangeAddressActivity" />
         <activity android:name=".activities.AddAddressActivity" />
-        <activity android:name=".activities.BrandListActivity"></activity>
+        <activity android:name=".activities.BrandListActivity" />
+        <activity android:name=".activities.SearchActivity"/>
     </application>
 
 </manifest>
