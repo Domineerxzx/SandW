@@ -24,8 +24,8 @@ export default class DynamicImgesModules extends Component{
                         style={{width:Dimensions.get('window').width/2-20,height:200}}
                         source={{uri:infoList.imgUrl}}/>
                     <View style={{alignItems:'center'}}>
-                        <Text style={{fontWeight:'bold',fontSize:20}}>aaa</Text>
-                        <Text style={{fontWeight:'bold'}}>aaa</Text>
+                        <Text style={{fontWeight:'bold',fontSize:20}}>{infoList.title1}</Text>
+                        <Text style={{fontWeight:'bold'}}>{infoList.title2}</Text>
                     </View>
                 </View>
 

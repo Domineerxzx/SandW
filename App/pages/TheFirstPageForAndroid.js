@@ -8,10 +8,10 @@
 
 import React, {Component} from "react";
 import {Image, Alert, Dimensions, ScrollView, StyleSheet, Text, View, TouchableHighlight} from "react-native";
-import SwiperModules from "../modules/SwiperModules";
 import DynamicImgesModules from "../modules/DynamicImgesModules";
 import DataSwiperModules from "../modules/DataSwiperModules";
 import App from "./App";
+import TheNextPage from "./TheNextPage";
 
 
 export default class TheFirstPageForAndroid extends Component {
@@ -25,7 +25,8 @@ export default class TheFirstPageForAndroid extends Component {
             /*push主要掌管页面跳转 返回的component属性决定了呈现哪一个class*/
             navigator.push({
                 name : "SecondPageComponent",
-                component : App,
+                component : TheNextPage,
+                params:{ aran:"this is aran"}
             })
         }
     }
