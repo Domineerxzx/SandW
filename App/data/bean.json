@@ -1,11 +1,9 @@
 {
   "adInfo":[
-
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"aaaaaa"},
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"bbbbbb"},
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"cccccc"},
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title":"dddddd"}
-
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"aaaaaa","title2":"AAAAAA"},
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"bbbbbb","title2":"BBBBBB"},
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"cccccc","title2":"CCCCCC"},
+    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"dddddd","title2":"DDDDDD"}
   ],
   "test":[{"testResult":"result"}]
 }
