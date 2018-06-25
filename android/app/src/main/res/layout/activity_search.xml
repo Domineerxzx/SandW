@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:background="#fff">
 
     <RelativeLayout
         android:id="@+id/rl_search"
@@ -11,11 +11,29 @@
         android:background="#000">
 
         <RelativeLayout
+            android:id="@+id/rl_close_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/shape_background_search_input">
+
+            <ImageView
+                android:id="@+id/iv_close_search"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_centerInParent="true"
+                android:background="@mipmap/back" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:id="@+id/rl_search_input"
-            android:layout_width="270dp"
+            android:layout_width="260dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/rl_close_search"
             android:background="@drawable/shape_background_search_input">
 
             <ImageView
@@ -34,22 +52,22 @@
                 android:layout_toRightOf="@id/iv_search"
                 android:background="@drawable/shape_background_search_input"
                 android:hint="搜索"
-                android:textSize="12dp" />
+                android:textSize="10dp" />
 
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_cancel"
-            android:layout_width="50dp"
+            android:id="@+id/tv_find"
+            android:layout_width="40dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/shape_background_input"
             android:gravity="center"
-            android:text="取消"
+            android:text="搜索"
             android:textColor="#fff"
-            android:textSize="12dp" />
+            android:textSize="10dp" />
 
     </RelativeLayout>
 
@@ -141,31 +159,72 @@
             android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:id="@+id/rl_maybe"
+                android:id="@+id/rl_search_result"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tv_maybe"
+                <LinearLayout
+                    android:id="@+id/ll_search_result"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="您可能会喜欢......"
-                    android:textSize="10dp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    android:padding="20dp">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_maybe_content"
-                    android:layout_width="359dp"
-                    android:layout_height="300dp"
-                    android:layout_below="@id/tv_maybe" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:text="抱歉，暂时无法搜索到"
+                        android:textSize="12dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2"
+                        android:gravity="left"
+                        android:text="'hahaha'"
+                        android:textSize="12dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:id="@+id/ll_maybe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/tv_maybe"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="您可能会喜欢......"
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_maybe_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="190dp" />
+                </LinearLayout>
+
             </RelativeLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_history"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/rl_maybe">
+                android:layout_below="@id/rl_search_result">
 
                 <TextView
                     android:id="@+id/tv_history"
@@ -177,12 +236,14 @@
                     android:textSize="10dp"
                     android:textStyle="bold" />
 
-                <ListView
-                    android:id="@+id/lv_history_content"
+                <com.triplebro.aran.sandw.views.InnerListView
+                    android:id="@+id/ilv_history_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/tv_history"/>
+                    android:layout_below="@id/tv_history" />
             </RelativeLayout>
+
+
             <RelativeLayout
                 android:id="@+id/rl_sale"
                 android:layout_width="match_parent"
@@ -199,12 +260,18 @@
                     android:textSize="10dp"
                     android:textStyle="bold" />
 
-                <ListView
-                    android:id="@+id/lv_sale_content"
+                <com.triplebro.aran.sandw.views.InnerListView
+                    android:id="@+id/ilv_sale_content"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/tv_sale"/>
+                    android:layout_below="@id/tv_sale" />
             </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@id/rl_sale"
+                android:background="#fff" />
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
