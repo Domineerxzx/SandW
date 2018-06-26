@@ -9,22 +9,19 @@ import React, {Component} from "react";
 import {Text, NativeModules,Dimensions, StyleSheet, View, Image, TouchableHighlight} from "react-native";
 
 export default class GetAndroidData extends Component{
-
-
-
-
-
     render(){
         return(
             <View>
-                <TouchableHighlight onPress={this.call_button.bind(this)}>
-                    <Text>
+                <TouchableHighlight>
+                    <Text onPress={this.call_button.bind(this)}>
                         ONCLICK
                     </Text>
                 </TouchableHighlight>
             </View>
         )
     }
+
+
     call_button(){
 
         NativeModules.AransModules.rnCallNative("nihao")
