@@ -25,16 +25,9 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-    public static Context appContext;
-    private static MainApplication instance;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        instance = this;
-        appContext = getApplicationContext();
-        SoLoader.init(this,false);
-    }
+
+
     private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
         @Override
         public boolean getUseDeveloperSupport() {
@@ -61,6 +54,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public ReactNativeHost getReactNativeHost() {
         return mReactNativeHost;
+    }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        SoLoader.init(this,false);
     }
 
 }

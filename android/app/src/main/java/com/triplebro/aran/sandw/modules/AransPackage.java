@@ -26,17 +26,15 @@ public class AransPackage implements ReactPackage {
     private AransModules mModule;
 
     @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+        return Collections.emptyList();
+    }
+
+    @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         mModule = new AransModules(reactContext);
         modules.add(mModule);
         return modules;
-    }
-
-
-
-    @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
     }
 }

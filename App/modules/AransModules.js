@@ -6,4 +6,6 @@
  *我觉得这世间再没有别的东西比它值得被如此依靠。
  */
 import { NativeModules } from 'react-native';
-export default NativeModules.aransModules;
+import * as AppRegistry from "react-native/Libraries/ReactNative/AppRegistry";
+export default NativeModules.AransModules;
+AppRegistry.registerComponent("SandW",()=>NativeModules.AransModules);

@@ -8,6 +8,7 @@
 import React from "react";
 import {Button, Image, ScrollView, Text, TouchableHighlight, StyleSheet, View} from "react-native";
 import * as ToastAndroid from "react-native/Libraries/Components/ToastAndroid/ToastAndroid.android";
+import AransModules from "../modules/AransModules";
 
 export default class Firstpage extends React.Component{
 
@@ -22,11 +23,10 @@ export default class Firstpage extends React.Component{
 
     aranToast: Firstpage.aranToast;
 
-    componentWillMount(){
-        let recriveValues = ToastAndroid.Constant;
+    /*componentWillMount(){
+        let recriveValues = AransModules.Constant;
         return recriveValues;
-
-    }
+    }*/
 
      static aranToast(){
         /*AransModules.show('Awesome', AransModules.SHORT);*/

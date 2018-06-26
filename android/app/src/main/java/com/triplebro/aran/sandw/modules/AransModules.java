@@ -1,5 +1,7 @@
 package com.triplebro.aran.sandw.modules;
 
+import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -21,33 +23,22 @@ import javax.annotation.Nullable;
  */
 
 public class AransModules extends ReactContextBaseJavaModule {
-    private ReactApplicationContext mContext;
-    private static final String MODULE_NAME="aransModules";
-
-
+    private Context mContext;
     public AransModules(ReactApplicationContext reactContext) {
         super(reactContext);
-        this.mContext=reactContext;
+        mContext = reactContext;
+    }
+
+    @Override
+    public String getName() {
+        return "AransModules";
     }
 
     @ReactMethod
-    public void show(String message, int duration) {
-        Toast.makeText(getReactApplicationContext(), message, duration).show();
-    }
-    /*@ReactMethod
-    public void show(String aaa){
-        Toast.makeText(mContext, aaa, Toast.LENGTH_SHORT).show();
-    }*/
-    @Override
-    public String getName() {
-        return MODULE_NAME;
+    public void rnCallNative(String msg){
+
+        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
+
     }
 
-    @Nullable
-    @Override
-    public Map<String, Object> getConstants() {
-        Map<String,Object> params = new HashMap<>();
-        params.put("Constant",250);
-        return params;
-    }
 }
