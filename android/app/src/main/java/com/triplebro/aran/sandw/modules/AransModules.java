@@ -25,6 +25,8 @@ import javax.annotation.Nullable;
 
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
+    private Map<String, Object> params = new HashMap<>();
+
     public AransModules(ReactApplicationContext reactContext) {
         super(reactContext);
         mContext = reactContext;
@@ -40,5 +42,18 @@ public class AransModules extends ReactContextBaseJavaModule {
 
         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
 
+    }
+    @ReactMethod
+    public void giveRnData(String msg){
+
+        params.put("data",msg);
+        getConstants();
+
+    }
+
+    @Nullable
+    @Override
+    public Map<String, Object> getConstants() {
+        return params;
     }
 }

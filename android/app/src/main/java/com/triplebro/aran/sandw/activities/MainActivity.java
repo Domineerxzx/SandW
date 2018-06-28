@@ -26,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl_content, reactFirstPageFragment);
+        transaction.replace(R.id.fl_content, reactFirstPageFragment,"rFragment");
         transaction.replace(R.id.fl_bottom, new BottomFragment());
         transaction.commit();
         initView();

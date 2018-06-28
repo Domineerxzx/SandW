@@ -37,4 +37,12 @@ public class AransPackage implements ReactPackage {
         modules.add(mModule);
         return modules;
     }
+
+    public AransModules getmModule() {
+        return mModule;
+    }
+
+    public void setmModule(AransModules mModule) {
+        this.mModule = mModule;
+    }
 }
