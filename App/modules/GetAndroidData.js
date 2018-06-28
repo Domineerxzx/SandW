@@ -6,15 +6,15 @@
  *我觉得这世间再没有别的东西比它值得被如此依靠。
  */
 import React, {Component} from "react";
-import {Text, NativeModules,Dimensions, StyleSheet, View, Image, TouchableHighlight} from "react-native";
+import {Text, NativeModules, View,TouchableHighlight} from "react-native";
 
 export default class GetAndroidData extends Component{
     render(){
         return(
             <View>
-                <TouchableHighlight>
-                    <Text onPress={this.call_button.bind(this)}>
-                        ONCLICK
+                <TouchableHighlight onPress={this.call_button.bind(this)}>
+                    <Text>
+                        ONCLICK{NativeModules.toString()}
                     </Text>
                 </TouchableHighlight>
             </View>
@@ -27,4 +27,5 @@ export default class GetAndroidData extends Component{
         NativeModules.AransModules.rnCallNative("nihao")
     }
 
+    /*onPress={this.call_button()}*/
 }

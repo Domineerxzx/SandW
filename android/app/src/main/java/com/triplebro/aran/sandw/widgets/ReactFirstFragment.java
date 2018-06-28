@@ -9,7 +9,7 @@ package com.triplebro.aran.sandw.widgets;
  * 我觉得这世间再没有别的东西比它值得被如此依靠。
  */
 
-public class FirstFragment extends ReactFragment {
+public class ReactFirstFragment extends ReactFragment {
     @Override
     public String getMainComponentName() {
         return "index";

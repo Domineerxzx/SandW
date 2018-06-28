@@ -10,17 +10,15 @@ import android.widget.ImageView;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragments.BottomFragment;
-import com.triplebro.aran.sandw.fragments.FirstPageFragment;
-import com.triplebro.aran.sandw.modules.AransPackage;
-import com.triplebro.aran.sandw.widgets.FirstFragment;
+import com.triplebro.aran.sandw.fragments.ReactFirstPageFragment;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
     private FragmentManager fragmentManager;
     private FragmentTransaction transaction;
-    private static final AransPackage mAranPackage = new AransPackage();
     private ImageView iv_search;
+    ReactFirstPageFragment reactFirstPageFragment=new ReactFirstPageFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl_content, new FirstPageFragment());
+        transaction.replace(R.id.fl_content, reactFirstPageFragment);
         transaction.replace(R.id.fl_bottom, new BottomFragment());
         transaction.commit();
         initView();

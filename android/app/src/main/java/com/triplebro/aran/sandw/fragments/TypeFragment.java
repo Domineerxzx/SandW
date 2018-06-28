@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.react.ReactInstanceManager;
+import com.facebook.react.ReactInstanceManagerBuilder;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.adapters.TypeContentAdapter;
 
@@ -55,6 +57,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
         initView();
         setOnClickListener();
         initData();
+        ReactInstanceManagerBuilder builder = ReactInstanceManager.builder();
         return fragment_type;
     }
 

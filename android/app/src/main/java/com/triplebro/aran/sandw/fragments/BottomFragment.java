@@ -14,10 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
-import com.triplebro.aran.sandw.widgets.FirstFragment;
 
 /**
- * Created by Domineer on 2018/6/6.
+ * Created by Domineer250 on 2018/6/6.
  */
 
 public class BottomFragment extends Fragment implements View.OnClickListener {
@@ -108,7 +107,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.bt_first:
             case R.id.tv_first:
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fl_content, new FirstPageFragment());
+                transaction.replace(R.id.fl_content, new ReactFirstPageFragment());
                 transaction.commit();
                 changeImageForButton(lastFunctionButton, bt_first);
                 lastFunctionTextView.setTextColor(Color.GRAY);
@@ -130,7 +129,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.bt_brand:
             case R.id.tv_brand:
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fl_content, new BrandFragment());
+                transaction.replace(R.id.fl_content, new ReactBrandFragment());//TODO 此处修改为加载RN页面
                 transaction.commit();
                 changeImageForButton(lastFunctionButton, bt_brand);
                 lastFunctionTextView.setTextColor(Color.GRAY);
