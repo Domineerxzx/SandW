@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragments.BottomFragment;
-import com.triplebro.aran.sandw.fragments.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{

@@ -14,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.fragmentReact.ReactBrandFragment;
+import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
 
 /**
  * Created by Domineer250 on 2018/6/6.
@@ -39,7 +41,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private TextView tv_brand;
     private TextView tv_loves;
     private TextView tv_myself;
-
+    private ReactFirstPageFragment reactFirstPageFragment=new ReactFirstPageFragment();
     private Button lastFunctionButton;
     private TextView lastFunctionTextView;
 
@@ -107,7 +109,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.bt_first:
             case R.id.tv_first:
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fl_content, new ReactFirstPageFragment());
+                transaction.replace(R.id.fl_content,reactFirstPageFragment,"rFragment");
                 transaction.commit();
                 changeImageForButton(lastFunctionButton, bt_first);
                 lastFunctionTextView.setTextColor(Color.GRAY);

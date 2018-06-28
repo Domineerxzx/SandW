@@ -55,7 +55,7 @@ public class AransModules extends ReactContextBaseJavaModule {
     @ReactMethod
     public void giveRnData(){
 
-        params.put("data",data);
+        params.put("AransData",data);
         getConstants();
 
     }
@@ -63,6 +63,8 @@ public class AransModules extends ReactContextBaseJavaModule {
     @Nullable
     @Override
     public Map<String, Object> getConstants() {
+//        final Map<String, Object> constants = new HashMap<>();
+//        constants.put("AA", "我是一个常量，我来自Native");
         return params;
     }
 }

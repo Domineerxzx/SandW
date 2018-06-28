@@ -1,4 +1,6 @@
-package com.triplebro.aran.sandw.widgets;
+package com.triplebro.aran.sandw.fragmentReact;
+
+import com.triplebro.aran.sandw.widgets.ReactFragment;
 
 /**
  * Created by Aran on 2018/6/21.

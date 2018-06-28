@@ -10,13 +10,14 @@ import {Text, NativeModules, View,TouchableHighlight} from "react-native";
 
 export default class GetAndroidData extends Component{
     render(){
+
+        this.call_button();
         return(
             <View>
-                <TouchableHighlight onPress={this.call_button.bind(this)}>
                     <Text>
-                        ONCLICK{NativeModules.toString()}
+                        ONCLICK
+                        {NativeModules.AransModules.AransData}
                     </Text>
-                </TouchableHighlight>
             </View>
         )
     }
@@ -24,7 +25,7 @@ export default class GetAndroidData extends Component{
 
     call_button(){
 
-        NativeModules.AransModules.rnCallNative("nihao")
+        NativeModules.AransModules.giveRnData()
     }
 
     /*onPress={this.call_button()}*/

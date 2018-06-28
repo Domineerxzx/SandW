@@ -258,11 +258,7 @@ public class NetworkCommunicationService extends Service {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String res = response.body().string();
-                        ReactFirstPageFragment rFragment = (ReactFirstPageFragment) ((MainActivity) context).
-                                getFragmentManager().findFragmentByTag("rFragment");
-                        AransPackage aransPackage = rFragment.getAransPackage();
-                        AransModules aransModules = aransPackage.getmModule();
-                        aransModules.setData(res);
+
                         if (!res.contains("\"ListNull\":false")) {
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
@@ -365,6 +361,11 @@ public class NetworkCommunicationService extends Service {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String res = response.body().string();
+                        ReactFirstPageFragment rFragment = (ReactFirstPageFragment) ((MainActivity) context).
+                                getFragmentManager().findFragmentByTag("rFragment");
+                        AransPackage aransPackage = rFragment.getAransPackage();
+                        AransModules aransModules = aransPackage.getmModule();
+                        aransModules.setData(res);
                         UserInfo userInfo = gson.fromJson(res, UserInfo.class);
                         if (userInfo.isSessionProve()) {
                             Log.i("ServerBackCode(服务器返回):", "显示成功");

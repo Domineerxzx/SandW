@@ -8,4 +8,4 @@ import DynamicImgesModules from "./App/modules/DynamicImgesModules";
 
 // AppRegistry.registerComponent('SandW', () => NavigatorManager);
 AppRegistry.registerComponent('SandW',()=>NavigatorManager);
-AppRegistry.registerComponent('SandW1',()=>DynamicImgesModules);
+AppRegistry.registerComponent('SandW1',()=>GetAndroidData);
