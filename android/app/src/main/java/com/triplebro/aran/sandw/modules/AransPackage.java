@@ -23,7 +23,16 @@ import java.util.List;
 
 public class AransPackage implements ReactPackage {
 
-    private AransModules mModule;
+    public static AransModules mModule;
+    private Object data;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
@@ -34,15 +43,8 @@ public class AransPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
         mModule = new AransModules(reactContext);
+        mModule.setData(data);
         modules.add(mModule);
         return modules;
-    }
-
-    public AransModules getmModule() {
-        return mModule;
-    }
-
-    public void setmModule(AransModules mModule) {
-        this.mModule = mModule;
     }
 }

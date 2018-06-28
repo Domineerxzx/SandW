@@ -28,6 +28,7 @@ public class ReactBrandFragment extends Fragment{
     ReactRootView mReactRootView;
     ReactInstanceManager mReactInstanceManager;
     private TextView tv_title;
+    private AransPackage reactPackage = new AransPackage();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class ReactBrandFragment extends Fragment{
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModulePath("index")
                 .addPackage(new MainReactPackage())
-                .addPackage(new AransPackage())
+                .addPackage(reactPackage)
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
@@ -45,6 +46,14 @@ public class ReactBrandFragment extends Fragment{
         initView();
         initData();
         return mReactRootView;
+    }
+
+    public AransPackage getReactPackage() {
+        return reactPackage;
+    }
+
+    public void setReactPackage(AransPackage reactPackage) {
+        this.reactPackage = reactPackage;
     }
 
     private void initData() {

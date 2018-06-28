@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragmentReact.ReactBrandFragment;
 import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.modules.AransModules;
+import com.triplebro.aran.sandw.modules.AransPackage;
 
 /**
  * Created by Domineer250 on 2018/6/6.
@@ -44,6 +46,8 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private ReactFirstPageFragment reactFirstPageFragment=new ReactFirstPageFragment();
     private Button lastFunctionButton;
     private TextView lastFunctionTextView;
+    private ReactBrandFragment reactBrandFragment = new ReactBrandFragment();
+    private AransModules aransModules;
 
     @Nullable
     @Override
@@ -131,12 +135,13 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.bt_brand:
             case R.id.tv_brand:
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fl_content, new ReactBrandFragment());//TODO 此处修改为加载RN页面
+                transaction.replace(R.id.fl_content, reactBrandFragment);//TODO 此处修改为加载RN页面
                 transaction.commit();
                 changeImageForButton(lastFunctionButton, bt_brand);
                 lastFunctionTextView.setTextColor(Color.GRAY);
                 tv_brand.setTextColor(Color.BLACK);
                 lastFunctionTextView = tv_brand;
+                reactBrandFragment.getReactPackage().setData("hahaha");
                 break;
             case R.id.ll_loves:
             case R.id.bt_loves:

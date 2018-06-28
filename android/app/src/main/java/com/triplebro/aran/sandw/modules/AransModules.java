@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -25,7 +26,6 @@ import javax.annotation.Nullable;
 
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
-    private Map<String, Object> params = new HashMap<>();
     private Object data;
 
     public Object getData() {
@@ -52,19 +52,13 @@ public class AransModules extends ReactContextBaseJavaModule {
         Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
 
     }
+
     @ReactMethod
-    public void giveRnData(){
+    public void giveRnData(Callback callback){
 
-        params.put("AransData",data);
-        getConstants();
+        callback.invoke(data);
+        System.out.println("--------------------------------"+data);
 
     }
 
-    @Nullable
-    @Override
-    public Map<String, Object> getConstants() {
-//        final Map<String, Object> constants = new HashMap<>();
-//        constants.put("AA", "我是一个常量，我来自Native");
-        return params;
-    }
 }

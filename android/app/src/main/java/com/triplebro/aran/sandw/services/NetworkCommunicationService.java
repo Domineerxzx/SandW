@@ -1,7 +1,6 @@
 package com.triplebro.aran.sandw.services;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -13,23 +12,18 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
-import com.triplebro.aran.sandw.R;
-import com.triplebro.aran.sandw.activities.ChangeUserInfoActivity;
 import com.triplebro.aran.sandw.activities.LoginActivity;
 import com.triplebro.aran.sandw.activities.MainActivity;
 import com.triplebro.aran.sandw.activities.RegisterActivity;
 import com.triplebro.aran.sandw.beans.AddAddressInfoBean;
 import com.triplebro.aran.sandw.beans.AddressInfoBean;
 import com.triplebro.aran.sandw.beans.ChangeAddressInfoBean;
-import com.triplebro.aran.sandw.beans.ChangePasswordBean;
-import com.triplebro.aran.sandw.beans.ChangeUserInfoBean;
 import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
 import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
 import com.triplebro.aran.sandw.beans.UserInfo;
-import com.triplebro.aran.sandw.fragments.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
 import com.triplebro.aran.sandw.handlers.AddAddressHandler;
 import com.triplebro.aran.sandw.handlers.AddressHandler;
 import com.triplebro.aran.sandw.handlers.ChangeAddressHandler;
@@ -46,7 +40,6 @@ import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.utils.httpUtils.HttpUtils;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -361,11 +354,6 @@ public class NetworkCommunicationService extends Service {
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
                         String res = response.body().string();
-                        ReactFirstPageFragment rFragment = (ReactFirstPageFragment) ((MainActivity) context).
-                                getFragmentManager().findFragmentByTag("rFragment");
-                        AransPackage aransPackage = rFragment.getAransPackage();
-                        AransModules aransModules = aransPackage.getmModule();
-                        aransModules.setData(res);
                         UserInfo userInfo = gson.fromJson(res, UserInfo.class);
                         if (userInfo.isSessionProve()) {
                             Log.i("ServerBackCode(服务器返回):", "显示成功");

@@ -8,25 +8,46 @@
 import React, {Component} from "react";
 import {Text, NativeModules, View,TouchableHighlight} from "react-native";
 
+
+
 export default class GetAndroidData extends Component{
+
+
+    constructor() {
+        super();
+        this.state = {
+            vlaues:"this"
+        }
+    }
+
     render(){
 
-        this.call_button();
+        let nativeResult=NativeModules.AransModules.getCo();
+
         return(
             <View>
+                <TouchableHighlight onPress={this.getValues(nativeResult).bind(this)}>
                     <Text>
-                        ONCLICK
-                        {NativeModules.AransModules.AransData}
+                        aaaa
+                    </Text>
+                </TouchableHighlight>
+                    <Text>
+                        SHOW:
+                        {this.state.vlaues}
                     </Text>
             </View>
         )
     }
 
-
-    call_button(){
-
-        NativeModules.AransModules.giveRnData()
+    getValues(nativeResult){
+        this.aaa();
+        this.setState({vlaues:nativeResult})
     }
 
+
+
+    aaa(){
+        NativeModules.AransModules.giveRnData()
+    }
     /*onPress={this.call_button()}*/
 }
