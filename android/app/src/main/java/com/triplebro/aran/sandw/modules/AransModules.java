@@ -26,6 +26,15 @@ import javax.annotation.Nullable;
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
     private Map<String, Object> params = new HashMap<>();
+    private Object data;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 
     public AransModules(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -44,9 +53,9 @@ public class AransModules extends ReactContextBaseJavaModule {
 
     }
     @ReactMethod
-    public void giveRnData(String msg){
+    public void giveRnData(){
 
-        params.put("data",msg);
+        params.put("data",data);
         getConstants();
 
     }

@@ -262,7 +262,7 @@ public class NetworkCommunicationService extends Service {
                                 getFragmentManager().findFragmentByTag("rFragment");
                         AransPackage aransPackage = rFragment.getAransPackage();
                         AransModules aransModules = aransPackage.getmModule();
-                        aransModules.giveRnData(res);
+                        aransModules.setData(res);
                         if (!res.contains("\"ListNull\":false")) {
                             ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
