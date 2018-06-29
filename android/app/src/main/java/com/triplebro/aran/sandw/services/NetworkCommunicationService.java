@@ -23,7 +23,6 @@ import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
 import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
 import com.triplebro.aran.sandw.beans.UserInfo;
-import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
 import com.triplebro.aran.sandw.handlers.AddAddressHandler;
 import com.triplebro.aran.sandw.handlers.AddressHandler;
 import com.triplebro.aran.sandw.handlers.ChangeAddressHandler;

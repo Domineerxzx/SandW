@@ -22,7 +22,7 @@ export default class GetAndroidData extends Component{
 
     render(){
 
-        let nativeResult=NativeModules.AransModules.getCo();
+        let nativeResult=NativeModules.AransModules.aa;
 
         return(
             <View>
@@ -48,6 +48,11 @@ export default class GetAndroidData extends Component{
 
     aaa(){
         NativeModules.AransModules.giveRnData()
+    }
+
+
+    call_button(){
+        NativeModules.AransModules.rnCallNative("这里是js端传递的数据");
     }
     /*onPress={this.call_button()}*/
 }

@@ -24,7 +24,7 @@ public class ReactFirstPageFragment extends Fragment{
     ReactInstanceManager mReactInstanceManager;
     private TextView tv_title;
     public AransPackage aransPackage = new AransPackage();
-
+    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -141,7 +141,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
                 lastFunctionTextView.setTextColor(Color.GRAY);
                 tv_brand.setTextColor(Color.BLACK);
                 lastFunctionTextView = tv_brand;
-                reactBrandFragment.getReactPackage().setData("hahaha");
+                reactBrandFragment.getReactPackage().setData("hahaha");//TODO 置入数据的的入口
                 break;
             case R.id.ll_loves:
             case R.id.bt_loves:

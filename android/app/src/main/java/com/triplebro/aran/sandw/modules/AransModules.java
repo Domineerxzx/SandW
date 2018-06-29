@@ -61,4 +61,12 @@ public class AransModules extends ReactContextBaseJavaModule {
 
     }
 
+    @Nullable
+    @Override
+    public Map<String, Object> getConstants() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("aa","hahaha");
+        params.put("bb","xixixi");
+        return params;
+    }
 }

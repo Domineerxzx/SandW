@@ -40,7 +40,7 @@ public class AransPackage implements ReactPackage {
     }
 
     @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {//只执行一次
         List<NativeModule> modules = new ArrayList<>();
         mModule = new AransModules(reactContext);
         mModule.setData(data);
