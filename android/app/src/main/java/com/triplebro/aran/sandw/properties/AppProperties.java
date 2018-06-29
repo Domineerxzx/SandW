@@ -26,6 +26,8 @@ public class AppProperties {
     public static final String SERVER_ADDRESS_OF_CHANGE_ADDRESS = "http://120.25.96.141:8080/address/save";
     //TODO 删除地址
     public static final String SERVER_ADDRESS_OF_DELETE_ADDRESS = "http://120.25.96.141:8080/address/dele";
+    //TODO 获取商品类型
+    public static final String SERVER_ADDRESS_OF_GET_TYPE = "http://120.25.96.141:8080/search/rangelist";
     //TODO 国家及地区
     public static final String[] COUNTRY_OR_AREA = {"中国内地"};
     //TODO 省

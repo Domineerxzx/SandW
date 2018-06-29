@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.triplebro.aran.sandw.activities.LoginActivity;
-import com.triplebro.aran.sandw.activities.MainActivity;
 import com.triplebro.aran.sandw.activities.RegisterActivity;
 import com.triplebro.aran.sandw.beans.AddAddressInfoBean;
 import com.triplebro.aran.sandw.beans.AddressInfoBean;
@@ -22,6 +21,7 @@ import com.triplebro.aran.sandw.beans.ChangeAddressInfoBean;
 import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
 import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
+import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.beans.UserInfo;
 import com.triplebro.aran.sandw.handlers.AddAddressHandler;
 import com.triplebro.aran.sandw.handlers.AddressHandler;
@@ -32,9 +32,8 @@ import com.triplebro.aran.sandw.handlers.DeleteAddressHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
 import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
+import com.triplebro.aran.sandw.handlers.TypeHandler;
 import com.triplebro.aran.sandw.handlers.UserHandler;
-import com.triplebro.aran.sandw.modules.AransModules;
-import com.triplebro.aran.sandw.modules.AransPackage;
 import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.utils.httpUtils.HttpUtils;
 
@@ -98,6 +97,41 @@ public class NetworkCommunicationService extends Service {
         public void deleteAddress(Context context, DeleteAddressHandler deleteAddressHandler, String session, String address_id) {
             NetworkCommunicationService.this.deleteAddress(context, deleteAddressHandler, session, address_id);
         }
+
+        public void getType(Context context, TypeHandler typeHandler) {
+            NetworkCommunicationService.this.getType(context,typeHandler);
+        }
+    }
+
+    private void getType(final Context context, final TypeHandler typeHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_GET_TYPE, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        TypeInfo typeInfo = gson.fromJson(res, TypeInfo.class);
+                        Message message = new Message();
+                        message.obj = typeInfo;
+                        typeHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取类别成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void deleteAddress(final Context context, final DeleteAddressHandler deleteAddressHandler, String session, String address_id) {

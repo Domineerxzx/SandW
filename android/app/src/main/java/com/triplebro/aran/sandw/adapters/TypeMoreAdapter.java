@@ -8,24 +8,26 @@ import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
 
+import java.util.List;
+
 public class TypeMoreAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] type_more;
+    private List<String> type_more;
 
-    public TypeMoreAdapter(Context context, String[] type_more) {
+    public TypeMoreAdapter(Context context, List<String> type_more) {
         this.context = context;
         this.type_more = type_more;
     }
 
     @Override
     public int getCount() {
-        return type_more.length;
+        return type_more.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return type_more[position];
+        return type_more.get(position);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class TypeMoreAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_item_more_type.setText(type_more[position]);
+        viewHolder.tv_item_more_type.setText(type_more.get(position));
         return convertView;
     }
 

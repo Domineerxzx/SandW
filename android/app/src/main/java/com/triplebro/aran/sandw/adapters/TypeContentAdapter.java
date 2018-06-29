@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.fragments.TypeFragment;
 import com.triplebro.aran.sandw.views.InnerListView;
 
@@ -18,23 +19,21 @@ import java.util.List;
 public class TypeContentAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] types;
-    private List<String[]> type_more;
+    private List<TypeInfo.BigRangeListBean> types;
 
-    public TypeContentAdapter(Context context, String[] types, List<String[]> type_more) {
+    public TypeContentAdapter(Context context, List<TypeInfo.BigRangeListBean> types) {
         this.context = context;
         this.types = types;
-        this.type_more = type_more;
     }
 
     @Override
     public int getCount() {
-        return types.length;
+        return types.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return types[position];
+        return types.get(position);
     }
 
     @Override
@@ -55,8 +54,8 @@ public class TypeContentAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_item_type.setText(types[position]);
-        TypeMoreAdapter typeMoreAdapter = new TypeMoreAdapter(context, type_more.get(position));
+        viewHolder.tv_item_type.setText(types.get(position).getBigRangeName());
+        TypeMoreAdapter typeMoreAdapter = new TypeMoreAdapter(context, types.get(position).getItemRangeList());
         viewHolder.lv_type_more.setAdapter(typeMoreAdapter);
         viewHolder.tv_item_type.setOnClickListener(new View.OnClickListener() {
             @Override

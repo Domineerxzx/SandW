@@ -14,24 +14,15 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactInstanceManagerBuilder;
 import com.triplebro.aran.sandw.R;
-import com.triplebro.aran.sandw.adapters.TypeContentAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.triplebro.aran.sandw.handlers.TypeHandler;
+import com.triplebro.aran.sandw.managers.TypeManager;
 
 
 public class TypeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private View fragment_type;
     private ListView lv_type_content;
-    //TODO 类别名称服务器请求
-    private String[] types_f = new String[]{"1", "1", "1", "1"};
-    private String[] types_m = new String[]{"2", "2", "2", "2"};
-    private String[] types_c = new String[]{"3", "3", "3", "3"};
-    private List<String[]> type_more = new ArrayList<>();
     private LinearLayout ll_type_title_f;
     private Button bt_type_title_f;
     private View v_type_title_f;
@@ -43,13 +34,12 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
     private View v_type_title_c;
     private Button lastClickButton;
     private View lastClickView;
-    private TypeContentAdapter typeContentAdapter_f;
-    private TypeContentAdapter typeContentAdapter_m;
-    private TypeContentAdapter typeContentAdapter_c;
     private TextView tv_type_sale;
     private ImageView iv_type_sale;
     private RelativeLayout rl_type_sale;
     private TextView tv_title;
+    private TypeHandler typeHandler;
+    private TypeManager typeManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +47,6 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
         initView();
         setOnClickListener();
         initData();
-        ReactInstanceManagerBuilder builder = ReactInstanceManager.builder();
         return fragment_type;
     }
 
@@ -76,19 +65,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
 
     private void initData() {
         tv_title.setText(R.string.title_type);
-        typeContentAdapter_f = new TypeContentAdapter(getActivity(), types_f, type_more);
-        lv_type_content.setAdapter(typeContentAdapter_f);
-        //TODO 子类别服务器获取
-        String[] type_more_1 = new String[]{"4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4"};
-        String[] type_more_2 = new String[]{"5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5"};
-        String[] type_more_3 = new String[]{"6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"};
-        String[] type_more_4 = new String[]{"7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7"};
-
-        type_more.add(type_more_1);
-        type_more.add(type_more_2);
-        type_more.add(type_more_3);
-        type_more.add(type_more_4);
-
+        typeHandler = new TypeHandler(getActivity(), lv_type_content);
+        typeManager = new TypeManager(getActivity(), typeHandler);
+        typeHandler.setTypeManager(typeManager);
+        typeManager.getType();
     }
 
     private void initView() {
@@ -122,11 +102,6 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
                 v_type_title_f.setBackgroundColor(Color.BLACK);
                 lastClickView = v_type_title_f;
                 lastClickButton = bt_type_title_f;
-                if (typeContentAdapter_f == null) {
-
-                    typeContentAdapter_f = new TypeContentAdapter(getActivity(), types_f, type_more);
-                }
-                lv_type_content.setAdapter(typeContentAdapter_f);
                 break;
             case R.id.ll_type_title_m:
             case R.id.bt_type_title_m:
@@ -136,11 +111,6 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
                 v_type_title_m.setBackgroundColor(Color.BLACK);
                 lastClickView = v_type_title_m;
                 lastClickButton = bt_type_title_m;
-                if (typeContentAdapter_m == null) {
-
-                    typeContentAdapter_m = new TypeContentAdapter(getActivity(), types_m, type_more);
-                }
-                lv_type_content.setAdapter(typeContentAdapter_m);
                 break;
             case R.id.ll_type_title_c:
             case R.id.bt_type_title_c:
@@ -150,11 +120,6 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
                 v_type_title_c.setBackgroundColor(Color.BLACK);
                 lastClickView = v_type_title_c;
                 lastClickButton = bt_type_title_c;
-                if (typeContentAdapter_c == null) {
-
-                    typeContentAdapter_c = new TypeContentAdapter(getActivity(), types_c, type_more);
-                }
-                lv_type_content.setAdapter(typeContentAdapter_c);
                 break;
             case R.id.tv_type_sale:
             case R.id.iv_type_sale:
@@ -167,16 +132,6 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //TODO 子类别服务器获取
-        String[] type_more_1 = new String[]{"4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4"};
-        String[] type_more_2 = new String[]{"5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5"};
-        String[] type_more_3 = new String[]{"6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6"};
-        String[] type_more_4 = new String[]{"7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7"};
-
-        type_more.add(type_more_1);
-        type_more.add(type_more_2);
-        type_more.add(type_more_3);
-        type_more.add(type_more_4);
         LinearLayout ll_type_more = view.findViewById(R.id.ll_type_more);
         ll_type_more.setVisibility(View.VISIBLE);
     }
