@@ -28,6 +28,8 @@ public class AppProperties {
     public static final String SERVER_ADDRESS_OF_DELETE_ADDRESS = "http://120.25.96.141:8080/address/dele";
     //TODO 获取商品类型
     public static final String SERVER_ADDRESS_OF_GET_TYPE = "http://120.25.96.141:8080/search/rangelist";
+    //TODO 获取四格推荐
+    public static final String SERVER_ADDRESS_OF_GET_GOODS_INFO = "http://120.25.96.141:8080/commodity/recommendation";
     //TODO 国家及地区
     public static final String[] COUNTRY_OR_AREA = {"中国内地"};
     //TODO 省
@@ -38,4 +40,5 @@ public class AppProperties {
     //TODO 字母表
     public static final String[] BRAND_WORD_LIST = {"A","B","C","D","E","F","G", "H","I","J","K","L","M","N","O",
             "P","Q","R","S","T","U","V","W","X","Y","Z"};
+    public static final int GET_GOODS_INFO = 1;
 }

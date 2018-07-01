@@ -29,11 +29,13 @@ import com.triplebro.aran.sandw.handlers.ChangeAddressHandler;
 import com.triplebro.aran.sandw.handlers.ChangeInfoHandler;
 import com.triplebro.aran.sandw.handlers.ChangePassWordHandler;
 import com.triplebro.aran.sandw.handlers.DeleteAddressHandler;
+import com.triplebro.aran.sandw.handlers.FirstPageHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
 import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
 import com.triplebro.aran.sandw.handlers.TypeHandler;
 import com.triplebro.aran.sandw.handlers.UserHandler;
+import com.triplebro.aran.sandw.modules.AransModules;
 import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.utils.httpUtils.HttpUtils;
 
@@ -101,6 +103,42 @@ public class NetworkCommunicationService extends Service {
         public void getType(Context context, TypeHandler typeHandler) {
             NetworkCommunicationService.this.getType(context,typeHandler);
         }
+
+        public void getGoodsInfo(Context context, FirstPageHandler firstPageHandler) {
+            NetworkCommunicationService.this.getGoodsInfo(context,firstPageHandler);
+        }
+    }
+
+    private void getGoodsInfo(final Context context, final FirstPageHandler firstPageHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("recommendation", "T恤"/*AransModules.title*/);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_GET_GOODS_INFO, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.obj = res;
+                        message.what = AppProperties.GET_GOODS_INFO;
+                        firstPageHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取商品四格推荐成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void getType(final Context context, final TypeHandler typeHandler) {

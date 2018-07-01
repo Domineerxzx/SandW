@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragmentReact.ReactBrandFragment;
 import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.handlers.FirstPageHandler;
+import com.triplebro.aran.sandw.managers.FirstPageManager;
 import com.triplebro.aran.sandw.modules.AransModules;
 import com.triplebro.aran.sandw.modules.AransPackage;
 
@@ -48,6 +50,8 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private TextView lastFunctionTextView;
     private ReactBrandFragment reactBrandFragment = new ReactBrandFragment();
     private AransModules aransModules;
+    private FirstPageHandler firstPageHandler;
+    private FirstPageManager firstPageManager;
 
     @Nullable
     @Override
@@ -112,9 +116,12 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_first:
             case R.id.bt_first:
             case R.id.tv_first:
-                transaction = fragmentManager.beginTransaction();
+                firstPageHandler = new FirstPageHandler(getActivity(),reactFirstPageFragment);
+                firstPageManager = new FirstPageManager(getActivity(), firstPageHandler);
+                firstPageManager.getGoodsInfo();
+                /*transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fl_content,reactFirstPageFragment,"rFragment");
-                transaction.commit();
+                transaction.commit();*/
                 changeImageForButton(lastFunctionButton, bt_first);
                 lastFunctionTextView.setTextColor(Color.GRAY);
                 tv_first.setTextColor(Color.BLACK);
@@ -134,6 +141,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_brand:
             case R.id.bt_brand:
             case R.id.tv_brand:
+                reactBrandFragment.getReactPackage().setData("hahaha");//TODO 置入数据的的入口
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fl_content, reactBrandFragment);//TODO 此处修改为加载RN页面
                 transaction.commit();
@@ -141,7 +149,6 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
                 lastFunctionTextView.setTextColor(Color.GRAY);
                 tv_brand.setTextColor(Color.BLACK);
                 lastFunctionTextView = tv_brand;
-                reactBrandFragment.getReactPackage().setData("hahaha");//TODO 置入数据的的入口
                 break;
             case R.id.ll_loves:
             case R.id.bt_loves:

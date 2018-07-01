@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragments.BottomFragment;
 import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.handlers.FirstPageHandler;
+import com.triplebro.aran.sandw.managers.FirstPageManager;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -19,6 +21,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private FragmentTransaction transaction;
     private ImageView iv_search;
     ReactFirstPageFragment reactFirstPageFragment=new ReactFirstPageFragment();
+    private FirstPageHandler firstPageHandler;
+    private FirstPageManager firstPageManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +30,9 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         fragmentManager = getFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl_content, reactFirstPageFragment,"rFragment");
+        firstPageHandler = new FirstPageHandler(this,reactFirstPageFragment);
+        firstPageManager = new FirstPageManager(this, firstPageHandler);
+        firstPageManager.getGoodsInfo();
         transaction.replace(R.id.fl_bottom, new BottomFragment());
         transaction.commit();
         initView();

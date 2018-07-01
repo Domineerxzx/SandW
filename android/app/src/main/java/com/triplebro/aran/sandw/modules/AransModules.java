@@ -27,6 +27,7 @@ import javax.annotation.Nullable;
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
     private Object data;
+    public static String title;
 
     public Object getData() {
         return data;
@@ -47,18 +48,15 @@ public class AransModules extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void rnCallNative(String msg){
+    public void setTitle(String msg){
 
-        Toast.makeText(mContext,msg,Toast.LENGTH_SHORT).show();
+        title = msg;
 
     }
 
     @ReactMethod
-    public void giveRnData(Callback callback){
-
+    public void getGoodsInfo(Callback callback){
         callback.invoke(data);
-        System.out.println("--------------------------------"+data);
-
     }
 
     @Nullable
