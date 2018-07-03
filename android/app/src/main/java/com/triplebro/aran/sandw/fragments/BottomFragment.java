@@ -19,10 +19,9 @@ import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
 import com.triplebro.aran.sandw.handlers.FirstPageHandler;
 import com.triplebro.aran.sandw.managers.FirstPageManager;
 import com.triplebro.aran.sandw.modules.AransModules;
-import com.triplebro.aran.sandw.modules.AransPackage;
 
 /**
- * Created by Domineer250 on 2018/6/6.
+ * Created by Domineer on 2018/6/6.
  */
 
 public class BottomFragment extends Fragment implements View.OnClickListener {
@@ -141,7 +140,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_brand:
             case R.id.bt_brand:
             case R.id.tv_brand:
-                reactBrandFragment.getReactPackage().setData("hahaha");//TODO 置入数据的的入口
+                reactBrandFragment.getReactPackage().setGoodsInfo("hahaha");//TODO 置入数据的的入口
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fl_content, reactBrandFragment);//TODO 此处修改为加载RN页面
                 transaction.commit();

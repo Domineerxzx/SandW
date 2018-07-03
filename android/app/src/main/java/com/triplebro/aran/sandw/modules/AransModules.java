@@ -1,15 +1,12 @@
 package com.triplebro.aran.sandw.modules;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,15 +23,15 @@ import javax.annotation.Nullable;
 
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
-    private Object data;
+    private String goodsInfo;
     public static String title;
 
-    public Object getData() {
-        return data;
+    public String getGoodsInfo() {
+        return goodsInfo;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setGoodsInfo(String goodsInfo) {
+        this.goodsInfo = goodsInfo;
     }
 
     public AransModules(ReactApplicationContext reactContext) {
@@ -56,7 +53,7 @@ public class AransModules extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getGoodsInfo(Callback callback){
-        callback.invoke(data);
+        callback.invoke(goodsInfo);
     }
 
     @Nullable

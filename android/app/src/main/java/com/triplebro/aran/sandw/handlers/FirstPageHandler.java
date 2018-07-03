@@ -38,7 +38,7 @@ public class FirstPageHandler extends Handler{
             case AppProperties.GET_GOODS_INFO:
                 String goodsInfo = (String) msg.obj;
                 AransPackage aransPackage = ((ReactFirstPageFragment)fragment).getAransPackage();
-                aransPackage.setData(goodsInfo);
+                aransPackage.setGoodsInfo(goodsInfo);
                 FragmentTransaction fragmentTransaction = ((MainActivity) context).getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fl_content,fragment);
                 fragmentTransaction.commit();

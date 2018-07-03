@@ -23,6 +23,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     ReactFirstPageFragment reactFirstPageFragment=new ReactFirstPageFragment();
     private FirstPageHandler firstPageHandler;
     private FirstPageManager firstPageManager;
+    private ImageView iv_shopbag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     private void setOnClickListener() {
         iv_search.setOnClickListener(this);
+        iv_shopbag.setOnClickListener(this);
     }
 
     private void initData() {
@@ -50,14 +52,19 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
     private void initView() {
         iv_search = (ImageView) findViewById(R.id.iv_search);
+        iv_shopbag = (ImageView) findViewById(R.id.iv_shopbag);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.iv_search:
-                Intent intent = new Intent(this, SearchActivity.class);
-                startActivity(intent);
+                Intent search = new Intent(this, SearchActivity.class);
+                startActivity(search);
+                break;
+            case R.id.iv_shopbag:
+                Intent shopBag = new Intent(this, ShopBagActivity.class);
+                startActivity(shopBag);
                 break;
         }
     }

@@ -1,14 +1,11 @@
 package com.triplebro.aran.sandw.modules;
 
 import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.react.uimanager.ViewManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -24,14 +21,14 @@ import java.util.List;
 public class AransPackage implements ReactPackage {
 
     public static AransModules mModule;
-    private Object data;
+    private String goodsInfo;
 
-    public Object getData() {
-        return data;
+    public String getGoodsInfo() {
+        return goodsInfo;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setGoodsInfo(String goodsInfo) {
+        this.goodsInfo = goodsInfo;
     }
 
     @Override
@@ -43,7 +40,7 @@ public class AransPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {//只执行一次
         List<NativeModule> modules = new ArrayList<>();
         mModule = new AransModules(reactContext);
-        mModule.setData(data);
+        mModule.setGoodsInfo(goodsInfo);
         modules.add(mModule);
         return modules;
     }
