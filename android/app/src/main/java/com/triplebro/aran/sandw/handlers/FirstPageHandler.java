@@ -43,7 +43,6 @@ public class FirstPageHandler extends Handler{
                 fragmentTransaction.replace(R.id.fl_content,fragment);
                 fragmentTransaction.commit();
                 context.unbindService(firstPageManager);
-                
                 break;
         }
     }

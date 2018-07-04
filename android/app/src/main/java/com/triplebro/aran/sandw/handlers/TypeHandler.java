@@ -16,6 +16,7 @@ public class TypeHandler extends Handler {
     private Context context;
     private ListView lv_type;
     private TypeManager typeManager;
+    private int sex;
 
     public TypeManager getTypeManager() {
         return typeManager;
@@ -25,16 +26,19 @@ public class TypeHandler extends Handler {
         this.typeManager = typeManager;
     }
 
-    public TypeHandler(Context context, ListView lv_type) {
+    public TypeHandler(Context context, ListView lv_type, int sex) {
         this.context = context;
         this.lv_type = lv_type;
+        this.sex = sex;
     }
 
     @Override
     public void handleMessage(Message msg) {
         TypeInfo typeInfo = (TypeInfo) msg.obj;
         List<TypeInfo.BigRangeListBean> bigRangeList = typeInfo.getBigRangeList();
-        TypeContentAdapter typeContentAdapter = new TypeContentAdapter(context, bigRangeList);
+        TypeInfo.BigRangeListBean bigRangeListBean = bigRangeList.get(sex);
+        List<TypeInfo.BigRangeListBean.ClassValueBean> classValue = bigRangeListBean.getClassValue();
+        TypeContentAdapter typeContentAdapter = new TypeContentAdapter(context, classValue);
         lv_type.setAdapter(typeContentAdapter);
         context.unbindService(typeManager);
     }

@@ -19,9 +19,9 @@ import java.util.List;
 public class TypeContentAdapter extends BaseAdapter {
 
     private Context context;
-    private List<TypeInfo.BigRangeListBean> types;
+    private List<TypeInfo.BigRangeListBean.ClassValueBean> types;
 
-    public TypeContentAdapter(Context context, List<TypeInfo.BigRangeListBean> types) {
+    public TypeContentAdapter(Context context, List<TypeInfo.BigRangeListBean.ClassValueBean> types) {
         this.context = context;
         this.types = types;
     }

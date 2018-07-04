@@ -65,7 +65,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
 
     private void initData() {
         tv_title.setText(R.string.title_type);
-        typeHandler = new TypeHandler(getActivity(), lv_type_content);
+        typeHandler = new TypeHandler(getActivity(), lv_type_content, 1);
         typeManager = new TypeManager(getActivity(), typeHandler);
         typeHandler.setTypeManager(typeManager);
         typeManager.getType();
@@ -102,6 +102,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
                 v_type_title_f.setBackgroundColor(Color.BLACK);
                 lastClickView = v_type_title_f;
                 lastClickButton = bt_type_title_f;
+                typeHandler = new TypeHandler(getActivity(), lv_type_content,1);
+                typeManager = new TypeManager(getActivity(), typeHandler);
+                typeHandler.setTypeManager(typeManager);
+                typeManager.getType();
                 break;
             case R.id.ll_type_title_m:
             case R.id.bt_type_title_m:
@@ -111,6 +115,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
                 v_type_title_m.setBackgroundColor(Color.BLACK);
                 lastClickView = v_type_title_m;
                 lastClickButton = bt_type_title_m;
+                typeHandler = new TypeHandler(getActivity(), lv_type_content,0);
+                typeManager = new TypeManager(getActivity(), typeHandler);
+                typeHandler.setTypeManager(typeManager);
+                typeManager.getType();
                 break;
             case R.id.ll_type_title_c:
             case R.id.bt_type_title_c:
@@ -120,6 +128,10 @@ public class TypeFragment extends Fragment implements View.OnClickListener, Adap
                 v_type_title_c.setBackgroundColor(Color.BLACK);
                 lastClickView = v_type_title_c;
                 lastClickButton = bt_type_title_c;
+                typeHandler = new TypeHandler(getActivity(), lv_type_content,2);
+                typeManager = new TypeManager(getActivity(), typeHandler);
+                typeHandler.setTypeManager(typeManager);
+                typeManager.getType();
                 break;
             case R.id.tv_type_sale:
             case R.id.iv_type_sale:

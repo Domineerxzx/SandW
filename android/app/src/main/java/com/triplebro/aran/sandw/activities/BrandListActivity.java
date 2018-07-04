@@ -35,7 +35,6 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
     private BrandContentAdapter brandContentAdapter_f;
     private BrandContentAdapter brandContentAdapter_m;
     private BrandContentAdapter brandContentAdapter_c;
-    private List<String[]> brand_more = new ArrayList<>();
     private ImageView iv_close_brand_list;
 
     @Override
@@ -59,13 +58,6 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
     }
 
     private void initData() {
-        brandContentAdapter_f = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
-        lv_brand_list_content.setAdapter(brandContentAdapter_f);
-        //TODO 子类别服务器获取
-        String[] brand_more_1 = new String[]{"1", "2", "3"};
-
-        brand_more.add(brand_more_1);
-
     }
 
     private void initView() {
@@ -98,7 +90,7 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
                 lastClickButton = bt_brand_title_f;
                 if (brandContentAdapter_f == null) {
 
-                    brandContentAdapter_f = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
+                    //brandContentAdapter_f = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
                 }
                 lv_brand_list_content.setAdapter(brandContentAdapter_f);
                 break;
@@ -112,7 +104,7 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
                 lastClickButton = bt_brand_title_m;
                 if (brandContentAdapter_m == null) {
 
-                    brandContentAdapter_m = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
+                    //brandContentAdapter_m = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
                 }
                 lv_brand_list_content.setAdapter(brandContentAdapter_m);
                 break;
@@ -126,7 +118,7 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
                 lastClickButton = bt_brand_title_c;
                 if (brandContentAdapter_c == null) {
 
-                    brandContentAdapter_c = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
+                    //brandContentAdapter_c = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
                 }
                 lv_brand_list_content.setAdapter(brandContentAdapter_c);
                 break;
@@ -139,6 +131,6 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String[] brand_more_content = new String[]{"1", "2", "3"};
-        brand_more.add(brand_more_content);
+        /*brand_more.add(brand_more_content);*/
     }
 }
