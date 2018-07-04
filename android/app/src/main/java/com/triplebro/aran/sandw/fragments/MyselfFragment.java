@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.triplebro.aran.sandw.activities.AddressActivity;
+import com.triplebro.aran.sandw.activities.OrderActivity;
 import com.triplebro.aran.sandw.handlers.UserHandler;
 
 import android.support.v4.content.ContextCompat;
@@ -79,6 +80,8 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     private TextView tv_address;
     private ImageView iv_address_more;
     private String session_now;
+    private TextView tv_order;
+    private ImageView iv_order;
 
 
     @Override
@@ -154,6 +157,8 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         iv_user_more.setOnClickListener(this);
         tv_address.setOnClickListener(this);
         iv_address_more.setOnClickListener(this);
+        tv_order.setOnClickListener(this);
+        iv_order.setOnClickListener(this);
     }
 
     private void initView() {
@@ -196,6 +201,8 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         iv_partner_more = fragment_myself.findViewById(R.id.iv_partner_more);
         tv_address = fragment_myself.findViewById(R.id.tv_address);
         iv_address_more = fragment_myself.findViewById(R.id.iv_address_more);
+        tv_order = (TextView) fragment_myself.findViewById(R.id.tv_order);
+        iv_order = (ImageView) fragment_myself.findViewById(R.id.iv_order);
     }
 
     @Override
@@ -228,6 +235,11 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
                     }
                 }, getActivity().getFragmentManager());
 
+                break;
+            case R.id.tv_order:
+            case R.id.iv_order:
+                Intent order = new Intent(getActivity(), OrderActivity.class);
+                getActivity().startActivity(order);
                 break;
             case R.id.tv_sex_f:
             case R.id.rbt_sex_f:

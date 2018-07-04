@@ -41,7 +41,8 @@
         <activity android:name=".activities.ChangeAddressActivity" />
         <activity android:name=".activities.AddAddressActivity" />
         <activity android:name=".activities.BrandListActivity" />
-        <activity android:name=".activities.SearchActivity"/>
+        <activity android:name=".activities.SearchActivity" />
+        <activity android:name=".activities.OrderActivity"></activity>
     </application>
 
 </manifest>
