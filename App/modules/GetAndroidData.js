@@ -22,13 +22,13 @@ export default class GetAndroidData extends Component{
 
     render(){
 
-        let nativeResult=NativeModules.AransModules.aa;
+        let nativeResult=NativeModules.AransModules.getGoodsInfo;
 
         return(
             <View>
                 <TouchableHighlight onPress={this.getValues(nativeResult).bind(this)}>
                     <Text>
-                        aaaa
+                        {this.getValues(nativeResult).bind(this)}
                     </Text>
                 </TouchableHighlight>
                     <Text>

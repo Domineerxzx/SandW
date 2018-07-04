@@ -68,5 +68,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
         }
     }
-
+    public void Jump(){
+        Intent intent = new Intent();
+        startActivity(intent);
+    }
 }

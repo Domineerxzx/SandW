@@ -1,11 +1,15 @@
 package com.triplebro.aran.sandw.modules;
 
 import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.triplebro.aran.sandw.activities.ReactNextAcivity;
+import com.triplebro.aran.sandw.utils.aranUtils.JumpActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,14 +50,19 @@ public class AransModules extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setTitle(String msg){
-
         title = msg;
-
     }
 
     @ReactMethod
     public void getGoodsInfo(Callback callback){
         callback.invoke(goodsInfo);
+    }
+    @ReactMethod
+    public void startNextActivity(){
+        Intent intent = new Intent(mContext, ReactNextAcivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
+        Toast.makeText(mContext, "aaa", Toast.LENGTH_SHORT).show();
     }
 
     @Nullable
