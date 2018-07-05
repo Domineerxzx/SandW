@@ -14,12 +14,13 @@ export default class DynamicImgesModules extends Component{
     constructor() {
         super();
         this.state = {
-            vlaues:""
+            vlaues:"???"
         }
     }
 
-    componentWillUnmount() {
-        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})})
+    componentWillMount() {
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
+        NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
 
     getItem(){
@@ -44,12 +45,23 @@ export default class DynamicImgesModules extends Component{
             return arr;
     }
     render(){
-        return(
+        if (this.state.vlaues==="???"){
+            return(
+                <View>
+                    <Text>
+                        无数据
+                    </Text>
+                </View>
+            )
+        }else {
+                return(
 
-            <View style={{margin:10,marginTop:20,alignItems:'stretch',flexDirection:'row',flexWrap:'wrap'}}>
-                {this.getItem()}
-            </View>
-        );
+                    <View style={{margin:10,marginTop:20,alignItems:'stretch',flexDirection:'row',flexWrap:'wrap'}}>
+                        {this.getItem()}
+                    </View>
+                );
+        }
+
     }
 
 }

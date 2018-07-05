@@ -6,5 +6,5 @@ import GetAndroidData from "./App/modules/GetAndroidData";
 import ToucheTest from "./App/pages/ToucheTest";
 
 // AppRegistry.registerComponent('SandW', () => NavigatorManager);
-AppRegistry.registerComponent('SandW',()=>ToucheTest);
+AppRegistry.registerComponent('SandW',()=>NavigatorManager);
 AppRegistry.registerComponent('SandW1',()=>xuzhanxin);

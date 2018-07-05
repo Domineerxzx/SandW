@@ -58,6 +58,9 @@ export default class TheFirstPageForAndroid extends Component {
                             <DynamicImgesModules style={{flexDirection:'row'}}/>
                         </View>
                     </View>
+                    <View style={styles.dianjiaoshi}>
+
+                    </View>
 
                 </ScrollView>
             </View>
@@ -65,6 +68,9 @@ export default class TheFirstPageForAndroid extends Component {
     }
 }
 const styles = StyleSheet.create({
+    dianjiaoshi:{
+      height:100,
+    },
     allTheView: {
         paddingLeft: Dimensions.get('window').width * 0.03,
         backgroundColor: "#FFFFFF",

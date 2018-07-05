@@ -14,23 +14,46 @@ export default class ToucheTest extends Component{
         super();
         this.state = {
             vlaues:"???",
-            json:""
+            json:"???"
         }
     }
 
     componentWillMount() {
-        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})})
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
+        NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
+    }
+
+    // componentDidMount() {
+    //      this.setState({json:JSON.parse(this.state.vlaues)});
+    // }
+    componentDidMount(){
+        NativeModules.AransModules.SEND_LOG("这是render结束"+this.state.vlaues);
+
     }
 
     render() {
-        let parse = JSON.parse(this.state.vlaues);
-        return (
-            <View>
-                <Text>
-                    {parse.recommendationInfo.itemInfo[0].brandName}
-                </Text>
-            </View>
-        )
+        NativeModules.AransModules.SEND_LOG("render"+this.state.vlaues);
+        NativeModules.AransModules.SEND_LOG("dsuihfjfhasfhasfsj");
+        if (this.state.vlaues==="???"){
+            return(
+                <View>
+                    <Text>
+                        无数据
+                    </Text>
+                </View>
+            )
+        }else {
+            let parse = JSON.parse(this.state.vlaues);
+            return (
+                <View>
+                    <Text>
+                        OK{parse.recommendationInfo.itemInfo[0].brandName}
+                    </Text>
+                </View>
+            )
+        }
+        // let parse = JSON.parse(this.state.vlaues);
+
     }
 
 }

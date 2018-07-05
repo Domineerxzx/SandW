@@ -62,7 +62,7 @@ public class AransModules extends ReactContextBaseJavaModule {
         commodityId = msg;
     }
     @ReactMethod
-    public void SEND_LOG(Object o){
+    public void SEND_LOG(String o){
         System.out.println("======================这里是log============="+o);
     }
 
