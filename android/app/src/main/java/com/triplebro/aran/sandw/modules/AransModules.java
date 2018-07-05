@@ -8,8 +8,7 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.triplebro.aran.sandw.activities.ReactNextAcivity;
-import com.triplebro.aran.sandw.utils.aranUtils.JumpActivity;
+import com.triplebro.aran.sandw.activities.GoodInfoActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +28,7 @@ public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
     private String goodsInfo;
     public static String title;
+    public static String commodityId;
 
     public String getGoodsInfo() {
         return goodsInfo;
@@ -53,13 +53,19 @@ public class AransModules extends ReactContextBaseJavaModule {
         title = msg;
     }
 
+
+    @ReactMethod
+    public void setCommodityId(String msg){
+        commodityId = msg;
+    }
+
     @ReactMethod
     public void getGoodsInfo(Callback callback){
         callback.invoke(goodsInfo);
     }
     @ReactMethod
     public void startNextActivity(){
-        Intent intent = new Intent(mContext, ReactNextAcivity.class);
+        Intent intent = new Intent(mContext, GoodInfoActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
         Toast.makeText(mContext, "aaa", Toast.LENGTH_SHORT).show();

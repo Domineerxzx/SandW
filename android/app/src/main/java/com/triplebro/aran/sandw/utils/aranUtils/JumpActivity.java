@@ -3,8 +3,7 @@ package com.triplebro.aran.sandw.utils.aranUtils;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.triplebro.aran.sandw.activities.MainActivity;
-import com.triplebro.aran.sandw.activities.ReactNextAcivity;
+import com.triplebro.aran.sandw.activities.GoodInfoActivity;
 
 /**
  * Created by Aran on 2018/7/5.
@@ -18,7 +17,7 @@ import com.triplebro.aran.sandw.activities.ReactNextAcivity;
 public class JumpActivity extends Activity {
 
     public void Jump(){
-        Intent intent = new Intent(this, ReactNextAcivity.class);
+        Intent intent = new Intent(this, GoodInfoActivity.class);
         startActivity(intent);
     }
 

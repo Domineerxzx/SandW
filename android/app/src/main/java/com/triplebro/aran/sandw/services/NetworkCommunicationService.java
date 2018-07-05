@@ -31,6 +31,7 @@ import com.triplebro.aran.sandw.handlers.ChangeInfoHandler;
 import com.triplebro.aran.sandw.handlers.ChangePassWordHandler;
 import com.triplebro.aran.sandw.handlers.DeleteAddressHandler;
 import com.triplebro.aran.sandw.handlers.FirstPageHandler;
+import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
 import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
@@ -112,6 +113,42 @@ public class NetworkCommunicationService extends Service {
         public void getBrand(Context context, BrandListHandler brandListHandler) {
             NetworkCommunicationService.this.getBrand(context,brandListHandler);
         }
+
+        public void getGoodInfo(Context context, GoodInfoHandler goodInfoHandler, String session) {
+            NetworkCommunicationService.this.getGoodInfo(context,goodInfoHandler,session);
+        }
+    }
+
+    private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler, String session) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("commodityId", String.valueOf(9)/*AransModules.commodityId*/);
+        builder.add("session",session);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_GET_GOOD_INFO, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.obj = res;
+                        goodInfoHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取商品详细信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void getBrand(final Context context, final BrandListHandler brandListHandler) {
@@ -146,7 +183,7 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodsInfo(final Context context, final FirstPageHandler firstPageHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("recommendation", AransModules.title);
+        builder.add("recommendation", "T恤");
         new Thread() {
             @Override
             public void run() {
