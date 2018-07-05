@@ -47,7 +47,7 @@ public class ReactFirstPageFragment extends Fragment{
     }
 
 
-    public AransPackage getAransPackage() {
+    public AransPackage getAransPackage(){
         return aransPackage;
     }
 

@@ -7,7 +7,7 @@
  */
 import React, {Component} from "react";
 
-import {Button, Text, TouchableHighlight, View} from "react-native";
+import {Button, NativeModules, Text, TouchableHighlight, View} from "react-native";
 import {Navigator} from "react-native-deprecated-custom-components";
 import DataSwiperModules from "../modules/DataSwiperModules";
 import TheFirstPageForAndroid from "./TheFirstPageForAndroid";
@@ -16,6 +16,7 @@ export default class NavigatorManager extends Component{
     render(){
         let defaultName = 'firstPageName';
         let defaultComponent = TheFirstPageForAndroid;
+
 
         return(
             <Navigator

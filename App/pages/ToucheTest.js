@@ -7,44 +7,34 @@
  */
 
 import React, {Component} from "react";
-import {Text, TextInput, TouchableHighlight, View} from "react-native";
-
-export default class TestTouchable extends Component{
-
+import {NativeModules, Text, TextInput, TouchableHighlight, View} from "react-native";
+export default class ToucheTest extends Component{
 
     constructor() {
         super();
-
-        this.state ={
-
-            value:"aaa"
-
+        this.state = {
+            vlaues:"",
+            json:""
         }
+    }
 
+    componentWillUnmount() {
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})}).then(
+                this.setState({json:JSON.parse(this.state.vlaues)})
+        )
     }
-    changeValues(e){
-        this.setState({
-            value: e.nativeEvent.text
-        })
-    }
-    getValues(){
-        this.setState({
-            value:this.state.vlaue
-        })
-    }
+
 
     render(){
-        return(
-            <View>
-
-
-                <TextInput onChangeText={(text) => this.setState({value: text})}  >
-
-                </TextInput>
-                <Text >
-                    {this.state.value}
-                </Text>
-            </View>
-        );
+        this.componentWillUnmount();
+            return(
+                <View>
+                    <Text>
+                        {this.state.json}
+                        {/*{this.state.json.recommendationInfo.itemInfo[0].brandName}*/}
+                    </Text>
+                </View>
+        )
     }
+
 }

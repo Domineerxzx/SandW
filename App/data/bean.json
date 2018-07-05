@@ -1,9 +1,31 @@
 {
-  "adInfo":[
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"aaaaaa","title2":"AAAAAA"},
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"bbbbbb","title2":"BBBBBB"},
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"cccccc","title2":"CCCCCC"},
-    {"imgUrl":"http://thethreestooges.cn/aran/cloth.png","title1":"dddddd","title2":"DDDDDD"}
-  ],
-  "test":[{"testResult":"result"}]
+  "recommendationInfo": {
+    "itemName": "T恤",
+    "itemInfo": [
+      {
+        "brandName": "Champion",
+        "money": "187.61 ",
+        "id": 13,
+        "photoDoc": "http://aaa"
+      },
+      {
+        "brandName": "Champion",
+        "money": "267.96 ",
+        "id": 12,
+        "photoDoc": "http://aaa"
+      },
+      {
+        "brandName": "Champion",
+        "money": "342.85 ",
+        "id": 11,
+        "photoDoc": "http://aaa"
+      },
+      {
+        "brandName": "Champion",
+        "money": "126.97",
+        "id": 10,
+        "photoDoc": "http://aaa"
+      }
+    ]
+  }
 }
