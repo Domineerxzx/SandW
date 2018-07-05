@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -62,6 +63,10 @@ public class AransModules extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getGoodsInfo(Callback callback){
         callback.invoke(goodsInfo);
+    }
+    @ReactMethod
+    public void getGoodsInfo(Promise promise){
+        promise.resolve(goodsInfo);
     }
     @ReactMethod
     public void startNextActivity(){

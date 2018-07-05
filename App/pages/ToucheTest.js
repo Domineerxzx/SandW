@@ -8,32 +8,32 @@
 
 import React, {Component} from "react";
 import {NativeModules, Text, TextInput, TouchableHighlight, View} from "react-native";
-export default class ToucheTest extends Component{
+
+export default class ToucheTest extends Component {
 
     constructor() {
         super();
         this.state = {
-            vlaues:"",
-            json:""
+            vlaues: "",
+            json: ""
         }
     }
 
     componentWillUnmount() {
-        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})}).then(
-                this.setState({json:JSON.parse(this.state.vlaues)})
-        )
+        NativeModules.AransModules.getGoodsInfo().then((result) => {
+            this.setState({vlaues: result})
+        })
     }
 
 
-    render(){
-        this.componentWillUnmount();
-            return(
-                <View>
-                    <Text>
-                        {this.state.json}
-                        {/*{this.state.json.recommendationInfo.itemInfo[0].brandName}*/}
-                    </Text>
-                </View>
+    render() {
+        return (
+            <View>
+                <Text>
+                    {this.state.json}
+                    {/*{this.state.json.recommendationInfo.itemInfo[0].brandName}*/}
+                </Text>
+            </View>
         )
     }
 
