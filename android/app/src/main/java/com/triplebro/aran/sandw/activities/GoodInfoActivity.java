@@ -15,6 +15,7 @@ import com.triplebro.aran.sandw.BuildConfig;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.managers.GoodInfoManager;
+import com.triplebro.aran.sandw.modules.AransPackage;
 
 /**
  * Created by Aran on 2018/7/5.
@@ -34,7 +35,7 @@ public class GoodInfoActivity extends Activity implements DefaultHardwareBackBtn
     private GoodInfoHandler goodInfoHandler;
     private GoodInfoManager goodInfoManager;
     private String session;
-    private TextView tv_good_info;
+    private AransPackage reactPackage= new AransPackage();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,23 +46,26 @@ public class GoodInfoActivity extends Activity implements DefaultHardwareBackBtn
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModulePath("index")
                 .addPackage(new MainReactPackage())
+                .addPackage(reactPackage)
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
         mReactRootView.startReactApplication(mReactInstanceManager, "SandW3", null);
-        setContentView(mReactRootView);
-        initView();
         initData();
     }
 
-    private void initView() {
-        tv_good_info = (TextView) findViewById(R.id.tv_good_info);
+    public AransPackage getReactPackage() {
+        return reactPackage;
+    }
+
+    public void setReactPackage(AransPackage reactPackage) {
+        this.reactPackage = reactPackage;
     }
 
     private void initData() {
         sharedPreferences = getSharedPreferences("session",MODE_PRIVATE);
         session = sharedPreferences.getString("session", null);
-        goodInfoHandler = new GoodInfoHandler(this,tv_good_info);
+        goodInfoHandler = new GoodInfoHandler(this,mReactRootView);
         goodInfoManager = new GoodInfoManager(this, goodInfoHandler, session);
         goodInfoManager.getGoodInfo();
     }

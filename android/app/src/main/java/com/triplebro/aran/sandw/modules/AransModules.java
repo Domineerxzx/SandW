@@ -30,8 +30,17 @@ import javax.annotation.Nullable;
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
     private String goodsInfo;
+    private String goodInfo;
     public static String title;
     public static String commodityId;
+
+    public String getGoodInfo() {
+        return goodInfo;
+    }
+
+    public void setGoodInfo(String goodInfo) {
+        this.goodInfo = goodInfo;
+    }
 
     public String getGoodsInfo() {
         return goodsInfo;

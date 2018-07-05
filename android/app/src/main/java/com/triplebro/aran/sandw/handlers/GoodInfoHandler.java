@@ -3,20 +3,26 @@ package com.triplebro.aran.sandw.handlers;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
-import android.widget.TextView;
+
+import com.facebook.react.ReactRootView;
+import com.triplebro.aran.sandw.activities.GoodInfoActivity;
+import com.triplebro.aran.sandw.modules.AransPackage;
 
 public class GoodInfoHandler extends Handler {
 
     private Context context;
-    private TextView tv;
+    private ReactRootView mReactRootView;
 
-    public GoodInfoHandler(Context context, TextView tv) {
+    public GoodInfoHandler(Context context, ReactRootView mReactRootView) {
         this.context = context;
-        this.tv = tv;
+        this.mReactRootView = mReactRootView;
     }
 
     @Override
     public void handleMessage(Message msg) {
-        tv.setText((String)msg.obj);
+        String goodInfo = (String) msg.obj;
+        AransPackage reactPackage = ((GoodInfoActivity) context).getReactPackage();
+        reactPackage.setGoodInfo(goodInfo);
+        ((GoodInfoActivity)context).setContentView(mReactRootView);
     }
 }
