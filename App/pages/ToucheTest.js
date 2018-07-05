@@ -8,30 +8,26 @@
 
 import React, {Component} from "react";
 import {NativeModules, Text, TextInput, TouchableHighlight, View} from "react-native";
-
-export default class ToucheTest extends Component {
+export default class ToucheTest extends Component{
 
     constructor() {
         super();
         this.state = {
-            vlaues: "",
-            json: ""
+            vlaues:"???",
+            json:""
         }
     }
 
-    componentWillUnmount() {
-        NativeModules.AransModules.getGoodsInfo().then((result) => {
-            this.setState({vlaues: result})
-        })
+    componentWillMount() {
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})})
     }
 
-
     render() {
+        let parse = JSON.parse(this.state.vlaues);
         return (
             <View>
                 <Text>
-                    {this.state.json}
-                    {/*{this.state.json.recommendationInfo.itemInfo[0].brandName}*/}
+                    {parse.recommendationInfo.itemInfo[0].brandName}
                 </Text>
             </View>
         )

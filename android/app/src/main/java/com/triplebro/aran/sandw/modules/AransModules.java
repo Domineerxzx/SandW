@@ -9,6 +9,8 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.WritableNativeMap;
 import com.triplebro.aran.sandw.activities.GoodInfoActivity;
 
 import java.util.HashMap;
@@ -59,15 +61,27 @@ public class AransModules extends ReactContextBaseJavaModule {
     public void setCommodityId(String msg){
         commodityId = msg;
     }
+    @ReactMethod
+    public void SEND_LOG(Object o){
+        System.out.println("======================这里是log============="+o);
+    }
+
+    @ReactMethod
+    public void sendPromiseTime(Promise promise) {
+        WritableMap writableMap=new WritableNativeMap();
+        writableMap.putString("goods",goodsInfo);
+        promise.resolve(writableMap);
+
+    }
 
     @ReactMethod
     public void getGoodsInfo(Callback callback){
         callback.invoke(goodsInfo);
     }
-    @ReactMethod
-    public void getGoodsInfo(Promise promise){
-        promise.resolve(goodsInfo);
-    }
+//    @ReactMethod
+//    public void getGoodsInfo(Promise promise){
+//        promise.resolve(goodsInfo);
+//    }
     @ReactMethod
     public void startNextActivity(){
         Intent intent = new Intent(mContext, GoodInfoActivity.class);
