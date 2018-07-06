@@ -30,7 +30,7 @@ export default class DynamicImgesModules extends Component{
             for (let i = 0; i < parse.recommendationInfo.itemInfo.length; i++) {
                 let infoList = parse.recommendationInfo.itemInfo[i];
                 arr.push(
-                    <TouchableHighlight onPress={() => {NativeModules.AransModules.startNextActivity()}}>
+                    <TouchableHighlight onPress={() => {NativeModules.AransModules.startGoodInfoActivity()}}>
                     <View key={i}
                           style={{width: Dimensions.get('window').width / 2 - 20, flexDirection: 'column'}}>
                         <Image

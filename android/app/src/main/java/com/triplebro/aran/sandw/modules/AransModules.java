@@ -55,13 +55,10 @@ public class AransModules extends ReactContextBaseJavaModule {
     public String getName() {
         return "AransModules";
     }
-
     @ReactMethod
     public void setTitle(String msg){
         title = msg;
     }
-
-
     @ReactMethod
     public void setCommodityId(String msg){
         commodityId = msg;
@@ -70,36 +67,29 @@ public class AransModules extends ReactContextBaseJavaModule {
     public void SEND_LOG(String o){
         System.out.println("======================这里是log============="+o);
     }
-
-    @ReactMethod
-    public void sendPromiseTime(Promise promise) {
-        WritableMap writableMap=new WritableNativeMap();
-        writableMap.putString("goods", String.valueOf(data));
-        promise.resolve(writableMap);
-
-    }
-
     @ReactMethod
     public void getGoodsInfo(Callback callback){
         callback.invoke(String.valueOf(data));
+        data = null;
     }
     @ReactMethod
     public void getGoodInfo(Callback callback){
         callback.invoke(String.valueOf(data));
+        data = null;
     }
-//    @ReactMethod
-//    public void getGoodsInfo(Promise promise){
-//        promise.resolve(goodsInfo);
-//    }
     @ReactMethod
-    public void startNextActivity(){
+    public void startGoodInfoActivity(){
         SharedPreferences sharedPreferences = mContext.getSharedPreferences("session",MODE_PRIVATE);
         String session = sharedPreferences.getString("session", null);
-        GoodInfoHandler goodInfoHandler = new GoodInfoHandler(mContext);
-        GoodInfoManager goodInfoManager = new GoodInfoManager(mContext, goodInfoHandler, session);
-        goodInfoManager.getGoodInfo();
+        if(session == null){
+            Toast.makeText(mContext, "还没登录呢，快去登录吧！！！", Toast.LENGTH_SHORT).show();
+        }else{
+            GoodInfoHandler goodInfoHandler = new GoodInfoHandler(mContext);
+            GoodInfoManager goodInfoManager = new GoodInfoManager(mContext, goodInfoHandler, session);
+            goodInfoManager.getGoodInfo();
 
-        Toast.makeText(mContext, "aaa", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "跳转页面成功", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Nullable

@@ -14,10 +14,7 @@ export default class xuzhanxin extends Component {
     render() {
         return (
             <View>
-                <TouchableHighlight onPress={() => {NativeModules.AransModules.giveRnData((result) => {
-                    //result去回调中取值
-                        this.setState({name: result});
-                    })}}>
+                <TouchableHighlight onPress={() => {NativeModules.AransModules.SEND_LOG("hahaha")}}>
                     <Text>
                         aaaa{this.state.name}
                     </Text>

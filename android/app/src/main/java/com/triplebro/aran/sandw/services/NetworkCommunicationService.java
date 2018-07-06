@@ -26,6 +26,7 @@ import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.beans.UserInfo;
 import com.triplebro.aran.sandw.handlers.AddAddressHandler;
 import com.triplebro.aran.sandw.handlers.AddressHandler;
+import com.triplebro.aran.sandw.handlers.BrandHandler;
 import com.triplebro.aran.sandw.handlers.BrandListHandler;
 import com.triplebro.aran.sandw.handlers.ChangeAddressHandler;
 import com.triplebro.aran.sandw.handlers.ChangeInfoHandler;
@@ -109,6 +110,9 @@ public class NetworkCommunicationService extends Service {
 
         public void getGoodsInfo(Context context, FirstPageHandler firstPageHandler) {
             NetworkCommunicationService.this.getGoodsInfo(context,firstPageHandler);
+        }
+        public void getGoodsInfo(Context context, BrandHandler brandHandler) {
+            NetworkCommunicationService.this.getGoodsInfo(context,brandHandler);
         }
 
         public void getBrand(Context context, BrandListHandler brandListHandler) {
@@ -197,6 +201,37 @@ public class NetworkCommunicationService extends Service {
                         message.obj = res;
                         message.what = AppProperties.GET_GOODS_INFO;
                         firstPageHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取商品四格推荐成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
+    }
+    private void getGoodsInfo(final Context context, final BrandHandler brandHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("recommendation", "T恤");
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_GET_GOODS_INFO, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.obj = res;
+                        message.what = AppProperties.GET_GOODS_INFO;
+                        brandHandler.sendMessage(message);
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
