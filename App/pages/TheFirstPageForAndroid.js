@@ -7,7 +7,17 @@
  */
 
 import React, {Component} from "react";
-import {Image, Alert, Dimensions, ScrollView, StyleSheet, Text, View, TouchableHighlight} from "react-native";
+import {
+    Image,
+    Alert,
+    Dimensions,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+    TouchableHighlight,
+    NativeModules
+} from "react-native";
 import DynamicImgesModules from "../modules/DynamicImgesModules";
 import DataSwiperModules from "../modules/DataSwiperModules";
 import App from "./App";
@@ -15,6 +25,23 @@ import TheNextPage from "./TheNextPage";
 
 
 export default class TheFirstPageForAndroid extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            vlaues:"???"
+        }
+    }
+
+    componentWillMount() {
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
+        NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
+    }
+
+    _onPressGetId(str){
+        NativeModules.AransModules.setCommodityId(str)
+    }
+
 
 
 
@@ -33,38 +60,53 @@ export default class TheFirstPageForAndroid extends Component {
 
 
     render() {
-        return (
-            <View>
-                <ScrollView>
-                    <View style={styles.allTheView}>
-                        <View style={styles.ADBG}>
-                            <Text style={styles.ADTest}>年 度 特 惠 S A L E | 高 达 5 0 % O F F</Text>
-                        </View>
-                        <View style={styles.BuyJewelryView}>
-                            <Text style={styles.BuyJewelry}>
-                                选购首饰
-                            </Text>
-                            <DataSwiperModules style={styles.SwiperView}/>
-                        </View>
-                        <View style={{justifyContent:'space-between',flexDirection:'row'}}>
-                            <Text style={{marginRight:20,color:'#000', fontSize:15,fontWeight:'bold'}}>特别为您推荐的上衣</Text>
-                            <View  style={{marginRight:20,justifyContent:'flex-end'}}>
-                                <TouchableHighlight onPress={this.jumpClick.bind(this)}>
-                                    <Text>选购全部 ></Text>
-                                </TouchableHighlight>
+        if (this.state.vlaues==="???"){
+            return(
+                <View>
+                    <Image style={{width:Dimensions.get('window').width}} source={require('../imges/01415f5996acdaa8012156038f6b78.gif')}/>
+                </View>
+            )
+        }else {
+            return (
+                <View>
+                    <ScrollView>
+                        <View style={styles.allTheView}>
+                            <View style={styles.ADBG}>
+                                <Text style={styles.ADTest}>年 度 特 惠 S A L E | 高 达 5 0 % O F F</Text>
+                            </View>
+                            <View style={styles.BuyJewelryView}>
+                                <Text style={styles.BuyJewelry}>
+                                    选购首饰
+                                </Text>
+                                <DataSwiperModules style={styles.SwiperView}/>
+                            </View>
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                <Text style={{
+                                    marginRight: 20,
+                                    color: '#000',
+                                    fontSize: 15,
+                                    fontWeight: 'bold'
+                                }}>特别为您推荐的上衣</Text>
+                                <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
+                                    <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                        <Text>选购全部 ></Text>
+                                    </TouchableHighlight>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                                <DynamicImgesModules callback={this._onPressGetId.bind(this)}
+                                    name={this.state.vlaues}
+                                                     style={{flexDirection: 'row'}}/>
                             </View>
                         </View>
-                        <View style={{flexDirection:'column',alignItems:'center'}}>
-                            <DynamicImgesModules style={{flexDirection:'row'}}/>
+                        <View style={styles.dianjiaoshi}>
+
                         </View>
-                    </View>
-                    <View style={styles.dianjiaoshi}>
 
-                    </View>
-
-                </ScrollView>
-            </View>
-        );
+                    </ScrollView>
+                </View>
+            );
+        }
     }
 }
 const styles = StyleSheet.create({

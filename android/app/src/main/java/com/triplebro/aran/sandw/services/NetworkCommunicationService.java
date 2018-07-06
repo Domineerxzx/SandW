@@ -126,7 +126,7 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("commodityId", String.valueOf(9)/*AransModules.commodityId*/);
+        builder.add("commodityId", /*String.valueOf(9)*/AransModules.commodityId);
         builder.add("session",session);
         new Thread() {
             @Override

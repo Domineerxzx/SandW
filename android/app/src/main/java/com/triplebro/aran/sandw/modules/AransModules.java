@@ -56,11 +56,11 @@ public class AransModules extends ReactContextBaseJavaModule {
         return "AransModules";
     }
     @ReactMethod
-    public void setTitle(String msg){
+    public void setTitle(String msg){//传递标签
         title = msg;
     }
     @ReactMethod
-    public void setCommodityId(String msg){
+    public void setCommodityId(String msg){//传递ID
         commodityId = msg;
     }
     @ReactMethod

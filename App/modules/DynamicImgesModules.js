@@ -9,28 +9,36 @@ import React, {Component} from "react";
 import {Text, Dimensions, StyleSheet, View, Image, TouchableHighlight, ScrollView, NativeModules} from "react-native";
 
 
-export default class DynamicImgesModules extends Component{
+export default class DynamicImgesModules extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            vlaues:"???"
-        }
+    // constructor() {
+    //     super();
+    //     this.state = {
+    //         vlaues:"???"
+    //     }
+    // }
+    //
+    // componentWillMount() {
+    //     NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
+    //     NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
+    // }
+
+    _onPressGetId(str){
+        this.props.callback(str)
     }
 
-    componentWillMount() {
-        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
-        NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
-    }
 
-    getItem(){
-        let parse=JSON.parse(this.state.vlaues);//TODO==图片未上传
+    getItem() {
+        let parse = JSON.parse(this.props.name);//TODO==图片未上传
 
         let arr = [];
-            for (let i = 0; i < parse.recommendationInfo.itemInfo.length; i++) {
-                let infoList = parse.recommendationInfo.itemInfo[i];
-                arr.push(
-                    <TouchableHighlight onPress={() => {NativeModules.AransModules.startGoodInfoActivity()}}>
+        for (let i = 0; i < parse.recommendationInfo.itemInfo.length; i++) {
+            let infoList = parse.recommendationInfo.itemInfo[i];
+            arr.push(
+                <TouchableHighlight onPress={() => {
+                    this._onPressGetId(parse.recommendationInfo.itemInfo[i].id.toString());
+                    NativeModules.AransModules.startGoodInfoActivity()
+                }}>
                     <View key={i}
                           style={{width: Dimensions.get('window').width / 2 - 20, flexDirection: 'column'}}>
                         <Image
@@ -41,29 +49,21 @@ export default class DynamicImgesModules extends Component{
                             <Text style={{fontWeight: 'bold'}}>{infoList.money}</Text>
                         </View>
                     </View>
-                    </TouchableHighlight>
-                );
-            }
-            return arr;
-    }
-    render(){
-        if (this.state.vlaues==="???"){
-            return(
-                <View>
-                    <Text>
-                        无数据
-                    </Text>
-                </View>
-            )
-        }else {
-                return(
-
-                    <View style={{margin:10,marginTop:20,alignItems:'stretch',flexDirection:'row',flexWrap:'wrap'}}>
-                        {this.getItem()}
-                    </View>
-                );
+                </TouchableHighlight>
+            );
         }
-
+        return arr;
     }
 
+    render() {
+
+        return (
+
+            <View style={{margin: 10, marginTop: 20, alignItems: 'stretch', flexDirection: 'row', flexWrap: 'wrap'}}>
+                {this.getItem()}
+            </View>
+        );
+
+
+    }
 }
