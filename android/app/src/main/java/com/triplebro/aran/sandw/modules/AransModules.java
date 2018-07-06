@@ -2,6 +2,7 @@ package com.triplebro.aran.sandw.modules;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
@@ -12,11 +13,15 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.triplebro.aran.sandw.activities.GoodInfoActivity;
+import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
+import com.triplebro.aran.sandw.managers.GoodInfoManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Nullable;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by Aran on 2018/6/11.
@@ -29,25 +34,16 @@ import javax.annotation.Nullable;
 
 public class AransModules extends ReactContextBaseJavaModule {
     private Context mContext;
-    private String goodsInfo;
-    private String goodInfo;
+    private Object data;
     public static String title;
     public static String commodityId;
 
-    public String getGoodInfo() {
-        return goodInfo;
+    public Object getData() {
+        return data;
     }
 
-    public void setGoodInfo(String goodInfo) {
-        this.goodInfo = goodInfo;
-    }
-
-    public String getGoodsInfo() {
-        return goodsInfo;
-    }
-
-    public void setGoodsInfo(String goodsInfo) {
-        this.goodsInfo = goodsInfo;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public AransModules(ReactApplicationContext reactContext) {
@@ -78,14 +74,18 @@ public class AransModules extends ReactContextBaseJavaModule {
     @ReactMethod
     public void sendPromiseTime(Promise promise) {
         WritableMap writableMap=new WritableNativeMap();
-        writableMap.putString("goods",goodsInfo);
+        writableMap.putString("goods", String.valueOf(data));
         promise.resolve(writableMap);
 
     }
 
     @ReactMethod
     public void getGoodsInfo(Callback callback){
-        callback.invoke(goodsInfo);
+        callback.invoke(String.valueOf(data));
+    }
+    @ReactMethod
+    public void getGoodInfo(Callback callback){
+        callback.invoke(String.valueOf(data));
     }
 //    @ReactMethod
 //    public void getGoodsInfo(Promise promise){
@@ -93,9 +93,12 @@ public class AransModules extends ReactContextBaseJavaModule {
 //    }
     @ReactMethod
     public void startNextActivity(){
-        Intent intent = new Intent(mContext, GoodInfoActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        mContext.startActivity(intent);
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("session",MODE_PRIVATE);
+        String session = sharedPreferences.getString("session", null);
+        GoodInfoHandler goodInfoHandler = new GoodInfoHandler(mContext);
+        GoodInfoManager goodInfoManager = new GoodInfoManager(mContext, goodInfoHandler, session);
+        goodInfoManager.getGoodInfo();
+
         Toast.makeText(mContext, "aaa", Toast.LENGTH_SHORT).show();
     }
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 public class BrandInfo {
 
-
     private List<BrandListBean> brandList;
 
     public List<BrandListBean> getBrandList() {
@@ -17,20 +16,12 @@ public class BrandInfo {
 
     public static class BrandListBean {
         /**
-         * classValue : {"C":["Champion"],"S":["SAM EDELMAN"]}
+         * classValue : [{"charClassName":"C","charClassValue":["Champion"]},{"charClassName":"S","charClassValue":["SAM EDELMAN"]}]
          * className : Man
          */
 
-        private ClassValueBean classValue;
         private String className;
-
-        public ClassValueBean getClassValue() {
-            return classValue;
-        }
-
-        public void setClassValue(ClassValueBean classValue) {
-            this.classValue = classValue;
-        }
+        private List<ClassValueBean> classValue;
 
         public String getClassName() {
             return className;
@@ -40,24 +31,37 @@ public class BrandInfo {
             this.className = className;
         }
 
+        public List<ClassValueBean> getClassValue() {
+            return classValue;
+        }
+
+        public void setClassValue(List<ClassValueBean> classValue) {
+            this.classValue = classValue;
+        }
+
         public static class ClassValueBean {
-            private List<String> C;
-            private List<String> S;
+            /**
+             * charClassName : C
+             * charClassValue : ["Champion"]
+             */
 
-            public List<String> getC() {
-                return C;
+            private String charClassName;
+            private List<String> charClassValue;
+
+            public String getCharClassName() {
+                return charClassName;
             }
 
-            public void setC(List<String> C) {
-                this.C = C;
+            public void setCharClassName(String charClassName) {
+                this.charClassName = charClassName;
             }
 
-            public List<String> getS() {
-                return S;
+            public List<String> getCharClassValue() {
+                return charClassValue;
             }
 
-            public void setS(List<String> S) {
-                this.S = S;
+            public void setCharClassValue(List<String> charClassValue) {
+                this.charClassValue = charClassValue;
             }
         }
     }

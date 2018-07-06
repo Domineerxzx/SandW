@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.adapters.BrandContentAdapter;
+import com.triplebro.aran.sandw.handlers.BrandListHandler;
+import com.triplebro.aran.sandw.managers.BrandListManager;
 import com.triplebro.aran.sandw.properties.AppProperties;
 
 import java.util.ArrayList;
@@ -32,10 +34,9 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
     private View v_brand_title_c;
     private Button lastClickButton;
     private View lastClickView;
-    private BrandContentAdapter brandContentAdapter_f;
-    private BrandContentAdapter brandContentAdapter_m;
-    private BrandContentAdapter brandContentAdapter_c;
     private ImageView iv_close_brand_list;
+    private BrandListHandler brandListHandler;
+    private BrandListManager brandListManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,9 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
     }
 
     private void initData() {
+        brandListHandler = new BrandListHandler(this,lv_brand_list_content, 1);
+        brandListManager = new BrandListManager(this, brandListHandler);
+        brandListManager.getBrand();
     }
 
     private void initView() {
@@ -88,11 +92,9 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
                 v_brand_title_f.setBackgroundColor(Color.BLACK);
                 lastClickView = v_brand_title_f;
                 lastClickButton = bt_brand_title_f;
-                if (brandContentAdapter_f == null) {
-
-                    //brandContentAdapter_f = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
-                }
-                lv_brand_list_content.setAdapter(brandContentAdapter_f);
+                brandListHandler = new BrandListHandler(this,lv_brand_list_content, 1);
+                brandListManager = new BrandListManager(this, brandListHandler);
+                brandListManager.getBrand();
                 break;
             case R.id.ll_brand_title_m:
             case R.id.bt_brand_title_m:
@@ -102,11 +104,9 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
                 v_brand_title_m.setBackgroundColor(Color.BLACK);
                 lastClickView = v_brand_title_m;
                 lastClickButton = bt_brand_title_m;
-                if (brandContentAdapter_m == null) {
-
-                    //brandContentAdapter_m = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
-                }
-                lv_brand_list_content.setAdapter(brandContentAdapter_m);
+                brandListHandler = new BrandListHandler(this,lv_brand_list_content, 0);
+                brandListManager = new BrandListManager(this, brandListHandler);
+                brandListManager.getBrand();
                 break;
             case R.id.ll_brand_title_c:
             case R.id.bt_brand_title_c:
@@ -116,11 +116,9 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
                 v_brand_title_c.setBackgroundColor(Color.BLACK);
                 lastClickView = v_brand_title_c;
                 lastClickButton = bt_brand_title_c;
-                if (brandContentAdapter_c == null) {
-
-                    //brandContentAdapter_c = new BrandContentAdapter(this, AppProperties.BRAND_WORD_LIST, brand_more);
-                }
-                lv_brand_list_content.setAdapter(brandContentAdapter_c);
+                brandListHandler = new BrandListHandler(this,lv_brand_list_content, 2);
+                brandListManager = new BrandListManager(this, brandListHandler);
+                brandListManager.getBrand();
                 break;
             case R.id.iv_close_brand_list:
                 finish();
@@ -130,7 +128,6 @@ public class BrandListActivity extends Activity implements View.OnClickListener,
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String[] brand_more_content = new String[]{"1", "2", "3"};
-        /*brand_more.add(brand_more_content);*/
+
     }
 }

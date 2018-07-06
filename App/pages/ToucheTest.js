@@ -19,7 +19,7 @@ export default class ToucheTest extends Component{
     }
 
     componentWillMount() {
-        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
+        NativeModules.AransModules.getGoodInfo((result) => {this.setState({vlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
 
@@ -47,7 +47,7 @@ export default class ToucheTest extends Component{
             return (
                 <View>
                     <Text>
-                        OK{parse.recommendationInfo.itemInfo[0].brandName}
+                        {parse.brandName}
                     </Text>
                 </View>
             )

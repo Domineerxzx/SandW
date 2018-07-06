@@ -8,24 +8,26 @@ import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
 
+import java.util.List;
+
 public class BrandMoreAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] brand_more;
+    private List<String> brand_more;
 
-    public BrandMoreAdapter(Context context, String[] brand_more) {
+    public BrandMoreAdapter(Context context, List<String> brand_more) {
         this.context = context;
         this.brand_more = brand_more;
     }
 
     @Override
     public int getCount() {
-        return brand_more.length;
+        return brand_more.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return brand_more[position];
+        return brand_more.get(position);
     }
 
     @Override
@@ -44,7 +46,7 @@ public class BrandMoreAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_item_more_brand.setText(brand_more[position]);
+        viewHolder.tv_item_more_brand.setText(brand_more.get(position));
         return convertView;
     }
 

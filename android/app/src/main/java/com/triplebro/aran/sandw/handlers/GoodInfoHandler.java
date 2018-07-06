@@ -1,28 +1,30 @@
 package com.triplebro.aran.sandw.handlers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 
-import com.facebook.react.ReactRootView;
 import com.triplebro.aran.sandw.activities.GoodInfoActivity;
+import com.triplebro.aran.sandw.activities.MainActivity;
+import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.modules.AransModules;
 import com.triplebro.aran.sandw.modules.AransPackage;
 
 public class GoodInfoHandler extends Handler {
 
     private Context context;
-    private ReactRootView mReactRootView;
 
-    public GoodInfoHandler(Context context, ReactRootView mReactRootView) {
+    public GoodInfoHandler(Context context) {
         this.context = context;
-        this.mReactRootView = mReactRootView;
     }
 
     @Override
     public void handleMessage(Message msg) {
         String goodInfo = (String) msg.obj;
-        AransPackage reactPackage = ((GoodInfoActivity) context).getReactPackage();
-        reactPackage.setGoodInfo(goodInfo);
-        ((GoodInfoActivity)context).setContentView(mReactRootView);
+        Intent intent = new Intent(context, GoodInfoActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("data",goodInfo);
+        context.startActivity(intent);
     }
 }

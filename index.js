@@ -9,4 +9,5 @@ import DynamicImgesModules from "./App/modules/DynamicImgesModules";
 // AppRegistry.registerComponent('SandW', () => NavigatorManager);
 AppRegistry.registerComponent('SandW',()=>NavigatorManager);
 AppRegistry.registerComponent('SandW1',()=>xuzhanxin);
+AppRegistry.registerComponent('SandW2',()=>ToucheTest);
 AppRegistry.registerComponent('SandW3',()=>DynamicImgesModules);

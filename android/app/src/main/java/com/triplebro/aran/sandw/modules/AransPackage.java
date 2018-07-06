@@ -20,25 +20,15 @@ import java.util.List;
 
 public class AransPackage implements ReactPackage {
 
-    public static AransModules mModule;
-    private String goodsInfo;
-    private String goodInfo;
+    private AransModules mModule;
+    private Object data;
 
-    public String getGoodsInfo() {
-        return goodsInfo;
+    public Object getData() {
+        return data;
     }
 
-    public void setGoodsInfo(String goodsInfo) {
-        this.goodsInfo = goodsInfo;
-    }
-
-
-    public String getGoodInfo() {
-        return goodInfo;
-    }
-
-    public void setGoodInfo(String goodInfo) {
-        this.goodInfo = goodInfo;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     @Override
@@ -50,14 +40,7 @@ public class AransPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {//只执行一次
         List<NativeModule> modules = new ArrayList<>();
         mModule = new AransModules(reactContext);
-        if (goodsInfo != null) {
-
-            mModule.setGoodsInfo(goodsInfo);
-        }
-        if (goodInfo != null) {
-
-            mModule.setGoodInfo(goodInfo);
-        }
+        mModule.setData(data);
         modules.add(mModule);
         return modules;
     }

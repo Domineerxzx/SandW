@@ -17,6 +17,7 @@ import com.triplebro.aran.sandw.activities.LoginActivity;
 import com.triplebro.aran.sandw.activities.RegisterActivity;
 import com.triplebro.aran.sandw.beans.AddAddressInfoBean;
 import com.triplebro.aran.sandw.beans.AddressInfoBean;
+import com.triplebro.aran.sandw.beans.BrandInfo;
 import com.triplebro.aran.sandw.beans.ChangeAddressInfoBean;
 import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
@@ -139,12 +140,6 @@ public class NetworkCommunicationService extends Service {
                         Message message = Message.obtain();
                         message.obj = res;
                         goodInfoHandler.sendMessage(message);
-                        ((Activity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context, "获取商品详细信息成功", Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     }
                 });
             }
@@ -166,8 +161,9 @@ public class NetworkCommunicationService extends Service {
                     public void onResponse(Call call, Response response) throws IOException {
                         String res = response.body().string();
                         System.out.println(res);
+                        BrandInfo brandInfo = gson.fromJson(res, BrandInfo.class);
                         Message message = Message.obtain();
-                        message.obj = res;
+                        message.obj = brandInfo;
                         brandListHandler.sendMessage(message);
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override

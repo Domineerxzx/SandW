@@ -24,7 +24,14 @@ public class ReactFirstPageFragment extends Fragment{
     ReactInstanceManager mReactInstanceManager;
     private TextView tv_title;
     public AransPackage aransPackage = new AransPackage();
-    
+
+    public AransPackage getAransPackage() {
+        return aransPackage;
+    }
+
+    public void setAransPackage(AransPackage aransPackage) {
+        this.aransPackage = aransPackage;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,11 +51,6 @@ public class ReactFirstPageFragment extends Fragment{
         initData();
         return mReactRootView;
 
-    }
-
-
-    public AransPackage getAransPackage(){
-        return aransPackage;
     }
 
     private void initData() {

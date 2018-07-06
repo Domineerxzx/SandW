@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.beans.BrandInfo;
 import com.triplebro.aran.sandw.views.InnerListView;
 
 import java.util.List;
@@ -16,23 +17,21 @@ import java.util.List;
 public class BrandContentAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] brands;
-    private List<String[]> brand_more;
+    private List<BrandInfo.BrandListBean.ClassValueBean> classValueBeans;
 
-    public BrandContentAdapter(Context context, String[] brands, List<String[]> brand_more) {
+    public BrandContentAdapter(Context context,List<BrandInfo.BrandListBean.ClassValueBean> classValueBeans) {
         this.context = context;
-        this.brands = brands;
-        this.brand_more = brand_more;
+        this.classValueBeans = classValueBeans;
     }
 
     @Override
     public int getCount() {
-        return brands.length;
+        return classValueBeans.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return brands[position];
+        return classValueBeans.get(position);
     }
 
     @Override
@@ -53,8 +52,8 @@ public class BrandContentAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_item_brand.setText(brands[position]);
-        BrandMoreAdapter brandMoreAdapter = new BrandMoreAdapter(context, brand_more.get(0));
+        viewHolder.tv_item_brand.setText(classValueBeans.get(position).getCharClassName());
+        BrandMoreAdapter brandMoreAdapter = new BrandMoreAdapter(context,classValueBeans.get(position).getCharClassValue());
         viewHolder.lv_brand_more.setAdapter(brandMoreAdapter);
         viewHolder.lv_brand_more.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
