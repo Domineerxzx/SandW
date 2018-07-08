@@ -43,7 +43,7 @@ export default class DynamicImgesModules extends Component {
                           style={{width: Dimensions.get('window').width / 2 - 20, flexDirection: 'column'}}>
                         <Image
                             style={{width: Dimensions.get('window').width / 2 - 20, height: 200}}
-                            source={{uri: infoList.photoDoc}}/>
+                            source={{uri: infoList.photoDoc+"/1.png"}}/>
                         <View style={{alignItems: 'center'}}>
                             <Text style={{fontWeight: 'bold', fontSize: 20}}>{infoList.brandName}</Text>
                             <Text style={{fontWeight: 'bold'}}>{infoList.money}</Text>

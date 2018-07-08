@@ -39,19 +39,20 @@ export default class BrandFragment extends Component{
             return(
                 <View>
                     <View style={styles.AllTheView}>
-                        <View>
+                        <View style={{backgroundColor:"#fff"}}>
                             <Image style={styles.TheBackButton} source={require('../imges/back.png')}/>
                         </View>
                         <ScrollView>
-                            <ScrollViewGetGoodInfo/>
+                            <ScrollViewGetGoodInfo name={this.state.getjson}/>
                         </ScrollView>
                         <View style={styles.ActionButtonStylesView}>
-                            <ActionButton style={styles.ActionButtonStyles}>
-                                <Text style={{color:"#fff"}}>
-                                    添加购物车
+                            <TouchableHighlight style={styles.ActionButtonStyles}>
+                                <Text style={{fontWeight:"bold",fontSize:15,color:"#fff"}}>
+                                    加入购物袋
                                 </Text>
-                            </ActionButton>
+                            </TouchableHighlight>
                         </View>
+
 
                     </View>
                 </View>
@@ -71,13 +72,16 @@ const styles = StyleSheet.create({
     },
     ActionButtonStylesView:{
         position:"absolute",
-        marginTop:500,
-        marginLeft:(Dimensions.get('window').width-240)/2,
+        marginTop:510,
+        marginLeft:(Dimensions.get('window').width-280)/2,
     },
     ActionButtonStyles:{
-        height:60,
-        width:240,
+        height:46,
+        width:280,
         backgroundColor:"#000",
+        flexDirection:"column",
+        alignItems:"center",
+        justifyContent:'center'
         // position:"absolute",
         // marginTop:Dimensions.get('window').height-200
     }
