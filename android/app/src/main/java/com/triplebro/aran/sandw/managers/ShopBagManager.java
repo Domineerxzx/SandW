@@ -18,6 +18,7 @@ public class ShopBagManager implements ServiceConnection {
     private ShopBagHandler shopBagHandler;
     private String session;
     private int commodityId;
+    private String commodityIds;
     private String sizeName;
     private int shopBagType;
     private List<ShopBagInfo.ShoppingListBean> remove;
@@ -26,6 +27,7 @@ public class ShopBagManager implements ServiceConnection {
         this.context = context;
         this.shopBagHandler = shopBagHandler;
         this.session = session;
+        shopBagHandler.setShopBagManager(this);
     }
 
     public ShopBagManager(Context context, ShopBagHandler shopBagHandler, String session, int commodityId, String sizeName, List<ShopBagInfo.ShoppingListBean> remove) {
@@ -35,6 +37,16 @@ public class ShopBagManager implements ServiceConnection {
         this.commodityId = commodityId;
         this.sizeName = sizeName;
         this.remove = remove;
+        shopBagHandler.setShopBagManager(this);
+    }
+
+    public ShopBagManager(Context mContext, ShopBagHandler shopBagHandler, String session, String commodityId, String sizeName) {
+        this.context = mContext;
+        this.shopBagHandler = shopBagHandler;
+        this.session = session;
+        this.commodityIds = commodityId;
+        this.sizeName = sizeName;
+        shopBagHandler.setShopBagManager(this);
     }
 
     public void showShopBag() {
@@ -48,6 +60,11 @@ public class ShopBagManager implements ServiceConnection {
         context.bindService(intent, this, Context.BIND_AUTO_CREATE);
         shopBagType = 2;
     }
+    public void addShopBag() {
+        Intent intent = new Intent(context, NetworkCommunicationService.class);
+        context.bindService(intent, this, Context.BIND_AUTO_CREATE);
+        shopBagType = 3;
+    }
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
@@ -60,6 +77,7 @@ public class ShopBagManager implements ServiceConnection {
                 myBinder.deleteShopBag(context,shopBagHandler,commodityId,sizeName,session,remove);
                 break;
             case 3:
+                myBinder.addShopBag(context,shopBagHandler,session,commodityIds,sizeName);
                 break;
         }
     }

@@ -55,6 +55,8 @@ import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.Response;
 
+import static com.triplebro.aran.sandw.modules.AransModules.commodityId;
+
 
 public class NetworkCommunicationService extends Service {
 
@@ -144,6 +146,43 @@ public class NetworkCommunicationService extends Service {
         public void deleteShopBag(Context context, ShopBagHandler shopBagHandler, int commodityId, String sizeName, String session, List<ShopBagInfo.ShoppingListBean> remove) {
             NetworkCommunicationService.this.deleteShopBag(context, shopBagHandler, session, commodityId,sizeName,remove);
         }
+
+        public void addShopBag(Context context, ShopBagHandler shopBagHandler, String session, String commodityIds, String sizeName) {
+            NetworkCommunicationService.this.addShopBag(context, shopBagHandler, session, commodityIds,sizeName);
+        }
+    }
+
+    private void addShopBag(final Context context, final ShopBagHandler shopBagHandler, String session, String commodityIds, String sizeName) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session", session);
+        builder.add("commodityId", commodityIds);
+        builder.add("sizeName", sizeName);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_ADD_SHOP_BAG, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.what = AppProperties.SHOP_BAG_ADD;
+                        shopBagHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "添加购物袋信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void deleteShopBag(final Context context, final ShopBagHandler shopBagHandler, String session, int commodityId , String sizeName, final List<ShopBagInfo.ShoppingListBean> remove) {
@@ -276,7 +315,7 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("commodityId", AransModules.commodityId);
+        builder.add("commodityId", commodityId);
         builder.add("session", session);
         new Thread() {
             @Override

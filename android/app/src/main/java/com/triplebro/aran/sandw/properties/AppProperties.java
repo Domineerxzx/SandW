@@ -42,6 +42,8 @@ public class AppProperties {
     public static final String SERVER_ADDRESS_OF_SHOW_SHOP_BAG = "http://120.25.96.141:8080/shopping/shoppinglist";
     //TODO 删除购物车信息
     public static final String SERVER_ADDRESS_OF_DELETE_SHOP_BAG = "http://120.25.96.141:8080/shopping/deleshopping";
+    //TODO 添加购物车信息
+    public static final String SERVER_ADDRESS_OF_ADD_SHOP_BAG = "http://120.25.96.141:8080/shopping/joinshopping";
     //TODO 国家及地区
     public static final String[] COUNTRY_OR_AREA = {"中国内地"};
     //TODO 省
@@ -54,4 +56,5 @@ public class AppProperties {
     public static final int SEARCH_FIND = 1;
     public static final int SHOP_BAG_SHOW = 1;
     public static final int SHOP_BAG_DELETE = 2;
+    public static final int SHOP_BAG_ADD = 3;
 }

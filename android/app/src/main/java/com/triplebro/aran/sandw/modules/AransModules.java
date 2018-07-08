@@ -10,8 +10,10 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.handlers.SelectAllHandler;
+import com.triplebro.aran.sandw.handlers.ShopBagHandler;
 import com.triplebro.aran.sandw.managers.GoodInfoManager;
 import com.triplebro.aran.sandw.managers.SelectAllManager;
+import com.triplebro.aran.sandw.managers.ShopBagManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,6 +99,14 @@ public class AransModules extends ReactContextBaseJavaModule {
     public void getSelectAll(Callback callback) {
         callback.invoke(String.valueOf(data));
         data = null;
+    }
+
+    //TODO Rn调用添加购物袋
+    @ReactMethod
+    public void addShopBag(String commodityId,String sizeName) {
+        ShopBagHandler shopBagHandler = new ShopBagHandler(mContext);
+        ShopBagManager shopBagManager = new ShopBagManager(mContext, shopBagHandler, mContext.getSharedPreferences("session", MODE_PRIVATE).getString("session", null), commodityId, sizeName);
+        shopBagManager.addShopBag();
     }
 
     //TODO Rn调用Android开启商品详情页

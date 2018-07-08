@@ -3,7 +3,9 @@ package com.triplebro.aran.sandw.handlers;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
+import com.facebook.react.bridge.Callback;
 import com.triplebro.aran.sandw.adapters.ShopBagAdapter;
 import com.triplebro.aran.sandw.beans.ShopBagInfo;
 import com.triplebro.aran.sandw.managers.ShopBagManager;
@@ -28,6 +30,7 @@ public class ShopBagHandler extends Handler {
         this.ilv_shop_content = ilv_shop_content;
     }
 
+
     public void setShopBagManager(ShopBagManager shopBagManager) {
         this.shopBagManager = shopBagManager;
     }
@@ -40,11 +43,17 @@ public class ShopBagHandler extends Handler {
                 List<ShopBagInfo.ShoppingListBean> shoppingList = shopBagInfo.getShoppingList();
                 shopBagAdapter = new ShopBagAdapter(context, shoppingList);
                 ilv_shop_content.setAdapter(shopBagAdapter);
+                context.unbindService(shopBagManager);
                 break;
             case AppProperties.SHOP_BAG_DELETE:
                 List<ShopBagInfo.ShoppingListBean> remove = (List<ShopBagInfo.ShoppingListBean>) msg.obj;
                 shopBagAdapter = new ShopBagAdapter(context, remove);
                 ilv_shop_content.setAdapter(shopBagAdapter);
+                context.unbindService(shopBagManager);
+                break;
+            case AppProperties.SHOP_BAG_ADD:
+                Toast.makeText(context, "添加购物袋成功", Toast.LENGTH_SHORT).show();
+                context.unbindService(shopBagManager);
                 break;
         }
     }
