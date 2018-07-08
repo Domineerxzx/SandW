@@ -35,7 +35,11 @@ public class AppProperties {
     //TODO 获取详细商品信息
     public static final String SERVER_ADDRESS_OF_GET_GOOD_INFO = "http://120.25.96.141:8080/commodity/commodityinfo";
     //TODO 获取选购全部信息
-    public static final String SERVER_ADDRESS_OF_SELECT_ALL = "http://120.25.96.141:8080/search/rangesearch";
+    public static final String SERVER_ADDRESS_OF_SELECT_ALL_TYPE = "http://120.25.96.141:8080/search/rangesearch";
+    //TODO 获取搜索结果
+    public static final String SERVER_ADDRESS_OF_FIND = "http://120.25.96.141:8080/search/description";
+    //TODO 获取购物车信息
+    public static final String SERVER_ADDRESS_OF_SHOW_SHOP_BAG = "http://120.25.96.141:8080/shopping/shoppinglist";
     //TODO 国家及地区
     public static final String[] COUNTRY_OR_AREA = {"中国内地"};
     //TODO 省
@@ -45,4 +49,6 @@ public class AppProperties {
             "重庆市","陕西省","青海省","黑龙江省"};
 
     public static final int GET_GOODS_INFO = 1;
+    public static final int SEARCH_FIND = 1;
+    public static final int SHOP_BAG_SHOW = 1;
 }

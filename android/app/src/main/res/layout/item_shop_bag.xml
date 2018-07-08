@@ -8,8 +8,7 @@
         android:id="@+id/iv_goods"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@mipmap/ic_launcher_round" />
-
+        android:src="#9dbebebe"/>
     <ImageView
         android:id="@+id/iv_delete_goods"
         android:layout_width="10dp"
@@ -64,12 +63,6 @@
                 android:text="1"
                 android:textSize="8dp" />
 
-            <ImageView
-                android:id="@+id/iv_count"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="55dp"
-                android:background="@mipmap/more" />
         </LinearLayout>
 
         <LinearLayout
@@ -98,13 +91,6 @@
                 android:layout_marginLeft="10dp"
                 android:text="S"
                 android:textSize="8dp" />
-
-            <ImageView
-                android:id="@+id/iv_size"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="45dp"
-                android:background="@mipmap/more" />
 
         </LinearLayout>
 

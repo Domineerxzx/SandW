@@ -1,18 +1,13 @@
 package com.triplebro.aran.sandw.modules;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.facebook.react.bridge.Callback;
-import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
-import com.triplebro.aran.sandw.activities.GoodInfoActivity;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.handlers.SelectAllHandler;
 import com.triplebro.aran.sandw.managers.GoodInfoManager;

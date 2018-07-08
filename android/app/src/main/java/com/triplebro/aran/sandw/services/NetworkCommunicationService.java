@@ -21,6 +21,7 @@ import com.triplebro.aran.sandw.beans.BrandInfo;
 import com.triplebro.aran.sandw.beans.ChangeAddressInfoBean;
 import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
+import com.triplebro.aran.sandw.beans.ShopBagInfo;
 import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
 import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.beans.UserInfo;
@@ -36,7 +37,9 @@ import com.triplebro.aran.sandw.handlers.FirstPageHandler;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
+import com.triplebro.aran.sandw.handlers.SearchHandler;
 import com.triplebro.aran.sandw.handlers.SelectAllHandler;
+import com.triplebro.aran.sandw.handlers.ShopBagHandler;
 import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
 import com.triplebro.aran.sandw.handlers.TypeHandler;
 import com.triplebro.aran.sandw.handlers.UserHandler;
@@ -45,6 +48,7 @@ import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.utils.httpUtils.HttpUtils;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -127,6 +131,83 @@ public class NetworkCommunicationService extends Service {
         public void selectAll(Context context, SelectAllHandler selectAllHandler) {
             NetworkCommunicationService.this.selectAll(context,selectAllHandler);
         }
+
+        public void find(Context context, SearchHandler searchHandler, String find) {
+            NetworkCommunicationService.this.find(context,searchHandler,find);
+        }
+
+        public void showShopBag(Context context, ShopBagHandler shopBagHandler, String session) {
+            NetworkCommunicationService.this.showShopBag(context,shopBagHandler,session);
+        }
+    }
+
+    private void showShopBag(final Context context, final ShopBagHandler shopBagHandler, String session) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session",session);
+        new Thread(){
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SHOW_SHOP_BAG, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        ShopBagInfo shopBagInfo = gson.fromJson(res, ShopBagInfo.class);
+                        List<ShopBagInfo.ShoppingListBean> shoppingList = shopBagInfo.getShoppingList();
+                        if (shoppingList.size() == 0) {
+                            ((Activity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "购物袋为空", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }else{
+                            Message message = Message.obtain();
+                            message.what = AppProperties.SHOP_BAG_SHOW;
+                            message.obj = shopBagInfo;
+                            shopBagHandler.sendMessage(message);
+                            ((Activity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "获取购物袋信息成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void find(final Context context, final SearchHandler searchHandler, String find) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("description",find);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_FIND, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.what = AppProperties.SEARCH_FIND;
+                        message.obj = res;
+                        searchHandler.sendMessage(message);
+                    }
+                });
+            }
+        }.start();
     }
 
     private void selectAll(Context context, final SelectAllHandler selectAllHandler) {
@@ -135,7 +216,7 @@ public class NetworkCommunicationService extends Service {
         new Thread() {
             @Override
             public void run() {
-                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SELECT_ALL, builder, new Callback() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SELECT_ALL_TYPE, builder, new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
 

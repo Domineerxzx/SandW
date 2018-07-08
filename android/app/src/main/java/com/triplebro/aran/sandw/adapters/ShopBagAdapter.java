@@ -3,34 +3,45 @@ package com.triplebro.aran.sandw.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.beans.ShopBagInfo;
+import com.triplebro.aran.sandw.cache.ImageCacheOP;
+import com.triplebro.aran.sandw.handlers.ImageHandler;
 import com.triplebro.aran.sandw.views.TwoButtonDialog;
+
+import java.io.File;
+import java.util.List;
 
 public class ShopBagAdapter extends BaseAdapter {
 
     private Context context;
-    private String[] s;
+    private List<ShopBagInfo.ShoppingListBean> shoppingListBeans;
+    private ImageCacheOP imageCacheOP;
 
-    public ShopBagAdapter(Context context, String[] s) {
+    public ShopBagAdapter(Context context, List<ShopBagInfo.ShoppingListBean> shoppingListBeans) {
         this.context = context;
-        this.s = s;
+        this.shoppingListBeans = shoppingListBeans;
     }
 
     @Override
     public int getCount() {
-        return s.length;
+        return shoppingListBeans.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return s[position];
+        return shoppingListBeans.get(position);
     }
 
     @Override
@@ -44,7 +55,6 @@ public class ShopBagAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ShopBagAdapter.ViewHolder();
             convertView = View.inflate(context, R.layout.item_shop_bag, null);
-            viewHolder.iv_count = convertView.findViewById(R.id.iv_count);
             viewHolder.ll_size = convertView.findViewById(R.id.ll_size);
             viewHolder.ll_count = convertView.findViewById(R.id.ll_count);
             viewHolder.iv_delete_goods = convertView.findViewById(R.id.iv_delete_goods);
@@ -55,11 +65,11 @@ public class ShopBagAdapter extends BaseAdapter {
             viewHolder.tv_count = convertView.findViewById(R.id.tv_count);
             viewHolder.tv_goods_name = convertView.findViewById(R.id.tv_goods_name);
             viewHolder.iv_goods = convertView.findViewById(R.id.iv_goods);
-            viewHolder.iv_size = convertView.findViewById(R.id.iv_size);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ShopBagAdapter.ViewHolder) convertView.getTag();
         }
+
         viewHolder.iv_delete_goods.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,11 +82,22 @@ public class ShopBagAdapter extends BaseAdapter {
                 }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        Toast.makeText(context, "取消移除", Toast.LENGTH_SHORT).show();
                     }
                 },((Activity)context).getFragmentManager());
             }
         });
+        String fileName = context.getCacheDir() + "/" + shoppingListBeans.
+                get(position).getCommodityId() + shoppingListBeans.get(position).getSize() + ".png";
+        ImageHandler imageHandler = new ImageHandler(context,viewHolder.iv_goods,fileName);
+        imageCacheOP = new ImageCacheOP(context);
+        imageCacheOP.getImageFromURL(shoppingListBeans.get(position).getPhoto_doc()+"/1.png",
+                shoppingListBeans.get(position).getCommodityId()+shoppingListBeans.
+                        get(position).getSize(),imageHandler);
+        viewHolder.tv_coast.setText(shoppingListBeans.get(position).getMoney());
+        viewHolder.tv_count.setText(String.valueOf(shoppingListBeans.get(position).getCount()));
+        viewHolder.tv_size.setText(shoppingListBeans.get(position).getSize());
+        viewHolder.tv_goods_name.setText(shoppingListBeans.get(position).getBrandName());
         return convertView;
     }
 
@@ -91,7 +112,5 @@ public class ShopBagAdapter extends BaseAdapter {
         private ImageView iv_delete_goods;
         private LinearLayout ll_count;
         private LinearLayout ll_size;
-        private ImageView iv_count;
-        private ImageView iv_size;
     }
 }

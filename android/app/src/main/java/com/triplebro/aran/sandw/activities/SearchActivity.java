@@ -20,6 +20,8 @@ import com.triplebro.aran.sandw.adapters.HistoryAdapter;
 import com.triplebro.aran.sandw.adapters.MaybeAdapter;
 import com.triplebro.aran.sandw.adapters.SaleAdapter;
 import com.triplebro.aran.sandw.adapters.TypeContentAdapter;
+import com.triplebro.aran.sandw.handlers.SearchHandler;
+import com.triplebro.aran.sandw.managers.SearchManager;
 import com.triplebro.aran.sandw.views.InnerListView;
 
 import java.util.Map;
@@ -51,6 +53,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     private RelativeLayout rl_history;
     private Map<String, String> historyAll;
     private HistoryAdapter historyAdapter;
+    private SearchHandler searchHandler;
+    private SearchManager searchManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     }
 
     private void initData() {
+        searchHandler = new SearchHandler(this, rv_maybe_content, ilv_history_content, ilv_sale_content);
+        searchManager = new SearchManager(this,searchHandler);
         ll_maybe.setVisibility(View.VISIBLE);
         ll_search_result.setVisibility(View.GONE);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -160,19 +166,8 @@ public class SearchActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.tv_find:
                 String search = et_search_input.getText().toString().trim();
-                if(search!=null){
-                    edit.putString("history"+(historyAll.size()+1),search);
-                    edit.commit();
-                }
-                historyAll = (Map<String, String>) history.getAll();
-                if(historyAll.size() == 0){
-                    //TODO 无数据，移除历史控件
-                    rl_history.setVisibility(View.GONE);
-                }else{
-                    rl_history.setVisibility(View.VISIBLE);
-                    historyAdapter = new HistoryAdapter(this, historyAll);
-                    ilv_history_content.setAdapter(historyAdapter);
-                }
+                searchManager = new SearchManager(this, searchHandler, search);
+                searchManager.find();
                 break;
         }
     }
