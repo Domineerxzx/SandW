@@ -34,6 +34,8 @@ public class AppProperties {
     public static final String SERVER_ADDRESS_OF_GET_GOODS_INFO = "http://120.25.96.141:8080/commodity/recommendation";
     //TODO 获取详细商品信息
     public static final String SERVER_ADDRESS_OF_GET_GOOD_INFO = "http://120.25.96.141:8080/commodity/commodityinfo";
+    //TODO 获取选购全部信息
+    public static final String SERVER_ADDRESS_OF_SELECT_ALL = "http://120.25.96.141:8080/search/rangesearch";
     //TODO 国家及地区
     public static final String[] COUNTRY_OR_AREA = {"中国内地"};
     //TODO 省

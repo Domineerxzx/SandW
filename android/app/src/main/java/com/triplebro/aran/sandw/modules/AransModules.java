@@ -14,7 +14,9 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 import com.triplebro.aran.sandw.activities.GoodInfoActivity;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
+import com.triplebro.aran.sandw.handlers.SelectAllHandler;
 import com.triplebro.aran.sandw.managers.GoodInfoManager;
+import com.triplebro.aran.sandw.managers.SelectAllManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +35,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class AransModules extends ReactContextBaseJavaModule {
+    public static String type;
     private Context mContext;
     private Object data;
     public static String title;
@@ -55,35 +58,60 @@ public class AransModules extends ReactContextBaseJavaModule {
     public String getName() {
         return "AransModules";
     }
+
+    //TODO 告知Android首页需要展示需要的标签
     @ReactMethod
-    public void setTitle(String msg){//传递标签
+    public void setTitle(String msg) {//传递标签
         title = msg;
     }
+
+    //TODO 告知Android查看商品详情需要的商品Id
     @ReactMethod
-    public void setCommodityId(String msg){//传递ID
+    public void setCommodityId(String msg) {//传递ID
         commodityId = msg;
     }
+
+    //TODO 告知Android选购全部需要的商品类别
     @ReactMethod
-    public void SEND_LOG(String o){
-        System.out.println("======================这里是log============="+o);
+    public static void setType(String type) {
+        AransModules.type = type;
     }
+
+    //TODO Rn向Android传递信息，并且打印Log
     @ReactMethod
-    public void getGoodsInfo(Callback callback){
+    public void SEND_LOG(String o) {
+        System.out.println("======================这里是log=============" + o);
+    }
+
+    //TODO Rn调用获取四格推荐，在这之前必须调用setTitle()
+    @ReactMethod
+    public void getGoodsInfo(Callback callback) {
         callback.invoke(String.valueOf(data));
         data = null;
     }
+
+    //TODO Rn调用获取商品详情，在这之前必须调用setCommodityId()
     @ReactMethod
-    public void getGoodInfo(Callback callback){
+    public void getGoodInfo(Callback callback) {
         callback.invoke(String.valueOf(data));
         data = null;
     }
+
+    //TODO Rn调用获取选购全部，在这之前必须调用setType()
     @ReactMethod
-    public void startGoodInfoActivity(){
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("session",MODE_PRIVATE);
+    public void getSelectAll(Callback callback) {
+        callback.invoke(String.valueOf(data));
+        data = null;
+    }
+
+    //TODO Rn调用Android开启商品详情页
+    @ReactMethod
+    public void startGoodInfoActivity() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences("session", MODE_PRIVATE);
         String session = sharedPreferences.getString("session", null);
-        if(session == null){
+        if (session == null) {
             Toast.makeText(mContext, "还没登录呢，快去登录吧！！！", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             GoodInfoHandler goodInfoHandler = new GoodInfoHandler(mContext);
             GoodInfoManager goodInfoManager = new GoodInfoManager(mContext, goodInfoHandler, session);
             goodInfoManager.getGoodInfo();
@@ -92,12 +120,22 @@ public class AransModules extends ReactContextBaseJavaModule {
         }
     }
 
+    //TODO Rn调用Android开启选购全部页
+    @ReactMethod
+    public void startSelectAllActivity() {
+        SelectAllHandler selectAllHandler = new SelectAllHandler(mContext);
+        SelectAllManager selectAllManager = new SelectAllManager(mContext,selectAllHandler);
+        selectAllManager.selectAll();
+        Toast.makeText(mContext, "跳转页面成功", Toast.LENGTH_SHORT).show();
+    }
+
+    //TODO 暂时不用
     @Nullable
     @Override
     public Map<String, Object> getConstants() {
         Map<String, Object> params = new HashMap<>();
-        params.put("aa","hahaha");
-        params.put("bb","xixixi");
+        params.put("aa", "hahaha");
+        params.put("bb", "xixixi");
         return params;
     }
 }

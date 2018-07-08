@@ -10,3 +10,4 @@ AppRegistry.registerComponent('SandW',()=>NavigatorManager);
 AppRegistry.registerComponent('SandW1',()=>DynamicImgesModules);
 AppRegistry.registerComponent('SandW2',()=>BrandFragment);
 AppRegistry.registerComponent('SandW3',()=>DynamicImgesModules);
+AppRegistry.registerComponent('SandW4',()=>ToucheTest);

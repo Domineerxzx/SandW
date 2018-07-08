@@ -36,6 +36,7 @@ import com.triplebro.aran.sandw.handlers.FirstPageHandler;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
+import com.triplebro.aran.sandw.handlers.SelectAllHandler;
 import com.triplebro.aran.sandw.handlers.ShowAddressInfoHandler;
 import com.triplebro.aran.sandw.handlers.TypeHandler;
 import com.triplebro.aran.sandw.handlers.UserHandler;
@@ -122,6 +123,35 @@ public class NetworkCommunicationService extends Service {
         public void getGoodInfo(Context context, GoodInfoHandler goodInfoHandler, String session) {
             NetworkCommunicationService.this.getGoodInfo(context,goodInfoHandler,session);
         }
+
+        public void selectAll(Context context, SelectAllHandler selectAllHandler) {
+            NetworkCommunicationService.this.selectAll(context,selectAllHandler);
+        }
+    }
+
+    private void selectAll(Context context, final SelectAllHandler selectAllHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("rangeSearch",AransModules.type);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SELECT_ALL, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.obj = res;
+                        selectAllHandler.sendMessage(message);
+                    }
+                });
+            }
+        }.start();
     }
 
     private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler, String session) {

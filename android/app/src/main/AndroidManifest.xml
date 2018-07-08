@@ -42,8 +42,9 @@
         <activity android:name=".activities.AddAddressActivity" />
         <activity android:name=".activities.BrandListActivity" />
         <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.OrderActivity"></activity>
-        <activity android:name=".activities.GoodInfoActivity"/>
+        <activity android:name=".activities.OrderActivity" />
+        <activity android:name=".activities.GoodInfoActivity" />
+        <activity android:name=".activities.SelectAllActivity"></activity>
     </application>
 
 </manifest>

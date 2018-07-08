@@ -46,16 +46,8 @@ export default class TheFirstPageForAndroid extends Component {
 
 
     jumpClick(){
-        const{navigator} = this.props;
-        /*that存储了上一个this*/
-        if(navigator){
-            /*push主要掌管页面跳转 返回的component属性决定了呈现哪一个class*/
-            navigator.push({
-                name : "SecondPageComponent",
-                component : TheNextPage,
-                params:{ aran:"this is aran"}
-            })
-        }
+        NativeModules.AransModules.setType("短袖");
+        NativeModules.AransModules.startSelectAllActivity();
     }
 
 
