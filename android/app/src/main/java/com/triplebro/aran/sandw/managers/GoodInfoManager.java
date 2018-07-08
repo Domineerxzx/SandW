@@ -19,6 +19,7 @@ public class GoodInfoManager implements ServiceConnection {
         this.context = context;
         this.goodInfoHandler = goodInfoHandler;
         this.session = session;
+        goodInfoHandler.setGoodInfoManager(this);
     }
     public void getGoodInfo(){
         Intent intent = new Intent(context, NetworkCommunicationService.class);

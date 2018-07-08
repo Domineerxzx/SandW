@@ -33,9 +33,6 @@
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.ChangeUserInfoActivity" />
         <activity android:name=".activities.ChangePassWordActivity" />
-
-        <service android:name=".services.NetworkCommunicationService" />
-
         <activity android:name=".activities.ShopBagActivity" />
         <activity android:name=".activities.AddressActivity" />
         <activity android:name=".activities.ChangeAddressActivity" />
@@ -44,7 +41,17 @@
         <activity android:name=".activities.SearchActivity" />
         <activity android:name=".activities.OrderActivity" />
         <activity android:name=".activities.GoodInfoActivity" />
-        <activity android:name=".activities.SelectAllActivity"></activity>
+        <activity android:name=".activities.SelectAllActivity" />
+        <activity android:name=".activities.NetWorkDisconnectionActivity"
+            android:theme="@android:style/Theme.Translucent"/>
+
+        <service android:name=".services.NetworkCommunicationService" />
+
+        <receiver android:name=".receivers.NetWorkChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
