@@ -32,6 +32,8 @@ export default class RadiosPage extends Component{
                 >
                     {this.renderSwiper(this.props.name.sizeStock)}
                 </RadioModal>
+                <Text>{this.state.initId}</Text>
+                <Text>{this.state.initName}</Text>
             </View>
         )
     }
@@ -43,7 +45,7 @@ export default class RadiosPage extends Component{
 
             NativeModules.AransModules.SEND_LOG("========这是尺码大小========="+bean.sizeName);
             banners.push(
-                <Text key={i}>
+                <Text value={i} key={i}>    
                     <Text>
                         {bean.sizeName}
                     </Text>
