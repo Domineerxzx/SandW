@@ -19,12 +19,12 @@ export default class ToucheTest extends Component{
     }
 
     componentWillMount() {
-        NativeModules.AransModules.getSelectAll((result) => {this.setState({vlaues:result})});
+        NativeModules.AransModules.getSelectAll((result) => {this.setState({Tshirtvlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
 
     // componentDidMount() {
-    //      this.setState({json:JSON.parse(this.state.vlaues)});
+    //      this.setState({json:JSON.parse(this.state.Tshirtvlaues)});
     // }
     componentDidMount(){
         NativeModules.AransModules.SEND_LOG("这是render结束"+this.state.vlaues);
@@ -52,7 +52,7 @@ export default class ToucheTest extends Component{
                 </View>
             )
         }
-        // let parse = JSON.parse(this.state.vlaues);
+        // let parse = JSON.parse(this.state.Tshirtvlaues);
 
     }
 

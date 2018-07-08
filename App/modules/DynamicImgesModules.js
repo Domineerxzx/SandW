@@ -14,13 +14,13 @@ export default class DynamicImgesModules extends Component {
     // constructor() {
     //     super();
     //     this.state = {
-    //         vlaues:"???"
+    //         Tshirtvlaues:"???"
     //     }
     // }
     //
     // componentWillMount() {
-    //     NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
-    //     NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
+    //     NativeModules.AransModules.getGoodsInfo((result) => {this.setState({Tshirtvlaues:result})});
+    //     NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.Tshirtvlaues);
     // }
 
     _onPressGetId(str){
@@ -29,14 +29,14 @@ export default class DynamicImgesModules extends Component {
 
 
     getItem() {
-        let parse = JSON.parse(this.props.name);//TODO==图片未上传
+        let list = this.props.name;//TODO==图片未上传
 
         let arr = [];
-        for (let i = 0; i < parse.recommendationInfo.itemInfo.length; i++) {
-            let infoList = parse.recommendationInfo.itemInfo[i];
+        for (let i = 0; i < list.itemInfo.length; i++) {
+            let infoList = list.itemInfo[i];
             arr.push(
                 <TouchableHighlight onPress={() => {
-                    this._onPressGetId(parse.recommendationInfo.itemInfo[i].id.toString());
+                    this._onPressGetId(list.itemInfo[i].id.toString());
                     NativeModules.AransModules.startGoodInfoActivity()
                 }}>
                     <View key={i}

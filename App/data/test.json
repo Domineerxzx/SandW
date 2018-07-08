@@ -1,0 +1,62 @@
+{
+  "recommendationInfo": [
+    {
+      "itemName": "T恤",
+      "itemInfo": [
+        {
+          "brandName": "Champion",
+          "money": "187.61 ",
+          "id": 13,
+          "photoDoc": "http://aaa"
+        },
+        {
+          "brandName": "Champion",
+          "money": "267.96 ",
+          "id": 12,
+          "photoDoc": "http://aaa"
+        },
+        {
+          "brandName": "Champion",
+          "money": "342.85 ",
+          "id": 11,
+          "photoDoc": "http://aaa"
+        },
+        {
+          "brandName": "Champion",
+          "money": "126.97",
+          "id": 10,
+          "photoDoc": "http://aaa"
+        }
+      ]
+    },
+    {
+      "itemName": "高跟鞋",
+      "itemInfo": [
+        {
+          "brandName": "SAM EDELMAN",
+          "money": "100",
+          "id": 19,
+          "photoDoc": "http://aaa"
+        },
+        {
+          "brandName": "SAM EDELMAN",
+          "money": "100",
+          "id": 18,
+          "photoDoc": "http://aaa"
+        },
+        {
+          "brandName": "SAM EDELMAN",
+          "money": "100",
+          "id": 17,
+          "photoDoc": "http://aaa"
+        },
+        {
+          "brandName": "SAM EDELMAN",
+          "money": "100",
+          "id": 16,
+          "photoDoc": "http://aaa"
+        }
+      ]
+    }
+  ]
+}

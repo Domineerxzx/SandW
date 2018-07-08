@@ -29,7 +29,7 @@ export default class GetAndroidData extends Component{
                 <TouchableHighlight>
                     <Text>
                         这是：{
-                NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues: result})
+                NativeModules.AransModules.getGoodsInfo((result) => {this.setState({Tshirtvlaues: result})
                     })
             }
 
@@ -45,7 +45,7 @@ export default class GetAndroidData extends Component{
 
     getValues(nativeResult){
         this.aaa();
-        this.setState({vlaues:nativeResult})
+        this.setState({Tshirtvlaues:nativeResult})
     }
 
 

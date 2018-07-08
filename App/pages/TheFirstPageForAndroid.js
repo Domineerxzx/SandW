@@ -34,6 +34,7 @@ export default class TheFirstPageForAndroid extends Component {
     }
 
     componentWillMount() {
+        NativeModules.AransModules.setTitle("T恤#高跟鞋");
         NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
@@ -59,6 +60,7 @@ export default class TheFirstPageForAndroid extends Component {
                 </View>
             )
         }else {
+            let parseJSONList = JSON.parse(this.state.vlaues).recommendationInfo;
             return (
                 <View>
                     <ScrollView>
@@ -78,7 +80,7 @@ export default class TheFirstPageForAndroid extends Component {
                                     color: '#000',
                                     fontSize: 15,
                                     fontWeight: 'bold'
-                                }}>特别为您推荐的上衣</Text>
+                                }}>特别为您推荐的{parseJSONList[0].itemName}</Text>
                                 <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
                                     <TouchableHighlight onPress={this.jumpClick.bind(this)}>
                                         <Text>选购全部 ></Text>
@@ -87,13 +89,36 @@ export default class TheFirstPageForAndroid extends Component {
                             </View>
                             <View style={{flexDirection: 'column', alignItems: 'center'}}>
                                 <DynamicImgesModules callback={this._onPressGetId.bind(this)}
-                                    name={this.state.vlaues}
+                                    name={parseJSONList[0]}
+                                                     style={{flexDirection: 'row'}}/>
+                            </View>
+                            <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                                <Text style={{
+                                    marginRight: 20,
+                                    color: '#000',
+                                    fontSize: 15,
+                                    fontWeight: 'bold'
+                                }}>特别为您推荐的{parseJSONList[1].itemName}</Text>
+                                <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
+                                    <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                        <Text>选购全部 ></Text>
+                                    </TouchableHighlight>
+                                </View>
+                            </View>
+                            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                                <DynamicImgesModules callback={this._onPressGetId.bind(this)}
+                                                     name={parseJSONList[1]}
                                                      style={{flexDirection: 'row'}}/>
                             </View>
                         </View>
+
+
+
                         <View style={styles.dianjiaoshi}>
 
                         </View>
+
+
 
                     </ScrollView>
                 </View>

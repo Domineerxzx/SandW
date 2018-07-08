@@ -21,7 +21,7 @@ import com.triplebro.aran.sandw.handlers.BrandHandler;
 import com.triplebro.aran.sandw.managers.BrandManager;
 
 
-public class BrandFragment extends Fragment implements View.OnClickListener {
+public class DescriptionFragment extends Fragment implements View.OnClickListener {
 
     private View fragment_brand;
     private TextView tv_title;

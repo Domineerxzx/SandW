@@ -372,7 +372,11 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodsInfo(final Context context, final FirstPageHandler firstPageHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("recommendation", AransModules.title);
+        String title = AransModules.title;
+        if(title==null){
+            title="T恤#高跟鞋";
+        }
+        builder.add("recommendation", title);
         new Thread() {
             @Override
             public void run() {
@@ -404,7 +408,11 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodsInfo(final Context context, final BrandHandler brandHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("recommendation", AransModules.title);
+        String title = AransModules.title;
+        if(title==null){
+            title="T恤";
+        }
+        builder.add("recommendation", title);
         new Thread() {
             @Override
             public void run() {
