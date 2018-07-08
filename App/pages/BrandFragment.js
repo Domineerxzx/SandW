@@ -7,8 +7,9 @@
  */
 
 import React, {Component} from "react";
-import {Text,Dimensions, View, TouchableHighlight, NativeModules, Image, ScrollView} from "react-native";
+import {Text,Dimensions,StyleSheet, View, TouchableHighlight, NativeModules, Image, ScrollView} from "react-native";
 import ScrollViewGetGoodInfo from "./ScrollViewGetGoodInfo";
+import ActionButton from "react-native-action-button";
 
 
 export default class BrandFragment extends Component{
