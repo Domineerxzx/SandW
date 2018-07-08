@@ -16,7 +16,12 @@ public class ShopBagHandler extends Handler {
 
     private Context context;
     private ShopBagManager shopBagManager;
-    private InnerListView ilv_shop_content;
+    private static InnerListView ilv_shop_content;
+    private ShopBagAdapter shopBagAdapter;
+
+    public ShopBagHandler(Context context) {
+        this.context = context;
+    }
 
     public ShopBagHandler(Context context, InnerListView ilv_shop_content) {
         this.context = context;
@@ -33,7 +38,12 @@ public class ShopBagHandler extends Handler {
             case AppProperties.SHOP_BAG_SHOW:
                 ShopBagInfo shopBagInfo = (ShopBagInfo) msg.obj;
                 List<ShopBagInfo.ShoppingListBean> shoppingList = shopBagInfo.getShoppingList();
-                ShopBagAdapter shopBagAdapter = new ShopBagAdapter(context, shoppingList);
+                shopBagAdapter = new ShopBagAdapter(context, shoppingList);
+                ilv_shop_content.setAdapter(shopBagAdapter);
+                break;
+            case AppProperties.SHOP_BAG_DELETE:
+                List<ShopBagInfo.ShoppingListBean> remove = (List<ShopBagInfo.ShoppingListBean>) msg.obj;
+                shopBagAdapter = new ShopBagAdapter(context, remove);
                 ilv_shop_content.setAdapter(shopBagAdapter);
                 break;
         }

@@ -110,41 +110,80 @@ public class NetworkCommunicationService extends Service {
         }
 
         public void getType(Context context, TypeHandler typeHandler) {
-            NetworkCommunicationService.this.getType(context,typeHandler);
+            NetworkCommunicationService.this.getType(context, typeHandler);
         }
 
         public void getGoodsInfo(Context context, FirstPageHandler firstPageHandler) {
-            NetworkCommunicationService.this.getGoodsInfo(context,firstPageHandler);
+            NetworkCommunicationService.this.getGoodsInfo(context, firstPageHandler);
         }
+
         public void getGoodsInfo(Context context, BrandHandler brandHandler) {
-            NetworkCommunicationService.this.getGoodsInfo(context,brandHandler);
+            NetworkCommunicationService.this.getGoodsInfo(context, brandHandler);
         }
 
         public void getBrand(Context context, BrandListHandler brandListHandler) {
-            NetworkCommunicationService.this.getBrand(context,brandListHandler);
+            NetworkCommunicationService.this.getBrand(context, brandListHandler);
         }
 
         public void getGoodInfo(Context context, GoodInfoHandler goodInfoHandler, String session) {
-            NetworkCommunicationService.this.getGoodInfo(context,goodInfoHandler,session);
+            NetworkCommunicationService.this.getGoodInfo(context, goodInfoHandler, session);
         }
 
         public void selectAll(Context context, SelectAllHandler selectAllHandler) {
-            NetworkCommunicationService.this.selectAll(context,selectAllHandler);
+            NetworkCommunicationService.this.selectAll(context, selectAllHandler);
         }
 
         public void find(Context context, SearchHandler searchHandler, String find) {
-            NetworkCommunicationService.this.find(context,searchHandler,find);
+            NetworkCommunicationService.this.find(context, searchHandler, find);
         }
 
         public void showShopBag(Context context, ShopBagHandler shopBagHandler, String session) {
-            NetworkCommunicationService.this.showShopBag(context,shopBagHandler,session);
+            NetworkCommunicationService.this.showShopBag(context, shopBagHandler, session);
         }
+
+        public void deleteShopBag(Context context, ShopBagHandler shopBagHandler, int commodityId, String sizeName, String session, List<ShopBagInfo.ShoppingListBean> remove) {
+            NetworkCommunicationService.this.deleteShopBag(context, shopBagHandler, session, commodityId,sizeName,remove);
+        }
+    }
+
+    private void deleteShopBag(final Context context, final ShopBagHandler shopBagHandler, String session, int commodityId , String sizeName, final List<ShopBagInfo.ShoppingListBean> remove) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session", session);
+        builder.add("commodityId", String.valueOf(commodityId));
+        builder.add("sizeName", sizeName);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_DELETE_SHOP_BAG, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.what = AppProperties.SHOP_BAG_DELETE;
+                        message.obj = remove;
+                        shopBagHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "删除购物袋信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void showShopBag(final Context context, final ShopBagHandler shopBagHandler, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("session",session);
-        new Thread(){
+        builder.add("session", session);
+        new Thread() {
             @Override
             public void run() {
                 HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SHOW_SHOP_BAG, builder, new Callback() {
@@ -160,18 +199,18 @@ public class NetworkCommunicationService extends Service {
                         ShopBagInfo shopBagInfo = gson.fromJson(res, ShopBagInfo.class);
                         List<ShopBagInfo.ShoppingListBean> shoppingList = shopBagInfo.getShoppingList();
                         if (shoppingList.size() == 0) {
-                            ((Activity)context).runOnUiThread(new Runnable() {
+                            ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(context, "购物袋为空", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                        }else{
+                        } else {
                             Message message = Message.obtain();
                             message.what = AppProperties.SHOP_BAG_SHOW;
                             message.obj = shopBagInfo;
                             shopBagHandler.sendMessage(message);
-                            ((Activity)context).runOnUiThread(new Runnable() {
+                            ((Activity) context).runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(context, "获取购物袋信息成功", Toast.LENGTH_SHORT).show();
@@ -186,7 +225,7 @@ public class NetworkCommunicationService extends Service {
 
     private void find(final Context context, final SearchHandler searchHandler, String find) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("description",find);
+        builder.add("description", find);
         new Thread() {
             @Override
             public void run() {
@@ -212,7 +251,7 @@ public class NetworkCommunicationService extends Service {
 
     private void selectAll(Context context, final SelectAllHandler selectAllHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("rangeSearch",AransModules.type);
+        builder.add("rangeSearch", AransModules.type);
         new Thread() {
             @Override
             public void run() {
@@ -237,8 +276,8 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("commodityId", /*String.valueOf(9)*/AransModules.commodityId);
-        builder.add("session",session);
+        builder.add("commodityId", AransModules.commodityId);
+        builder.add("session", session);
         new Thread() {
             @Override
             public void run() {
@@ -294,7 +333,7 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoodsInfo(final Context context, final FirstPageHandler firstPageHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("recommendation", "T恤");
+        builder.add("recommendation", AransModules.title);
         new Thread() {
             @Override
             public void run() {
@@ -323,9 +362,10 @@ public class NetworkCommunicationService extends Service {
             }
         }.start();
     }
+
     private void getGoodsInfo(final Context context, final BrandHandler brandHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("recommendation", "T恤");
+        builder.add("recommendation", AransModules.title);
         new Thread() {
             @Override
             public void run() {

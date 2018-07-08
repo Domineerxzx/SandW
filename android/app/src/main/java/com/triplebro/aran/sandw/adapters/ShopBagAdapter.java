@@ -18,6 +18,9 @@ import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.beans.ShopBagInfo;
 import com.triplebro.aran.sandw.cache.ImageCacheOP;
 import com.triplebro.aran.sandw.handlers.ImageHandler;
+import com.triplebro.aran.sandw.handlers.ShopBagHandler;
+import com.triplebro.aran.sandw.managers.ShopBagManager;
+import com.triplebro.aran.sandw.views.InnerListView;
 import com.triplebro.aran.sandw.views.TwoButtonDialog;
 
 import java.io.File;
@@ -50,7 +53,7 @@ public class ShopBagAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final ShopBagAdapter.ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ShopBagAdapter.ViewHolder();
@@ -77,23 +80,31 @@ public class ShopBagAdapter extends BaseAdapter {
                 twoButtonDialog.show("移除商品", "确定要将该商品移出购物袋吗？", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //TODO 告知服务器移除商品
+                        ShopBagHandler shopBagHandler = new ShopBagHandler(context);
+                        String session = context.getSharedPreferences("session", Context.MODE_PRIVATE).getString("session", null);
+                        int commodityId = shoppingListBeans.get(position).getCommodityId();
+                        String size = shoppingListBeans.get(position).getSize();
+                        if (shoppingListBeans.size() > 0) {
+                            shoppingListBeans.remove(position);
+                        }
+                        ShopBagManager shopBagManager = new ShopBagManager(context, shopBagHandler, session, commodityId, size, shoppingListBeans);
+                        shopBagManager.deleteShopBag();
                     }
                 }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context, "取消移除", Toast.LENGTH_SHORT).show();
                     }
-                },((Activity)context).getFragmentManager());
+                }, ((Activity) context).getFragmentManager());
             }
         });
         String fileName = context.getCacheDir() + "/" + shoppingListBeans.
                 get(position).getCommodityId() + shoppingListBeans.get(position).getSize() + ".png";
-        ImageHandler imageHandler = new ImageHandler(context,viewHolder.iv_goods,fileName);
+        ImageHandler imageHandler = new ImageHandler(context, viewHolder.iv_goods, fileName);
         imageCacheOP = new ImageCacheOP(context);
-        imageCacheOP.getImageFromURL(shoppingListBeans.get(position).getPhoto_doc()+"/1.png",
-                shoppingListBeans.get(position).getCommodityId()+shoppingListBeans.
-                        get(position).getSize(),imageHandler);
+        imageCacheOP.getImageFromURL(shoppingListBeans.get(position).getPhoto_doc() + "/1.png",
+                shoppingListBeans.get(position).getCommodityId() + shoppingListBeans.
+                        get(position).getSize(), imageHandler);
         viewHolder.tv_coast.setText(shoppingListBeans.get(position).getMoney());
         viewHolder.tv_count.setText(String.valueOf(shoppingListBeans.get(position).getCount()));
         viewHolder.tv_size.setText(shoppingListBeans.get(position).getSize());
@@ -101,7 +112,7 @@ public class ShopBagAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         private ImageView iv_goods;
         private TextView tv_goods_name;
         private TextView tv_count;
