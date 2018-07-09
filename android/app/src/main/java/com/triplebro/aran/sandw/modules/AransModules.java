@@ -9,9 +9,11 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
+import com.triplebro.aran.sandw.handlers.LovesHandler;
 import com.triplebro.aran.sandw.handlers.SelectAllHandler;
 import com.triplebro.aran.sandw.handlers.ShopBagHandler;
 import com.triplebro.aran.sandw.managers.GoodInfoManager;
+import com.triplebro.aran.sandw.managers.LovesManager;
 import com.triplebro.aran.sandw.managers.SelectAllManager;
 import com.triplebro.aran.sandw.managers.ShopBagManager;
 
@@ -101,6 +103,13 @@ public class AransModules extends ReactContextBaseJavaModule {
         data = null;
     }
 
+    //TODO Rn调用添加心愿单
+    @ReactMethod
+    public void getLovesList(Callback callback) {
+        callback.invoke(String.valueOf(data));
+        data = null;
+    }
+
     //TODO Rn调用添加购物袋
     @ReactMethod
     public void addShopBag(String commodityId,String sizeName) {
@@ -108,6 +117,15 @@ public class AransModules extends ReactContextBaseJavaModule {
         ShopBagManager shopBagManager = new ShopBagManager(mContext, shopBagHandler, mContext.getSharedPreferences("session", MODE_PRIVATE).getString("session", null), commodityId, sizeName);
         shopBagManager.addShopBag();
     }
+
+    //TODO Rn调用添加心愿单
+    @ReactMethod
+    public void addLovesList(String commodityId) {
+        LovesHandler lovesHandler = new LovesHandler(mContext);
+        LovesManager lovesManager = new LovesManager(mContext, lovesHandler, mContext.getSharedPreferences("session", MODE_PRIVATE).getString("session", null), commodityId);
+        lovesManager.addLovesList();
+    }
+
 
     //TODO Rn调用Android开启商品详情页
     @ReactMethod

@@ -12,5 +12,5 @@ AppRegistry.registerComponent('SandW',()=>NavigatorManager);
 AppRegistry.registerComponent('SandW_Des',()=>DescriptionFragment);
 AppRegistry.registerComponent('SandW_BR',()=>DynamicImgesModules);
 AppRegistry.registerComponent('SandW3',()=>DynamicImgesModules);
-AppRegistry.registerComponent('SandW4',()=>BuyALLPages);
+AppRegistry.registerComponent('SandW4',()=>ToucheTest);
 AppRegistry.registerComponent('BuyALLPages',()=>BuyALLPages);

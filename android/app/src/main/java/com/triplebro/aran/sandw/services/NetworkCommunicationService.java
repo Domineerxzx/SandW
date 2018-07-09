@@ -2,9 +2,12 @@ package com.triplebro.aran.sandw.services;
 
 import android.app.Activity;
 import android.app.Service;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.Message;
@@ -25,6 +28,7 @@ import com.triplebro.aran.sandw.beans.ShopBagInfo;
 import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
 import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.beans.UserInfo;
+import com.triplebro.aran.sandw.databases.MyOpenHelper;
 import com.triplebro.aran.sandw.handlers.AddAddressHandler;
 import com.triplebro.aran.sandw.handlers.AddressHandler;
 import com.triplebro.aran.sandw.handlers.BrandHandler;
@@ -147,28 +151,107 @@ public class NetworkCommunicationService extends Service {
         }
 
         public void deleteShopBag(Context context, ShopBagHandler shopBagHandler, int commodityId, String sizeName, String session, List<ShopBagInfo.ShoppingListBean> remove) {
-            NetworkCommunicationService.this.deleteShopBag(context, shopBagHandler, session, commodityId,sizeName,remove);
+            NetworkCommunicationService.this.deleteShopBag(context, shopBagHandler, session, commodityId, sizeName, remove);
         }
 
         public void addShopBag(Context context, ShopBagHandler shopBagHandler, String session, String commodityIds, String sizeName) {
-            NetworkCommunicationService.this.addShopBag(context, shopBagHandler, session, commodityIds,sizeName);
+            NetworkCommunicationService.this.addShopBag(context, shopBagHandler, session, commodityIds, sizeName);
         }
 
         public void startSelectAllActivity(Context context, String brandName, BrandOnClickHandler brandOnClickHandler) {
-            NetworkCommunicationService.this.startSelectAllActivity(context,brandName, brandOnClickHandler);
+            NetworkCommunicationService.this.startSelectAllActivity(context, brandName, brandOnClickHandler);
         }
+
         public void startSelectAllActivity(Context context, String typeName, TypeOnClickHandler typeOnClickHandler) {
-            NetworkCommunicationService.this.startSelectAllActivity(context,typeName, typeOnClickHandler);
+            NetworkCommunicationService.this.startSelectAllActivity(context, typeName, typeOnClickHandler);
         }
 
         public void getLovesList(Context context, LovesHandler lovesHandler, String session) {
-            NetworkCommunicationService.this.getLovesList(context,lovesHandler,session);
+            NetworkCommunicationService.this.getLovesList(context, lovesHandler, session);
         }
+
+        public void addLovesList(Context context, LovesHandler lovesHandler, String session, String commodityId) {
+            NetworkCommunicationService.this.addLovesList(context, lovesHandler, session, commodityId);
+        }
+    }
+
+    private void addLovesList(final Context context, final LovesHandler lovesHandler, String session, String commodityId) {
+        final FormBody.Builder builder = new FormBody.Builder();
+
+        if (session == null) {
+            Toast.makeText(context, "尚未登录，心愿单数据已加到本地数据库中", Toast.LENGTH_SHORT).show();
+            MyOpenHelper myOpenHelper = new MyOpenHelper(context);
+            SQLiteDatabase writableDatabase = myOpenHelper.getWritableDatabase();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("commodityId", commodityId);
+            writableDatabase.insert(AppProperties.LOVES_TABLE, null, contentValues);
+        } else {
+            builder.add("session", session);
+            builder.add("commodityId", commodityId);
+            new Thread() {
+                @Override
+                public void run() {
+                    HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_ADD_LOVES_LIST, builder, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            String res = response.body().string();
+                            System.out.println(res);
+                            Message message = Message.obtain();
+                            message.obj = res;
+                            message.what = AppProperties.LOVES_LIST_ADD;
+                            lovesHandler.sendMessage(message);
+                            ((Activity) context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "获取心愿单信息成功", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+            }.start();
+        }
+    }
+
+    private void addLovesList(final Context context, String session, String commodityId) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session", session);
+        builder.add("commodityId", commodityId);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_ADD_LOVES_LIST, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "添加心愿单信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void getLovesList(final Context context, final LovesHandler lovesHandler, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("session",session);
+        if(session != null){
+            builder.add("session", session);
+        }else{
+            return;
+        }
         new Thread() {
             @Override
             public void run() {
@@ -184,6 +267,7 @@ public class NetworkCommunicationService extends Service {
                         System.out.println(res);
                         Message message = Message.obtain();
                         message.obj = res;
+                        message.what = AppProperties.LOVES_LIST_SHOW;
                         lovesHandler.sendMessage(message);
                         ((Activity) context).runOnUiThread(new Runnable() {
                             @Override
@@ -199,7 +283,7 @@ public class NetworkCommunicationService extends Service {
 
     private void startSelectAllActivity(final Context context, String typeName, final TypeOnClickHandler typeOnClickHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("rangeSearch",typeName);
+        builder.add("rangeSearch", typeName);
         new Thread() {
             @Override
             public void run() {
@@ -230,7 +314,7 @@ public class NetworkCommunicationService extends Service {
 
     private void startSelectAllActivity(final Context context, String brandName, final BrandOnClickHandler brandOnClickHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        builder.add("brandSearch",brandName);
+        builder.add("brandSearch", brandName);
         new Thread() {
             @Override
             public void run() {
@@ -292,7 +376,7 @@ public class NetworkCommunicationService extends Service {
         }.start();
     }
 
-    private void deleteShopBag(final Context context, final ShopBagHandler shopBagHandler, String session, int commodityId , String sizeName, final List<ShopBagInfo.ShoppingListBean> remove) {
+    private void deleteShopBag(final Context context, final ShopBagHandler shopBagHandler, String session, int commodityId, String sizeName, final List<ShopBagInfo.ShoppingListBean> remove) {
         final FormBody.Builder builder = new FormBody.Builder();
         builder.add("session", session);
         builder.add("commodityId", String.valueOf(commodityId));
@@ -483,8 +567,8 @@ public class NetworkCommunicationService extends Service {
     private void getGoodsInfo(final Context context, final FirstPageHandler firstPageHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
         String title = AransModules.title;
-        if(title==null){
-            title="T恤#高跟鞋";
+        if (title == null) {
+            title = "T恤#高跟鞋";
         }
         builder.add("recommendation", title);
         new Thread() {
@@ -519,8 +603,8 @@ public class NetworkCommunicationService extends Service {
     private void getGoodsInfo(final Context context, final BrandHandler brandHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
         String title = AransModules.title;
-        if(title==null){
-            title="T恤";
+        if (title == null) {
+            title = "T恤";
         }
         builder.add("recommendation", title);
         new Thread() {
@@ -931,6 +1015,14 @@ public class NetworkCommunicationService extends Service {
                             SharedPreferences.Editor edit = sharedPreferences.edit();
                             edit.putString("session", loginInfoBean.getSession());
                             edit.commit();
+                            MyOpenHelper myOpenHelper = new MyOpenHelper(context);
+                            SQLiteDatabase writableDatabase = myOpenHelper.getWritableDatabase();
+                            Cursor query = writableDatabase.query(AppProperties.LOVES_TABLE, null, null, null, null, null, null);
+                            if (query != null && query.getCount() > 0)
+                                while (query.moveToNext()) {
+                                    String commodityId = query.getString(1);
+                                    addLovesList(context, loginInfoBean.getSession(), commodityId);
+                                }
                             Message message = new Message();
                             message.obj = res;
                             loginHandler.sendMessage(message);

@@ -19,7 +19,7 @@ export default class ToucheTest extends Component{
     }
 
     componentWillMount() {
-        NativeModules.AransModules.getSelectAll((result) => {this.setState({vlaues:result})});
+        NativeModules.AransModules.getLovesList((result) => {this.setState({vlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
 
