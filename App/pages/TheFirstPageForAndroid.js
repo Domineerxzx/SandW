@@ -40,7 +40,13 @@ export default class TheFirstPageForAndroid extends Component {
     }
 
     _onPressGetId(str){
-        NativeModules.AransModules.setCommodityId(str)
+        NativeModules.AransModules.setCommodityId(str);
+    }
+
+    _OnPressGetJson(str){
+        NativeModules.AransModules.setTitle("T恤#高跟鞋");
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
+
     }
 
 
@@ -107,7 +113,7 @@ export default class TheFirstPageForAndroid extends Component {
                             </View>
                             <View style={{flexDirection: 'column', alignItems: 'center'}}>
                                 <DynamicImgesModules callback={this._onPressGetId.bind(this)}
-                                                     name={parseJSONList[1]}
+                                                     name={parseJSONList[1].itemInfo}
                                                      style={{flexDirection: 'row'}}/>
                             </View>
                         </View>
