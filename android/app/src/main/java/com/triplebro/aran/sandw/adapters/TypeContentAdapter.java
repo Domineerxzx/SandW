@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.fragments.TypeFragment;
+import com.triplebro.aran.sandw.handlers.TypeOnClickHandler;
+import com.triplebro.aran.sandw.managers.TypeOnClickManager;
 import com.triplebro.aran.sandw.views.InnerListView;
 
 import java.util.List;
@@ -67,10 +69,14 @@ public class TypeContentAdapter extends BaseAdapter {
                 }
             }
         });
+        final List<String> itemRangeList = types.get(position).getItemRangeList();
         viewHolder.lv_type_more.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO 跳转页面，跳转到对应的类别商品展示页
+                TypeOnClickHandler typeOnClickHandler = new TypeOnClickHandler(context);
+                TypeOnClickManager typeOnClickManager = new TypeOnClickManager(context, typeOnClickHandler, itemRangeList.get(position));
+                typeOnClickManager.startSelectAllActivity();
             }
         });
         viewHolder.ll_type_more.setVisibility(View.GONE);

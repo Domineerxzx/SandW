@@ -57,7 +57,7 @@ public class ReactBrandFragment extends Fragment{
     }
 
     private void initData() {
-        tv_title.setText(R.string.title_first_page);
+
     }
 
     private void initView() {
