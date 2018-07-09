@@ -29,6 +29,7 @@ import com.triplebro.aran.sandw.handlers.AddAddressHandler;
 import com.triplebro.aran.sandw.handlers.AddressHandler;
 import com.triplebro.aran.sandw.handlers.BrandHandler;
 import com.triplebro.aran.sandw.handlers.BrandListHandler;
+import com.triplebro.aran.sandw.handlers.BrandOnClickHandler;
 import com.triplebro.aran.sandw.handlers.ChangeAddressHandler;
 import com.triplebro.aran.sandw.handlers.ChangeInfoHandler;
 import com.triplebro.aran.sandw.handlers.ChangePassWordHandler;
@@ -150,6 +151,41 @@ public class NetworkCommunicationService extends Service {
         public void addShopBag(Context context, ShopBagHandler shopBagHandler, String session, String commodityIds, String sizeName) {
             NetworkCommunicationService.this.addShopBag(context, shopBagHandler, session, commodityIds,sizeName);
         }
+
+        public void startSelectAllActivity(Context context, String brandName, BrandOnClickHandler brandOnClickHandler) {
+            NetworkCommunicationService.this.startSelectAllActivity(context,brandName, brandOnClickHandler);
+        }
+    }
+
+    private void startSelectAllActivity(final Context context, String brandName, final BrandOnClickHandler brandOnClickHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("brandSearch",brandName);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SELECT_ALL_BRAND, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.obj = res;
+                        brandOnClickHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取品牌商品信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void addShopBag(final Context context, final ShopBagHandler shopBagHandler, String session, String commodityIds, String sizeName) {

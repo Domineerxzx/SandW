@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.beans.BrandInfo;
+import com.triplebro.aran.sandw.handlers.BrandOnClickHandler;
+import com.triplebro.aran.sandw.managers.BrandOnClickManager;
 import com.triplebro.aran.sandw.views.InnerListView;
 
 import java.util.List;
@@ -59,6 +61,9 @@ public class BrandContentAdapter extends BaseAdapter {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO 跳转页面，跳转到对应的品牌商品展示页
+                BrandOnClickHandler brandOnClickHandler = new BrandOnClickHandler(context);
+                BrandOnClickManager brandOnClickManager = new BrandOnClickManager(context, classValueBeans.get(position).getCharClassName(), brandOnClickHandler);
+                brandOnClickManager.startSelectAllActivity();
             }
         });
         return convertView;
