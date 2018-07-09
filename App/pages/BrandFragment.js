@@ -8,20 +8,74 @@
 
 import React, {Component} from "react";
 import {Text,Dimensions,StyleSheet, View, TouchableHighlight, NativeModules, Image, ScrollView} from "react-native";
+import DynamicImgesModules from "../modules/DynamicImgesModules";
 
 export default class BrandFragment extends Component{
 
+    constructor() {
+        super();
+        this.state = {
+            vlaues:"???"
+        }
+    }
 
     componentWillMount() {
-
+        NativeModules.AransModules.setTitle("T恤#高跟鞋");
+        NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
     }
 
 
-    render(){
-        return(
-            <View>
-                <Text>该功能暂未开发</Text>
-            </View>
-        )
+    render() {
+        if (this.state.vlaues === "???") {
+
+            return(
+                <View>
+                    <Image style={{width:Dimensions.get('window').width}} source={require('../imges/01415f5996acdaa8012156038f6b78.gif')}/>
+                </View>
+            )
+
+        } else {
+
+            return (
+                <View>
+                    <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                        <Text style={{
+                            marginRight: 20,
+                            color: '#000',
+                            fontSize: 15,
+                            fontWeight: 'bold'
+                        }}>特别为您推荐的{parseJSONList[0].itemName}</Text>
+                        <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
+                            <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                <Text>选购全部 ></Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                    <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                        <DynamicImgesModules callback={this._onPressGetId.bind(this)}
+                                             name={parseJSONList[0]}
+                                             style={{flexDirection: 'row'}}/>
+                    </View>
+                    <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
+                        <Text style={{
+                            marginRight: 20,
+                            color: '#000',
+                            fontSize: 15,
+                            fontWeight: 'bold'
+                        }}>特别为您推荐的{parseJSONList[1].itemName}</Text>
+                        <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
+                            <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                <Text>选购全部 ></Text>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                    <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                        <DynamicImgesModules callback={this._onPressGetId.bind(this)}
+                                             name={parseJSONList[1]}
+                                             style={{flexDirection: 'row'}}/>
+                    </View>
+                </View>
+            )
+        }
     }
 }
