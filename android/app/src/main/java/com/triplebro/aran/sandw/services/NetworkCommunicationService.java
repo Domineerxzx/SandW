@@ -37,6 +37,7 @@ import com.triplebro.aran.sandw.handlers.DeleteAddressHandler;
 import com.triplebro.aran.sandw.handlers.FirstPageHandler;
 import com.triplebro.aran.sandw.handlers.GoodInfoHandler;
 import com.triplebro.aran.sandw.handlers.LoginHandler;
+import com.triplebro.aran.sandw.handlers.LovesHandler;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
 import com.triplebro.aran.sandw.handlers.SearchHandler;
 import com.triplebro.aran.sandw.handlers.SelectAllHandler;
@@ -159,6 +160,41 @@ public class NetworkCommunicationService extends Service {
         public void startSelectAllActivity(Context context, String typeName, TypeOnClickHandler typeOnClickHandler) {
             NetworkCommunicationService.this.startSelectAllActivity(context,typeName, typeOnClickHandler);
         }
+
+        public void getLovesList(Context context, LovesHandler lovesHandler, String session) {
+            NetworkCommunicationService.this.getLovesList(context,lovesHandler,session);
+        }
+    }
+
+    private void getLovesList(final Context context, final LovesHandler lovesHandler, String session) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        builder.add("session",session);
+        new Thread() {
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_GET_LOVES_LIST, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        Message message = Message.obtain();
+                        message.obj = res;
+                        lovesHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取心愿单信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void startSelectAllActivity(final Context context, String typeName, final TypeOnClickHandler typeOnClickHandler) {
@@ -315,6 +351,9 @@ public class NetworkCommunicationService extends Service {
                                     Toast.makeText(context, "购物袋为空", Toast.LENGTH_SHORT).show();
                                 }
                             });
+                            Message message = Message.obtain();
+                            message.what = AppProperties.SHOP_BAG_EMPTY;
+                            shopBagHandler.sendMessage(message);
                         } else {
                             Message message = Message.obtain();
                             message.what = AppProperties.SHOP_BAG_SHOW;
