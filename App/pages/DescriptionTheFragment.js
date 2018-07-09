@@ -10,7 +10,7 @@ import React, {Component} from "react";
 import {Text,Dimensions,StyleSheet, View, TouchableHighlight, NativeModules, Image, ScrollView} from "react-native";
 import DynamicImgesModules from "../modules/DynamicImgesModules";
 
-export default class BrandFragment extends Component{
+export default class DescriptionTheFragment extends Component{
 
     constructor() {
         super();

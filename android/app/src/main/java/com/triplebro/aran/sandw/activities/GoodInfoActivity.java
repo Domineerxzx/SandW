@@ -41,7 +41,7 @@ public class GoodInfoActivity extends Activity implements DefaultHardwareBackBtn
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "SandW2", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "SandW_Des", null);
         setContentView(mReactRootView);
     }
 

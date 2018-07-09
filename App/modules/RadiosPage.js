@@ -49,6 +49,9 @@ export default class RadiosPage extends Component{
                     <Text>
                         {bean.sizeName}
                     </Text>
+                    <Text>
+                           库存：{bean.sizeNum}
+                    </Text>
                 </Text>
             )
         }

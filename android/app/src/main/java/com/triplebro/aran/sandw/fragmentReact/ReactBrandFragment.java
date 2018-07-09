@@ -42,7 +42,7 @@ public class ReactBrandFragment extends Fragment{
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "SandW1", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "SandW_BR", null);
         initView();
         initData();
         return mReactRootView;

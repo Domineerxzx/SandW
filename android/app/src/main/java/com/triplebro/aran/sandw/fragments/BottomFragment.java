@@ -142,7 +142,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.tv_brand:
                 //reactBrandFragment.getReactPackage().setGoodsInfo("hahaha");//TODO 置入数据的的入口
                 transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fl_content, new DescriptionFragment());
+                transaction.replace(R.id.fl_content, new BrandFragment());
                 transaction.commit();
                 changeImageForButton(lastFunctionButton, bt_brand);
                 lastFunctionTextView.setTextColor(Color.GRAY);
