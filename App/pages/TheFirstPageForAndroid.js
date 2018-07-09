@@ -46,8 +46,8 @@ export default class TheFirstPageForAndroid extends Component {
 
 
 
-    jumpClick(){
-        NativeModules.AransModules.setType("短袖");
+    jumpClick(str){
+        NativeModules.AransModules.setType(str);
         NativeModules.AransModules.startSelectAllActivity();
     }
 
@@ -82,14 +82,14 @@ export default class TheFirstPageForAndroid extends Component {
                                     fontWeight: 'bold'
                                 }}>特别为您推荐的{parseJSONList[0].itemName}</Text>
                                 <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
-                                    <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                    <TouchableHighlight onPress={()=>{this.jumpClick(parseJSONList[0].itemName)}}>
                                         <Text>选购全部 ></Text>
                                     </TouchableHighlight>
                                 </View>
                             </View>
                             <View style={{flexDirection: 'column', alignItems: 'center'}}>
                                 <DynamicImgesModules callback={this._onPressGetId.bind(this)}
-                                    name={parseJSONList[0]}
+                                    name={parseJSONList[0].itemInfo}
                                                      style={{flexDirection: 'row'}}/>
                             </View>
                             <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
@@ -100,7 +100,7 @@ export default class TheFirstPageForAndroid extends Component {
                                     fontWeight: 'bold'
                                 }}>特别为您推荐的{parseJSONList[1].itemName}</Text>
                                 <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
-                                    <TouchableHighlight onPress={this.jumpClick.bind(this)}>
+                                    <TouchableHighlight onPress={()=>{this.jumpClick(parseJSONList[1].itemName)}}>
                                         <Text>选购全部 ></Text>
                                     </TouchableHighlight>
                                 </View>
