@@ -32,11 +32,11 @@ export default class DynamicImgesModules extends Component {
         let list = this.props.name;//TODO==图片未上传
 
         let arr = [];
-        for (let i = 0; i < list.itemInfo.length; i++) {
-            let infoList = list.itemInfo[i];
+        for (let i = 0; i < list.length; i++) {
+            let infoList = list[i];
             arr.push(
-                <TouchableHighlight onPress={() => {
-                    this._onPressGetId(list.itemInfo[i].id.toString());
+                <TouchableHighlight key={i} onPress={() => {
+                    this._onPressGetId(list[i].id.toString());
                     NativeModules.AransModules.startGoodInfoActivity()
                 }}>
                     <View key={i}

@@ -8,14 +8,14 @@
 
 import React, {Component} from "react";
 import {Text,Dimensions,StyleSheet, View, TouchableHighlight, NativeModules, Image, ScrollView} from "react-native";
+import DynamicImgesModules from "../modules/DynamicImgesModules";
 
 export default class BuyALLPages extends Component{
 
     constructor() {
         super();
         this.state = {
-            vlaues:"???",
-            json:"???"
+            vlaues:"???"
         }
     }
 
@@ -30,6 +30,9 @@ export default class BuyALLPages extends Component{
     componentDidMount(){
         NativeModules.AransModules.SEND_LOG("这是render结束"+this.state.vlaues);
 
+    }
+    _onPressGetId(str){
+        NativeModules.AransModules.setCommodityId(str)
     }
 
     render() {
@@ -47,9 +50,9 @@ export default class BuyALLPages extends Component{
             let parse = JSON.parse(this.state.vlaues);
             return (
                 <View>
-                    <Text>
-                        {this.state.vlaues}
-                    </Text>
+
+                    <DynamicImgesModules callback={this._onPressGetId.bind(this)} name={parse.rangeSearch}/>
+
                 </View>
             )
         }
