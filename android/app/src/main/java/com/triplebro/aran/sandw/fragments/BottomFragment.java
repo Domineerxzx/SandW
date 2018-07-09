@@ -3,6 +3,7 @@ package com.triplebro.aran.sandw.fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,8 +17,11 @@ import android.widget.TextView;
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragmentReact.ReactBrandFragment;
 import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
+import com.triplebro.aran.sandw.fragmentReact.ReactLovesFragment;
 import com.triplebro.aran.sandw.handlers.FirstPageHandler;
+import com.triplebro.aran.sandw.handlers.LovesHandler;
 import com.triplebro.aran.sandw.managers.FirstPageManager;
+import com.triplebro.aran.sandw.managers.LovesManager;
 import com.triplebro.aran.sandw.modules.AransModules;
 
 /**
@@ -47,10 +51,12 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private ReactFirstPageFragment reactFirstPageFragment=new ReactFirstPageFragment();
     private Button lastFunctionButton;
     private TextView lastFunctionTextView;
-    private ReactBrandFragment reactBrandFragment = new ReactBrandFragment();
     private AransModules aransModules;
     private FirstPageHandler firstPageHandler;
     private FirstPageManager firstPageManager;
+    private ReactLovesFragment reactLovesFragment = new ReactLovesFragment();
+    private LovesHandler loveHandler;
+    private LovesManager lovesManager;
 
     @Nullable
     @Override
@@ -151,9 +157,9 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
             case R.id.ll_loves:
             case R.id.bt_loves:
             case R.id.tv_loves:
-                transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fl_content, new LovesFragment());
-                transaction.commit();
+                loveHandler = new LovesHandler(getActivity(),reactLovesFragment);
+                lovesManager = new LovesManager(getActivity(), loveHandler,getActivity().getSharedPreferences("session", Context.MODE_PRIVATE).getString("session",null));
+                lovesManager.getLovesList();
                 changeImageForButton(lastFunctionButton, bt_loves);
                 lastFunctionTextView.setTextColor(Color.GRAY);
                 tv_loves.setTextColor(Color.BLACK);

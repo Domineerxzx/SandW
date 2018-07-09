@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tv_little"
-            android:text="2,950.00"
+            android:text="0.00"
             android:textColor="#000"
             android:textSize="8dp" />
 
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
-            android:text="2950.00"
+            android:text="0.00"
             android:textColor="#000" />
 
         <TextView
@@ -110,69 +110,120 @@
         android:id="@+id/v_coast"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#9dbebebe"
         android:layout_below="@id/rl_coast"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:background="#9dbebebe" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/v_coast">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.triplebro.aran.sandw.views.InnerListView
-                android:id="@+id/ilv_shop_content"
+            <RelativeLayout
+                android:id="@+id/rl_shop_bag_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/rl_shop_bag_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/iv_shop_bag_empty"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/shopbag" />
+
+                    <TextView
+                        android:id="@+id/tv_shop_bag_empty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/iv_shop_bag_empty"
+                        android:layout_centerInParent="true"
+                        android:text="您的购物袋空空如也......"
+                        android:textColor="#000"
+                        android:textSize="12dp" />
+
+                    <Button
+                        android:id="@+id/bt_shop_bag_empty"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_below="@id/tv_shop_bag_empty"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="10dp"
+                        android:background="@drawable/shape_background_login"
+                        android:text="去选购"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
+                </RelativeLayout>
+
+                <com.triplebro.aran.sandw.views.InnerListView
+                    android:id="@+id/ilv_shop_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/ilv_shop_content">
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="需要帮助？"
-                android:layout_marginLeft="10dp"
-                android:textSize="12dp"
-                android:textColor="#000"
-                android:layout_marginTop="10dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="请以如下方式联系我们的客服："
-                    android:layout_marginLeft="10dp"
-                    android:textSize="10dp"
-                    android:textColor="#595959" />
+                android:layout_below="@id/rl_shop_bag_content"
+                android:orientation="vertical">
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#9dbebebe"
-                    android:layout_marginTop="10dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="14天无理由免费退货（退款含税）"
                     android:layout_marginLeft="10dp"
-                    android:textSize="12dp"
+                    android:layout_marginTop="10dp"
+                    android:text="需要帮助？"
                     android:textColor="#000"
-                    android:layout_marginTop="10dp"/>
+                    android:textSize="12dp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="还在犹豫？别担心，我们提供14天无理由免费退货。来自中国内地的退货，您的退款将包含下单时所支付的关税。"
                     android:layout_marginLeft="10dp"
-                    android:textSize="10dp"
-                    android:textColor="#595959" />
+                    android:text="请以如下方式联系我们的客服："
+                    android:textColor="#595959"
+                    android:textSize="10dp" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#9dbebebe"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:background="#9dbebebe" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="14天无理由免费退货（退款含税）"
+                    android:textColor="#000"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="还在犹豫？别担心，我们提供14天无理由免费退货。来自中国内地的退货，您的退款将包含下单时所支付的关税。"
+                    android:textColor="#595959"
+                    android:textSize="10dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#9dbebebe" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -184,36 +235,41 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center">
+
                         <ImageView
                             android:id="@+id/iv_shop_contact_phone"
                             android:layout_width="15dp"
                             android:layout_height="15dp"
-                            android:background="@mipmap/contact_phone"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:background="@mipmap/contact_phone" />
                     </LinearLayout>
+
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#9dbebebe"/>
+                        android:background="#9dbebebe" />
+
                     <LinearLayout
                         android:id="@+id/ll_shop_contact_email"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center">
+
                         <ImageView
                             android:id="@+id/iv_shop_contact_email"
                             android:layout_width="15dp"
                             android:layout_height="15dp"
-                            android:background="@mipmap/contact_email"
-                            android:layout_gravity="center"/>
+                            android:layout_gravity="center"
+                            android:background="@mipmap/contact_email" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#9dbebebe"
-                    android:layout_marginBottom="50dp"/>
+                    android:layout_marginBottom="50dp"
+                    android:background="#9dbebebe" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -222,18 +278,18 @@
 
 
     <Button
+        android:id="@+id/bt_settlement"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:id="@+id/bt_settlement"
-        android:background="@drawable/shape_background_login"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/shape_background_login"
         android:text="去结算"
         android:textColor="#fff"
         android:textSize="12dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
