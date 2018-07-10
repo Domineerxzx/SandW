@@ -56,7 +56,7 @@ public class UserHandler extends Handler {
                 this.tv_username.setText(userInfo.getNickName());
                 this.tv_email.setText("/" + userInfo.getUserName());
                 this.tv_cancellation.setText("不是" + userInfo.getNickName() + "吗？");
-                System.out.println("-------------------------------"+userInfo.getSex().toString());
+                System.out.println("-------------------------------" + userInfo.getSex().toString());
                 if (userInfo.getSex().toString().equals("1.0")) {
                     rbt_sex_f.setChecked(true);
                     rbt_sex_m.setChecked(false);
@@ -69,7 +69,10 @@ public class UserHandler extends Handler {
             case AppProperties.UPDATE_USER_INFO_WHAT_INSIDE:
                 this.et_username.setText(userInfo.getNickName());
                 this.et_email.setText(userInfo.getUserName());
-                this.tv_birth.setText(userInfo.getBirthday().toString());
+                Object birthday = userInfo.getBirthday();
+                if (birthday != null) {
+                    this.tv_birth.setText(birthday.toString());
+                }
                 break;
         }
     }

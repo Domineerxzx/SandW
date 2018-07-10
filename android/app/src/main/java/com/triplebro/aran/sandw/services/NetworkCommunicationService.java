@@ -26,6 +26,7 @@ import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
 import com.triplebro.aran.sandw.beans.ShopBagInfo;
 import com.triplebro.aran.sandw.beans.ShowAddressInfoBean;
+import com.triplebro.aran.sandw.beans.TenCommodityInfo;
 import com.triplebro.aran.sandw.beans.TypeInfo;
 import com.triplebro.aran.sandw.beans.UserInfo;
 import com.triplebro.aran.sandw.databases.MyOpenHelper;
@@ -173,11 +174,84 @@ public class NetworkCommunicationService extends Service {
         public void addLovesList(Context context, LovesHandler lovesHandler, String session, String commodityId) {
             NetworkCommunicationService.this.addLovesList(context, lovesHandler, session, commodityId);
         }
+
+        public void getGoods(Context context, SearchHandler searchHandler) {
+            NetworkCommunicationService.this.getGoods(context, searchHandler);
+        }
+
+        public void getBrands(Context context, SearchHandler searchHandler) {
+            NetworkCommunicationService.this.getBrands(context, searchHandler);
+        }
+    }
+
+    private void getBrands(final Context context, final SearchHandler searchHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        new Thread(){
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SEARCH_GET_BRANDS, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        TenCommodityInfo tenCommodityInfo = gson.fromJson(res, TenCommodityInfo.class);
+                        List<TenCommodityInfo.TencommodityBean> tenCommodity = tenCommodityInfo.getTencommodity();
+                        Message message = Message.obtain();
+                        message.obj = tenCommodity;
+                        message.what = AppProperties.SEARCH_GET_GOODS;
+                        searchHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取商品推荐信息信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private void getGoods(final Context context, final SearchHandler searchHandler) {
+        final FormBody.Builder builder = new FormBody.Builder();
+        new Thread(){
+            @Override
+            public void run() {
+                HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SEARCH_GET_GOODS, builder, new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        String res = response.body().string();
+                        System.out.println(res);
+                        TenCommodityInfo tenCommodityInfo = gson.fromJson(res, TenCommodityInfo.class);
+                        List<TenCommodityInfo.TencommodityBean> tenCommodity = tenCommodityInfo.getTencommodity();
+                        Message message = Message.obtain();
+                        message.obj = tenCommodity;
+                        message.what = AppProperties.SEARCH_GET_GOODS;
+                        searchHandler.sendMessage(message);
+                        ((Activity) context).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(context, "获取商品推荐信息信息成功", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+        }.start();
     }
 
     private void addLovesList(final Context context, final LovesHandler lovesHandler, String session, String commodityId) {
         final FormBody.Builder builder = new FormBody.Builder();
-
         if (session == null) {
             Toast.makeText(context, "尚未登录，心愿单数据已加到本地数据库中", Toast.LENGTH_SHORT).show();
             MyOpenHelper myOpenHelper = new MyOpenHelper(context);
@@ -247,9 +321,9 @@ public class NetworkCommunicationService extends Service {
 
     private void getLovesList(final Context context, final LovesHandler lovesHandler, String session) {
         final FormBody.Builder builder = new FormBody.Builder();
-        if(session != null){
+        if (session != null) {
             builder.add("session", session);
-        }else{
+        } else {
             return;
         }
         new Thread() {

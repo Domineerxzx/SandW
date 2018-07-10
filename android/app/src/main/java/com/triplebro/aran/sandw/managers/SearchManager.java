@@ -33,6 +33,18 @@ public class SearchManager implements ServiceConnection {
         functionType = 1;
     }
 
+    public void getGoods(){
+        Intent intent = new Intent(context, NetworkCommunicationService.class);
+        context.bindService(intent,this,Context.BIND_AUTO_CREATE);
+        functionType = 2;
+    }
+
+    public void getBrands(){
+        Intent intent = new Intent(context, NetworkCommunicationService.class);
+        context.bindService(intent,this,Context.BIND_AUTO_CREATE);
+        functionType = 3;
+    }
+
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
@@ -42,8 +54,10 @@ public class SearchManager implements ServiceConnection {
                 myBinder.find(context,searchHandler,find);
                 break;
             case 2:
+                myBinder.getGoods(context,searchHandler);
                 break;
             case 3:
+                myBinder.getBrands(context,searchHandler);
                 break;
         }
     }

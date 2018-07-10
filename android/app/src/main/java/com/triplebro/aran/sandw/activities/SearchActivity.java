@@ -81,16 +81,15 @@ public class SearchActivity extends Activity implements View.OnClickListener {
     }
 
     private void initData() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        rv_maybe_content.setLayoutManager(linearLayoutManager);
         searchHandler = new SearchHandler(this, rv_maybe_content, ilv_history_content, ilv_sale_content);
         searchManager = new SearchManager(this,searchHandler);
         ll_maybe.setVisibility(View.VISIBLE);
         ll_search_result.setVisibility(View.GONE);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        rv_maybe_content.setLayoutManager(linearLayoutManager);
-        MaybeAdapter maybeAdapter = new MaybeAdapter(this);
-        rv_maybe_content.setAdapter(maybeAdapter);
-
+        searchManager.getGoods();
+        //searchManager.getBrands();
         SaleAdapter saleAdapter = new SaleAdapter(this);
         ilv_sale_content.setAdapter(saleAdapter);
         history = getSharedPreferences("history", MODE_PRIVATE);

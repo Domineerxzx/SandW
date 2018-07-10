@@ -4,13 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 
 import com.triplebro.aran.sandw.activities.SelectAllActivity;
+import com.triplebro.aran.sandw.adapters.MaybeAdapter;
+import com.triplebro.aran.sandw.beans.TenCommodityInfo;
 import com.triplebro.aran.sandw.managers.SearchManager;
 import com.triplebro.aran.sandw.properties.AppProperties;
 import com.triplebro.aran.sandw.views.InnerListView;
+
+import java.util.List;
 
 public class SearchHandler extends Handler {
 
@@ -44,6 +49,15 @@ public class SearchHandler extends Handler {
                 intent.putExtra("data", find);
                 context.startActivity(intent);
                 break;
+            case AppProperties.SEARCH_GET_GOODS:
+                List<TenCommodityInfo.TencommodityBean> data = (List<TenCommodityInfo.TencommodityBean>) msg.obj;
+                if (searchManager != null) {
+                    context.unbindService(searchManager);
+                }
+                MaybeAdapter maybeAdapter = new MaybeAdapter(context,data);
+                rv_maybe_content.setAdapter(maybeAdapter);
+                break;
+
         }
     }
 }

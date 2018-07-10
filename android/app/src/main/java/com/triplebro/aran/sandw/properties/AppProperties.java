@@ -48,8 +48,12 @@ public class AppProperties {
     public static final String SERVER_ADDRESS_OF_SELECT_ALL_BRAND = "http://120.25.96.141:8080/search/brandSearch";
     //TODO 获取心愿单信息
     public static final String SERVER_ADDRESS_OF_GET_LOVES_LIST = "http://120.25.96.141:8080/shopping/collectshow";
-    //TODO 获取心愿单信息
+    //TODO 添加心愿单信息
     public static final String SERVER_ADDRESS_OF_ADD_LOVES_LIST = "http://120.25.96.141:8080/shopping/collectinsert";
+    //TODO 获取搜索推荐商品信息
+    public static final String SERVER_ADDRESS_OF_SEARCH_GET_GOODS = "http://120.25.96.141:8080/recommend/tencommodity";
+    //TODO 获取搜索推荐品牌信息
+    public static final String SERVER_ADDRESS_OF_SEARCH_GET_BRANDS = "http://120.25.96.141:8080/recommend/fivebrand";
     //TODO 国家及地区
     public static final String[] COUNTRY_OR_AREA = {"中国内地"};
     //TODO 省
@@ -60,6 +64,7 @@ public class AppProperties {
 
     public static final int GET_GOODS_INFO = 1;
     public static final int SEARCH_FIND = 1;
+    public static final int SEARCH_GET_GOODS = 2;
     public static final int SHOP_BAG_SHOW = 1;
     public static final int SHOP_BAG_DELETE = 2;
     public static final int SHOP_BAG_ADD = 3;

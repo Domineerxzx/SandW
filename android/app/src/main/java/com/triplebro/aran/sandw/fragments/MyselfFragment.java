@@ -223,7 +223,9 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SharedPreferences.Editor edit = session.edit();
-                        edit.remove("session");
+                        edit.clear();
+                        edit.commit();
+
                         rl_login.setVisibility(View.GONE);
                         ll_unlogin.setVisibility(View.VISIBLE);
                         ll_cancellation.setVisibility(View.GONE);

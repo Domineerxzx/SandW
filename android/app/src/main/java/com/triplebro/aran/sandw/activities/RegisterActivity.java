@@ -14,7 +14,7 @@ import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.handlers.RegisterHandler;
 import com.triplebro.aran.sandw.managers.RegisterManager;
 
-public class RegisterActivity extends Activity implements View.OnClickListener{
+public class RegisterActivity extends Activity implements View.OnClickListener {
 
     private ImageView iv_close_create;
     private Button bt_create;
@@ -60,7 +60,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_close_create:
                 finish();
                 break;
@@ -69,7 +69,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 email = et_email.getText().toString().trim();
                 password = et_password.getText().toString().trim();
                 boolean checked = cb_agree.isChecked();
-                if(!checked){
+                if (!checked) {
                     Toast.makeText(this, "请阅读并同意条款", Toast.LENGTH_SHORT).show();
                     break;
                 }
@@ -96,8 +96,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
                 if (password.length() > 20) {
                     Toast.makeText(this, "密码太长啦！！！", Toast.LENGTH_SHORT).show();
                     break;
-                }else{
-                    registerManager = new RegisterManager(this, registerHandler,nickname,email,password);
+                } else {
+                    registerManager = new RegisterManager(this, registerHandler, nickname, email, password);
                     registerManager.register();
                     break;
                 }
@@ -112,6 +112,8 @@ public class RegisterActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(registerManager);
+        if (registerManager != null) {
+            unbindService(registerManager);
+        }
     }
 }

@@ -8,13 +8,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
+import com.triplebro.aran.sandw.beans.TenCommodityInfo;
+import com.triplebro.aran.sandw.cache.ImageCacheOP;
+import com.triplebro.aran.sandw.handlers.ImageHandler;
+
+import java.util.List;
 
 public class MaybeAdapter extends RecyclerView.Adapter<MaybeAdapter.ViewHolder> {
 
     private Context context;
+    private List<TenCommodityInfo.TencommodityBean> data;
 
-    public MaybeAdapter(Context context) {
+    public MaybeAdapter(Context context, List<TenCommodityInfo.TencommodityBean> data) {
         this.context = context;
+        this.data = data;
     }
 
     @Override
@@ -30,12 +37,12 @@ public class MaybeAdapter extends RecyclerView.Adapter<MaybeAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        holder.tv_maybe.setText(data.get(position).getBrandName());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return data.size();
     }
 
 

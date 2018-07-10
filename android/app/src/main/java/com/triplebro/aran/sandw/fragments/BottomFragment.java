@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.triplebro.aran.sandw.R;
-import com.triplebro.aran.sandw.fragmentReact.ReactBrandFragment;
 import com.triplebro.aran.sandw.fragmentReact.ReactFirstPageFragment;
 import com.triplebro.aran.sandw.fragmentReact.ReactLovesFragment;
 import com.triplebro.aran.sandw.handlers.FirstPageHandler;
@@ -63,7 +62,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         fragment_bottom = inflater.inflate(R.layout.fragment_bottom, null);
         initView();
-        setOnClick();
+        setOnClickListener();
         fragmentManager = getActivity().getFragmentManager();
         return fragment_bottom;
     }
@@ -94,7 +93,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void setOnClick() {
+    public void setOnClickListener() {
 
         ll_first.setOnClickListener(this);
         ll_type.setOnClickListener(this);
@@ -182,7 +181,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
     private void changeImageForButton(Button lastFunctionButton, Button onClickButton) {
         switch (lastFunctionButton.getId()) {
             case R.id.bt_first:
-                lastFunctionButton.setBackgroundResource(R.mipmap.ic_launcher);
+                lastFunctionButton.setBackgroundResource(R.mipmap.sandw_unclick);
                 break;
             case R.id.bt_type:
                 lastFunctionButton.setBackgroundResource(R.mipmap.type_unclick);
@@ -199,7 +198,7 @@ public class BottomFragment extends Fragment implements View.OnClickListener {
         }
         switch (onClickButton.getId()) {
             case R.id.bt_first:
-                onClickButton.setBackgroundResource(R.mipmap.ic_launcher_round);
+                onClickButton.setBackgroundResource(R.mipmap.sandw_click);
                 break;
             case R.id.bt_type:
                 onClickButton.setBackgroundResource(R.mipmap.type_click);

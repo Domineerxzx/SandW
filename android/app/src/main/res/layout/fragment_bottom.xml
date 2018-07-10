@@ -22,7 +22,7 @@
                 android:id="@+id/bt_first"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@mipmap/ic_launcher_round" />
+                android:background="@mipmap/sandw_click" />
 
             <TextView
                 android:id="@+id/tv_first"
