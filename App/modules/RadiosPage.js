@@ -22,13 +22,21 @@ export default class RadiosPage extends Component{
         }
     }
 
+
+    _selectRadio(id,name){
+        this.setState({initId:id,initName:name});
+
+        this.props.callback(name)
+    }
+
     render(){
         return(
             <View>
                 <RadioModal
                     selectionColor={"#000"}
                     selectedValue={this.state.initId}
-                    onValueChange={(id,name)=>this.setState({initId:id,initName:name})}
+                    onValueChange={(id,name)=>{this._selectRadio(id,name)}}
+                    // onValueChange={(id,name)=>this.setState({initId:id,initName:name})}
                 >
                     {this.renderSwiper(this.props.name.sizeStock)}
                 </RadioModal>

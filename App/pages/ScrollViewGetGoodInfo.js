@@ -21,8 +21,14 @@ export default class ScrollViewGetGoodInfo extends Component {
         super();
         this.state = {
             getTheImg: "???",
+            getTheSize:"请选择您的尺寸"
         }
     }
+
+    _selectRadio(str){
+        this.setState({getTheSize:str})
+    }
+
 
 
     render() {
@@ -52,15 +58,17 @@ export default class ScrollViewGetGoodInfo extends Component {
                         </View>
                     </View>
                     <View>
-                        <TouchableHighlight onPress={() => {
+                        <TouchableHighlight
+                            onPress={() => {
                             this.popupDialog.show()
                         }} style={{
                             alignItems: "center",
                             justifyContent: 'center', marginTop: 20
                         }}>
-                            <View style={styles.ChooseSizeView}>
+                            <View
+                                style={styles.ChooseSizeView}>
                                 <Text style={{marginRight: 120}}>
-                                    选择您的尺寸
+                                    {this.state.getTheSize}
                                 </Text>
                                 <Image style={{width: 20, resizeMode: "contain"}}
                                        source={require('../imges/extend.png')}/>
@@ -115,10 +123,16 @@ export default class ScrollViewGetGoodInfo extends Component {
                                 favorite tee feel.All-over mini C logo with contrast trim at neckline and
                                 sleeves.Fitted cotton-rich tee with raglan sleeves for ease.Signature striped twill
                                 tape detail at shoulder.Heritage C patch on sleeve.Please note that due to the
+                                garment-wash process, slight variations in color may occur.
+                            </Text>
+                            <Text style={{height:200,fontSize:25,color:"#fff"}}>Retro-sport Ringer Tee is garment-washed for a soft,
+                                favorite tee feel.All-over mini C logo with contrast trim at neckline and
+                                sleeves.Fitted cotton-rich tee with raglan sleeves for ease.Signature striped twill
+                                tape detail at shoulder.Heritage C patch on sleeve.Please note that due to the
                                 garment-wash process, slight variations in color may occur.</Text>
                         </View>
-
                     </View>
+
                 </View>
                 <PopupDialog
                     ref={(popupDialog) => {
@@ -126,9 +140,10 @@ export default class ScrollViewGetGoodInfo extends Component {
                     }}
                 >
                     <View style={{padding: 20}}>
-                        <RadiosPage name={parse}/>
+                        <RadiosPage callback={this._selectRadio.bind(this)} name={parse}/>
                     </View>
                 </PopupDialog>
+
             </ScrollView>
         )
     }
