@@ -16,7 +16,9 @@ export default class DescriptionFragment extends Component{
     constructor() {
         super();
         this.state={
-            getjson:"???"
+            getjson:"???",
+            updateId:"???",
+            updateSize:"???"
         }
     }
 
@@ -24,6 +26,24 @@ export default class DescriptionFragment extends Component{
         NativeModules.AransModules.getGoodInfo((result) => {this.setState({getjson:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.Tshirtvlaues);
     }
+
+    _addIDandSize(size) {
+
+        this.setState({
+            updateSize: size
+        });
+    }
+    _addShopBags(id, size){
+        if (id==="???"||size==="???"){
+            NativeModules.AransModules.SEND_LOG("错误"+id+"    "+size);
+
+        } else {
+            NativeModules.AransModules.SEND_LOG("添加购物袋"+id+"    "+size.toString());
+        }
+
+    }
+
+
     render(){
         if (this.state.getjson === "???") {
             return(
@@ -42,10 +62,13 @@ export default class DescriptionFragment extends Component{
                             <Image style={styles.TheBackButton} source={require('../imges/back.png')}/>
                         </View>
                         <ScrollView>
-                            <ScrollViewGetGoodInfo name={this.state.getjson}/>
+                            <ScrollViewGetGoodInfo callback={this._addIDandSize.bind(this)}
+                                name={this.state.getjson}/>
                         </ScrollView>
                         <View style={styles.ActionButtonStylesView}>
-                            <TouchableHighlight style={styles.ActionButtonStyles}>
+                            <TouchableHighlight
+                                onPress={()=>this._addShopBags(parse.id,this.state.updateSize)}
+                                style={styles.ActionButtonStyles}>
                                 <Text style={{fontWeight:"bold",fontSize:15,color:"#fff"}}>
                                     加入购物袋
                                 </Text>

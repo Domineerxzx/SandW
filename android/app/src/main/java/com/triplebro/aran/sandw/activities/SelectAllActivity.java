@@ -33,7 +33,7 @@ public class SelectAllActivity extends Activity implements DefaultHardwareBackBt
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "SandW4", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "BuyALLPages", null);
         setContentView(mReactRootView);
     }
 

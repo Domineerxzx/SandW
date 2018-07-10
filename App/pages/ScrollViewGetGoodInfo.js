@@ -21,12 +21,19 @@ export default class ScrollViewGetGoodInfo extends Component {
         super();
         this.state = {
             getTheImg: "???",
-            getTheSize:"请选择您的尺寸"
+            getTheSize:"请选择您的尺寸",
+            getTheId:"???"
         }
     }
 
     _selectRadio(str){
-        this.setState({getTheSize:str})
+        this.setState({getTheSize:str});
+        this._addInShoppingCar(str)
+    }
+
+
+    _addInShoppingCar(size){
+        this.props.callback(size)
     }
 
 
@@ -35,7 +42,6 @@ export default class ScrollViewGetGoodInfo extends Component {
 
 
         let parse = JSON.parse(this.props.name);
-
         return (
             <ScrollView>
                 <View>
