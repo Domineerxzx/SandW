@@ -19,6 +19,10 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         final ContentValues contentValues = new ContentValues();
         contentValues.put("commodityId","21");
         db.insert(AppProperties.LOVES_TABLE,null,contentValues);
+        db.insert(AppProperties.LOVES_TABLE,null,contentValues);
+        db.insert(AppProperties.LOVES_TABLE,null,contentValues);
+        db.insert(AppProperties.LOVES_TABLE,null,contentValues);
+        db.insert(AppProperties.LOVES_TABLE,null,contentValues);
     }
 
     @Override
