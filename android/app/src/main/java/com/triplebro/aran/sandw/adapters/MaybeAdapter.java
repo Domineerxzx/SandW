@@ -18,6 +18,7 @@ public class MaybeAdapter extends RecyclerView.Adapter<MaybeAdapter.ViewHolder> 
 
     private Context context;
     private List<TenCommodityInfo.TencommodityBean> data;
+    private ImageCacheOP imageCacheOP;
 
     public MaybeAdapter(Context context, List<TenCommodityInfo.TencommodityBean> data) {
         this.context = context;
@@ -38,6 +39,11 @@ public class MaybeAdapter extends RecyclerView.Adapter<MaybeAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tv_maybe.setText(data.get(position).getBrandName());
+        String fileName = data.get(position).getBrandName()+"";
+        ImageHandler imageHandler = new ImageHandler(context, holder.iv_maybe, fileName);
+        imageCacheOP = new ImageCacheOP(context);
+        imageCacheOP.getImageFromURL(data.get(position).getPhotoDoc() + "1.png",
+                fileName, imageHandler);
     }
 
     @Override

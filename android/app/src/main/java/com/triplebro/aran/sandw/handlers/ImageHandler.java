@@ -22,7 +22,7 @@ public class ImageHandler extends Handler {
     @Override
     public void handleMessage(Message msg) {
         Bitmap bitmap;
-        bitmap = BitmapFactory.decodeFile(fileName, null);
+        bitmap = BitmapFactory.decodeFile(context.getCacheDir()+"/"+fileName+".png", null);
         iv_goods.setImageBitmap(bitmap);
     }
 }
