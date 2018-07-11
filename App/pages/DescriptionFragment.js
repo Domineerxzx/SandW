@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     },
     ActionButtonStylesView: {
         position: "absolute",
-        marginTop: 540,
+        marginTop: 600,
         marginLeft: (Dimensions.get('window').width - 280) / 2,
     },
     ActionButtonStyles: {

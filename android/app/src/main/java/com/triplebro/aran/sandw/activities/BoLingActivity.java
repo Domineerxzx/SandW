@@ -25,7 +25,7 @@ public class BoLingActivity extends Activity {
         setContentView(R.layout.activity_bo_ling);
         RelativeLayout rl_bo_ling = (RelativeLayout) findViewById(R.id.rl_bo_ling);
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.1f, 1.0f);
-        alphaAnimation.setDuration(2000);//设置动画播放时长1000毫秒（1秒）
+        alphaAnimation.setDuration(2500);//设置动画播放时长1000毫秒（1秒）
         rl_bo_ling.startAnimation(alphaAnimation);
         //设置动画监听
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
@@ -39,6 +39,7 @@ public class BoLingActivity extends Activity {
             public void onAnimationEnd(Animation animation) {
                 Intent intent = new Intent(BoLingActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
 
             @Override
