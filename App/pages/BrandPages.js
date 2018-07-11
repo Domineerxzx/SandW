@@ -82,7 +82,7 @@ export default class BrandPages extends Component {
                                     fontWeight: 'bold'
                                 }}>特别为您推荐的{parseJSONList[0].itemName}</Text>
                                 <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
-                                    <TouchableHighlight onPress={()=>{this.jumpClick(parseJSONList[0].itemName)}}>
+                                    <TouchableHighlight underlayColor={"#fff"} activeOpacity={0.5} onPress={()=>{this.jumpClick(parseJSONList[0].itemName)}}>
                                         <Text>选购全部 ></Text>
                                     </TouchableHighlight>
                                 </View>
@@ -100,7 +100,7 @@ export default class BrandPages extends Component {
                                     fontWeight: 'bold'
                                 }}>特别为您推荐的{parseJSONList[1].itemName}</Text>
                                 <View style={{marginRight: 20, justifyContent: 'flex-end'}}>
-                                    <TouchableHighlight onPress={()=>{this.jumpClick(parseJSONList[1].itemName)}}>
+                                    <TouchableHighlight underlayColor={"#fff"} activeOpacity={0.5} onPress={()=>{this.jumpClick(parseJSONList[1].itemName)}}>
                                         <Text>选购全部 ></Text>
                                     </TouchableHighlight>
                                 </View>

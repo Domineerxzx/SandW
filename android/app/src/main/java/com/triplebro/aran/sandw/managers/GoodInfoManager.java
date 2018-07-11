@@ -13,12 +13,10 @@ public class GoodInfoManager implements ServiceConnection {
 
     private Context context;
     private GoodInfoHandler goodInfoHandler;
-    private String session;
 
-    public GoodInfoManager(Context context, GoodInfoHandler goodInfoHandler, String session) {
+    public GoodInfoManager(Context context, GoodInfoHandler goodInfoHandler) {
         this.context = context;
         this.goodInfoHandler = goodInfoHandler;
-        this.session = session;
         goodInfoHandler.setGoodInfoManager(this);
     }
     public void getGoodInfo(){
@@ -29,7 +27,7 @@ public class GoodInfoManager implements ServiceConnection {
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
         NetworkCommunicationService.MyBinder myBinder = (NetworkCommunicationService.MyBinder) service;
-        myBinder.getGoodInfo(context,goodInfoHandler,session);
+        myBinder.getGoodInfo(context,goodInfoHandler);
     }
 
     @Override

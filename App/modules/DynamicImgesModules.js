@@ -35,7 +35,7 @@ export default class DynamicImgesModules extends Component {
         for (let i = 0; i < list.length; i++) {
             let infoList = list[i];
             arr.push(
-                <TouchableHighlight underlayColor={"#fff"} activeOpacity={0.5}  key={i} onPress={() => {
+                <TouchableHighlight underlayColor={"#fff"} activeOpacity={0.5} key={i} onPress={() => {
                     this._onPressGetId(list[i].id.toString());
                     NativeModules.AransModules.startGoodInfoActivity()
                 }}>
