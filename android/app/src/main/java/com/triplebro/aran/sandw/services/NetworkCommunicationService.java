@@ -135,8 +135,8 @@ public class NetworkCommunicationService extends Service {
             NetworkCommunicationService.this.getBrand(context, brandListHandler);
         }
 
-        public void getGoodInfo(Context context, GoodInfoHandler goodInfoHandler, String session) {
-            NetworkCommunicationService.this.getGoodInfo(context, goodInfoHandler, session);
+        public void getGoodInfo(Context context, GoodInfoHandler goodInfoHandler) {
+            NetworkCommunicationService.this.getGoodInfo(context, goodInfoHandler);
         }
 
         public void selectAll(Context context, SelectAllHandler selectAllHandler) {
@@ -574,10 +574,9 @@ public class NetworkCommunicationService extends Service {
         }.start();
     }
 
-    private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler, String session) {
+    private void getGoodInfo(final Context context, final GoodInfoHandler goodInfoHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
         builder.add("commodityId", commodityId);
-        builder.add("session", session);
         new Thread() {
             @Override
             public void run() {

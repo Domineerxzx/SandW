@@ -112,7 +112,7 @@ public class AransModules extends ReactContextBaseJavaModule {
 
     //TODO Rn调用添加购物袋
     @ReactMethod
-    public void addShopBag(String commodityId,String sizeName) {
+    public void addShopBag(String commodityId, String sizeName) {
         ShopBagHandler shopBagHandler = new ShopBagHandler(mContext);
         ShopBagManager shopBagManager = new ShopBagManager(mContext, shopBagHandler, mContext.getSharedPreferences("session", MODE_PRIVATE).getString("session", null), commodityId, sizeName);
         shopBagManager.addShopBag();
@@ -127,31 +127,24 @@ public class AransModules extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void TanToast(String msg){
+    public void TanToast(String msg) {
         Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
     }
 
     //TODO Rn调用Android开启商品详情页
     @ReactMethod
     public void startGoodInfoActivity() {
-        SharedPreferences sharedPreferences = mContext.getSharedPreferences("session", MODE_PRIVATE);
-        String session = sharedPreferences.getString("session", null);
-        if (session == null) {
-            Toast.makeText(mContext, "还没登录呢，快去登录吧！！！", Toast.LENGTH_SHORT).show();
-        } else {
-            GoodInfoHandler goodInfoHandler = new GoodInfoHandler(mContext);
-            GoodInfoManager goodInfoManager = new GoodInfoManager(mContext, goodInfoHandler, session);
-            goodInfoManager.getGoodInfo();
 
-            Toast.makeText(mContext, "跳转页面成功", Toast.LENGTH_SHORT).show();
-        }
+        GoodInfoHandler goodInfoHandler = new GoodInfoHandler(mContext);
+        GoodInfoManager goodInfoManager = new GoodInfoManager(mContext, goodInfoHandler);
+        goodInfoManager.getGoodInfo();
     }
 
     //TODO Rn调用Android开启选购全部页
     @ReactMethod
     public void startSelectAllActivity() {
         SelectAllHandler selectAllHandler = new SelectAllHandler(mContext);
-        SelectAllManager selectAllManager = new SelectAllManager(mContext,selectAllHandler);
+        SelectAllManager selectAllManager = new SelectAllManager(mContext, selectAllHandler);
         selectAllManager.selectAll();
         Toast.makeText(mContext, "跳转页面成功", Toast.LENGTH_SHORT).show();
     }
