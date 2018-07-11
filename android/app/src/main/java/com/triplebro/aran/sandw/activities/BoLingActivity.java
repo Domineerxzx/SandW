@@ -31,8 +31,7 @@ public class BoLingActivity extends Activity {
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                //TODO
-                //监听网络状态
+
             }
 
             //动画结束
