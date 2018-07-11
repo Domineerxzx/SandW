@@ -12,7 +12,6 @@ import {Text, Dimensions, StyleSheet, View, Image, TouchableHighlight, ScrollVie
 import PopupDialog from "react-native-popup-dialog/src/PopupDialog";
 import RadiosPage from "../modules/RadiosPage";
 import BigDataSwiperModules from "../modules/BigDataSwiperModules";
-import DynamicImgesModules from "../modules/DynamicImgesModules";
 
 export default class ScrollViewGetGoodInfo extends Component {
 

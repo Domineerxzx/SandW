@@ -49,11 +49,11 @@ export default class BuyALLPages extends Component{
         }else {
             let parse = JSON.parse(this.state.vlaues);
             return (
-                <View>
+                <ScrollView>
 
                     <DynamicImgesModules callback={this._onPressGetId.bind(this)} name={parse.rangeSearch}/>
 
-                </View>
+                </ScrollView>
             )
         }
     }

@@ -34,10 +34,12 @@ export default class DescriptionFragment extends Component{
         });
     }
     _addShopBags(id, size){
-        if (id==="???"||size==="???"){
+        if (id==="???"){
             NativeModules.AransModules.SEND_LOG("错误"+id+"    "+size);
 
         } else {
+
+            NativeModules.AransModules.addShopBag(id.toString(),"M");
             NativeModules.AransModules.SEND_LOG("添加购物袋"+id+"    "+size.toString());
         }
 
@@ -56,7 +58,7 @@ export default class DescriptionFragment extends Component{
         }else {
             let parse = JSON.parse(this.state.getjson);
             return(
-                <View>
+                <View style={{backgroundColor:"#fff"}}>
                     <View style={styles.AllTheView}>
                         <View style={{backgroundColor:"#fff"}}>
                             <Image style={styles.TheBackButton} source={require('../imges/back.png')}/>
