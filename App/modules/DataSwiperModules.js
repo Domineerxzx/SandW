@@ -51,8 +51,8 @@ export default class DataSwiperModules extends Component{
                       style={{flexDirection:"row",
                           backgroundColor:"#FFF",
                           alignItems:"center",
-                          justifyContent:'center',width:Dimensions.get('window').width,height:200}}>
-                    <Image style={{resizeMode:"contain",width:Dimensions.get('window').width,height:200}} source={{uri:bean}}/>
+                          justifyContent:'center',width:Dimensions.get('window').width,height:160}}>
+                    <Image style={{marginTop:20,resizeMode:"contain",width:Dimensions.get('window').width,height:160}} source={{uri:bean}}/>
                 </View>
             )
         }

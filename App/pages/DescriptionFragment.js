@@ -100,7 +100,7 @@ export default class DescriptionFragment extends Component {
                             <Text style={styles.TitleText}>
                                 {parse.brandName}
                             </Text>
-                            <TouchableHighlight onPress={() => {
+                            <TouchableHighlight underlayColor={"#fff"} activeOpacity={0.5} onPress={() => {
                                 this.changImg(parse,this.state.loveId)
                             }}>
                                 {this.changeTheImgView(this.state.loveId)}

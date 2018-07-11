@@ -64,6 +64,7 @@ export default class ScrollViewGetGoodInfo extends Component {
                     </View>
                     <View>
                         <TouchableHighlight
+                            underlayColor={"#fff"} activeOpacity={0.5}
                             onPress={() => {
                             this.popupDialog.show()
                         }} style={{
