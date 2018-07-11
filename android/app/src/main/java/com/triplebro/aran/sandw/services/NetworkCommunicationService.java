@@ -279,12 +279,7 @@ public class NetworkCommunicationService extends Service {
                             message.obj = res;
                             message.what = AppProperties.LOVES_LIST_ADD;
                             lovesHandler.sendMessage(message);
-                            ((Activity) context).runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(context, "获取心愿单信息成功", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+
                         }
                     });
                 }

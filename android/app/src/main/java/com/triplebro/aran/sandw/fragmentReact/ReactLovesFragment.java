@@ -44,7 +44,7 @@ public class ReactLovesFragment extends Fragment {
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
-        mReactRootView.startReactApplication(mReactInstanceManager, "SandW4", null);
+        mReactRootView.startReactApplication(mReactInstanceManager, "LovePages", null);
         initView();
         initData();
         return mReactRootView;

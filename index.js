@@ -7,6 +7,7 @@ import DescriptionTheFragment from "./App/pages/DescriptionTheFragment";
 import BuyALLPages from "./App/pages/BuyALLPages";
 import DescriptionFragment from "./App/pages/DescriptionFragment";
 import BrandPages from "./App/pages/BrandPages";
+import LovePages from "./App/pages/LovePages";
 
 // AppRegistry.registerComponent('SandW', () => NavigatorManager);
 AppRegistry.registerComponent('SandW',()=>NavigatorManager);
@@ -15,3 +16,4 @@ AppRegistry.registerComponent('SandW_BR',()=>BrandPages);
 AppRegistry.registerComponent('SandW3',()=>DynamicImgesModules);
 AppRegistry.registerComponent('SandW4',()=>ToucheTest);
 AppRegistry.registerComponent('BuyALLPages',()=>BuyALLPages);
+AppRegistry.registerComponent('LovePages',()=>LovePages);

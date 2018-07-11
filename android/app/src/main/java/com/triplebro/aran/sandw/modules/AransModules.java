@@ -126,6 +126,10 @@ public class AransModules extends ReactContextBaseJavaModule {
         lovesManager.addLovesList();
     }
 
+    @ReactMethod
+    public void TanToast(String msg){
+        Toast.makeText(mContext, msg, Toast.LENGTH_SHORT).show();
+    }
 
     //TODO Rn调用Android开启商品详情页
     @ReactMethod

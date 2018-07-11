@@ -52,7 +52,9 @@ export default class BuyALLPages extends Component{
                 <ScrollView>
 
                     <DynamicImgesModules callback={this._onPressGetId.bind(this)} name={parse.rangeSearch}/>
+                    <View style={{height:100}}>
 
+                    </View>
                 </ScrollView>
             )
         }
