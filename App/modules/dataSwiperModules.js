@@ -44,13 +44,15 @@ export default class DataSwiperModules extends Component{
         let banners=[];
         for (let i=0;i<beans.length;i++){
 
-            let bean = beans[i];
+            let bean = beans[i].imgUrl;
 
             banners.push(
                 <View key={i}
-                      style={{width:400 ,height:200}}>
-                    <Text>{bean.title}</Text>
-                    <Image source={{uri:bean.imgUrl}}/>
+                      style={{flexDirection:"row",
+                          backgroundColor:"#FFF",
+                          alignItems:"center",
+                          justifyContent:'center',width:Dimensions.get('window').width,height:200}}>
+                    <Image style={{resizeMode:"contain",width:Dimensions.get('window').width,height:200}} source={{uri:bean}}/>
                 </View>
             )
         }
