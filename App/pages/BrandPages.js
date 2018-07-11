@@ -34,7 +34,7 @@ export default class BrandPages extends Component {
     }
 
     componentWillMount() {
-        NativeModules.AransModules.setTitle("T恤#高跟鞋");
+        NativeModules.AransModules.setTitle("休闲运动服#中国西装");
         NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }

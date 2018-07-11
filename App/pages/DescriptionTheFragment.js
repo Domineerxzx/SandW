@@ -20,7 +20,7 @@ export default class DescriptionTheFragment extends Component{
     }
 
     componentWillMount() {
-        NativeModules.AransModules.setTitle("T恤#高跟鞋");
+        NativeModules.AransModules.setTitle("休闲运动服#日本西装");
         NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
     }
 

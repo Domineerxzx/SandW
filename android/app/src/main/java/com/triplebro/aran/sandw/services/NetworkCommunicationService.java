@@ -186,7 +186,7 @@ public class NetworkCommunicationService extends Service {
 
     private void getBrands(final Context context, final SearchHandler searchHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SEARCH_GET_BRANDS, builder, new Callback() {
@@ -219,7 +219,7 @@ public class NetworkCommunicationService extends Service {
 
     private void getGoods(final Context context, final SearchHandler searchHandler) {
         final FormBody.Builder builder = new FormBody.Builder();
-        new Thread(){
+        new Thread() {
             @Override
             public void run() {
                 HttpUtils.sendOkHttpRequest(AppProperties.SERVER_ADDRESS_OF_SEARCH_GET_GOODS, builder, new Callback() {
@@ -324,6 +324,10 @@ public class NetworkCommunicationService extends Service {
         if (session != null) {
             builder.add("session", session);
         } else {
+            Toast.makeText(context, "心愿单为空，请去添加心愿单", Toast.LENGTH_SHORT).show();
+            Message obtain = Message.obtain();
+            obtain.what = AppProperties.LOVES_LIST_EMPTY;
+            lovesHandler.sendMessage(obtain);
             return;
         }
         new Thread() {
@@ -642,7 +646,7 @@ public class NetworkCommunicationService extends Service {
         final FormBody.Builder builder = new FormBody.Builder();
         String title = AransModules.title;
         if (title == null) {
-            title = "T恤#高跟鞋";
+            title = "休闲运动服#中国西装";
         }
         builder.add("recommendation", title);
         new Thread() {
@@ -1091,12 +1095,17 @@ public class NetworkCommunicationService extends Service {
                             edit.commit();
                             MyOpenHelper myOpenHelper = new MyOpenHelper(context);
                             SQLiteDatabase writableDatabase = myOpenHelper.getWritableDatabase();
+                            //writableDatabase.delete(AppProperties.LOVES_TABLE, "_id = ?", new String[]{"0"});
                             Cursor query = writableDatabase.query(AppProperties.LOVES_TABLE, null, null, null, null, null, null);
-                            if (query != null && query.getCount() > 0)
+                            if (query != null && query.getCount() > 0) {
                                 while (query.moveToNext()) {
                                     String commodityId = query.getString(1);
                                     addLovesList(context, loginInfoBean.getSession(), commodityId);
                                 }
+                            }
+                            writableDatabase.delete(AppProperties.LOVES_TABLE, null, null);
+                            query.close();
+                            writableDatabase.close();
                             Message message = new Message();
                             message.obj = res;
                             loginHandler.sendMessage(message);

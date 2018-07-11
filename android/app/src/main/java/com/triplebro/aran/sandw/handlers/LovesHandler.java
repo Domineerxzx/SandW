@@ -45,6 +45,9 @@ public class LovesHandler extends Handler {
             case AppProperties.LOVES_LIST_ADD:
                 Toast.makeText(context, "添加成功", Toast.LENGTH_SHORT).show();
                 break;
+            case AppProperties.LOVES_LIST_EMPTY:
+
+                break;
         }
 
     }

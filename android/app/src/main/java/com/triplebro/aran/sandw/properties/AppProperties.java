@@ -71,5 +71,6 @@ public class AppProperties {
     public static final int SHOP_BAG_EMPTY = 0;
     public static final int LOVES_LIST_SHOW = 1;
     public static final int LOVES_LIST_ADD = 2;
+    public static final int LOVES_LIST_EMPTY = 3;
     public static final String LOVES_TABLE = "loves";
 }
