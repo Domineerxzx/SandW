@@ -442,12 +442,6 @@ public class NetworkCommunicationService extends Service {
                         Message message = Message.obtain();
                         message.what = AppProperties.SHOP_BAG_ADD;
                         shopBagHandler.sendMessage(message);
-                        ((Activity) context).runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(context, "添加购物袋信息成功", Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     }
                 });
             }

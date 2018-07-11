@@ -17,7 +17,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table "+ AppProperties.LOVES_TABLE +"(_id Integer primary key autoincrement,commodityId varchar(20))");
         final ContentValues contentValues = new ContentValues();
-        contentValues.put("commodityId","11");
+        contentValues.put("commodityId","21");
         db.insert(AppProperties.LOVES_TABLE,null,contentValues);
     }
 
