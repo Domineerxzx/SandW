@@ -37,9 +37,18 @@ export default class LovePages extends Component{
                  </Text>
              </View>
          )
-        }else {
+        }
+        else {
 
             let parse = JSON.parse(this.state.vlaues);
+
+            if (parse.collectshow.length===0){
+                return(
+                    <View style={{alignItems:"center"}}>
+                        <Text style={{color:"#7d7d7d"}}>您的心愿单为空~  快去选购商品吧</Text>
+                    </View>
+                )
+            }
             return (
                 <ScrollView>
                     <DynamicImgesModules callback={this._onPressGetId.bind(this)}

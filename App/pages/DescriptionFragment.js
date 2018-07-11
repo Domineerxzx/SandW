@@ -71,7 +71,7 @@ export default class DescriptionFragment extends Component {
 
         } else {
 
-            NativeModules.AransModules.addShopBag(id.toString(), "M");
+            NativeModules.AransModules.addShopBag(id.toString(), null);
             NativeModules.AransModules.SEND_LOG("添加购物袋" + id + "    " + size.toString());
         }
 
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     },
     ActionButtonStylesView: {
         position: "absolute",
-        marginTop: 510,
+        marginTop: 540,
         marginLeft: (Dimensions.get('window').width - 280) / 2,
     },
     ActionButtonStyles: {

@@ -34,7 +34,7 @@ export default class TheFirstPageForAndroid extends Component {
     }
 
     componentWillMount() {
-        NativeModules.AransModules.setTitle("休闲运动服#中国西装");
+        NativeModules.AransModules.setTitle("连衣裙#手包");
         NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
@@ -61,8 +61,11 @@ export default class TheFirstPageForAndroid extends Component {
     render() {
         if (this.state.vlaues==="???"){
             return(
-                <View>
-                    <Image style={{width:Dimensions.get('window').width}} source={require('../imges/01415f5996acdaa8012156038f6b78.gif')}/>
+                <View style={{
+                    flexDirection: "row", alignItems: "center",
+                    justifyContent: 'center'
+                }}>
+                    <Image style={{marginTop:(Dimensions.get('window').width-50)/2,width:100,height:100,resizeMode: "contain"}} source={require('../imges/wait.png')}/>
                 </View>
             )
         }else {
@@ -76,7 +79,7 @@ export default class TheFirstPageForAndroid extends Component {
                             </View>
                             <View style={styles.BuyJewelryView}>
                                 <Text style={styles.BuyJewelry}>
-                                    选购首饰
+                                    选购精品
                                 </Text>
                                 <DataSwiperModules style={styles.SwiperView}/>
                             </View>

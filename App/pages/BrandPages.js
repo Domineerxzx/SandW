@@ -34,7 +34,7 @@ export default class BrandPages extends Component {
     }
 
     componentWillMount() {
-        NativeModules.AransModules.setTitle("休闲运动服#中国西装");
+        NativeModules.AransModules.setTitle("连衣裙#手包");
         NativeModules.AransModules.getGoodsInfo((result) => {this.setState({vlaues:result})});
         NativeModules.AransModules.SEND_LOG("这是第一次"+this.state.vlaues);
     }
@@ -61,8 +61,11 @@ export default class BrandPages extends Component {
     render() {
         if (this.state.vlaues==="???"){
             return(
-                <View>
-                    <Image style={{width:Dimensions.get('window').width}} source={require('../imges/01415f5996acdaa8012156038f6b78.gif')}/>
+                <View style={{
+                    flexDirection: "row", alignItems: "center",
+                    justifyContent: 'center'
+                }}>
+                    <Image style={{marginTop:(Dimensions.get('window').width-50)/2,width:100,height:100,resizeMode: "contain"}} source={require('../imges/wait.png')}/>
                 </View>
             )
         }else {
@@ -84,7 +87,7 @@ export default class BrandPages extends Component {
                                     </TouchableHighlight>
                                 </View>
                             </View>
-                            <View style={{flexDirection: 'column', alignItems: 'center'}}>
+                            <View style={{marginTop:20,flexDirection: 'column', alignItems: 'center'}}>
                                 <DynamicImgesModules callback={this._onPressGetId.bind(this)}
                                     name={parseJSONList[0].itemInfo}
                                                      style={{flexDirection: 'row'}}/>
@@ -125,7 +128,7 @@ export default class BrandPages extends Component {
 }
 const styles = StyleSheet.create({
     dianjiaoshi:{
-      height:100,
+      height:210,
     },
     allTheView: {
         paddingLeft: Dimensions.get('window').width * 0.03,

@@ -30,7 +30,9 @@ export default class RadiosPage extends Component{
     }
 
     render(){
+
         return(
+
             <View>
                 <RadioModal
                     selectionColor={"#000"}

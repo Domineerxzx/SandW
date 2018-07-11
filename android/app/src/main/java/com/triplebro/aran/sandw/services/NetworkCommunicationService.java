@@ -635,7 +635,7 @@ public class NetworkCommunicationService extends Service {
         final FormBody.Builder builder = new FormBody.Builder();
         String title = AransModules.title;
         if (title == null) {
-            title = "休闲运动服#中国西装";
+            title = "连衣裙#手包";
         }
         builder.add("recommendation", title);
         new Thread() {
