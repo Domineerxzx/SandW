@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.fragments.BottomFragment;
@@ -63,8 +65,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 startActivity(search);
                 break;
             case R.id.iv_shopbag:
-                Intent shopBag = new Intent(this, ShopBagActivity.class);
-                startActivity(shopBag);
+                SharedPreferences session = getSharedPreferences("session", MODE_PRIVATE);
+                String session1 = session.getString("session", null);
+                if (session1 == null) {
+                    Toast.makeText(this, "未登录,还不能进入购物车，前去登录吧！！！", Toast.LENGTH_SHORT).show();
+                } else{
+                    Intent shopBag = new Intent(this, ShopBagActivity.class);
+                    startActivity(shopBag);
+                }
                 break;
         }
     }

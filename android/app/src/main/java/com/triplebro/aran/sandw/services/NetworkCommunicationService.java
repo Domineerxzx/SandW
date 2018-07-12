@@ -22,6 +22,7 @@ import com.triplebro.aran.sandw.beans.AddAddressInfoBean;
 import com.triplebro.aran.sandw.beans.AddressInfoBean;
 import com.triplebro.aran.sandw.beans.BrandInfo;
 import com.triplebro.aran.sandw.beans.ChangeAddressInfoBean;
+import com.triplebro.aran.sandw.beans.FindInfo;
 import com.triplebro.aran.sandw.beans.LoginInfoBean;
 import com.triplebro.aran.sandw.beans.RegisterInfoBean;
 import com.triplebro.aran.sandw.beans.ShopBagInfo;
@@ -539,10 +540,21 @@ public class NetworkCommunicationService extends Service {
                     public void onResponse(Call call, Response response) throws IOException {
                         String res = response.body().string();
                         System.out.println(res);
-                        Message message = Message.obtain();
-                        message.what = AppProperties.SEARCH_FIND;
-                        message.obj = res;
-                        searchHandler.sendMessage(message);
+                        FindInfo findInfo = gson.fromJson(res, FindInfo.class);
+                        if(findInfo.getRangeSearch().size() == 0){
+                            ((Activity)context).runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(context, "未找到该数据", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }else{
+                            Message message = Message.obtain();
+                            message.what = AppProperties.SEARCH_FIND;
+                            message.obj = res;
+                            searchHandler.sendMessage(message);
+                        }
                     }
                 });
             }

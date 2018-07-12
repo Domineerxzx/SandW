@@ -89,7 +89,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         ll_maybe.setVisibility(View.VISIBLE);
         ll_search_result.setVisibility(View.GONE);
         searchManager.getGoods();
-        //searchManager.getBrands();
+        /*//searchManager.getBrands();
         SaleAdapter saleAdapter = new SaleAdapter(this);
         ilv_sale_content.setAdapter(saleAdapter);
         history = getSharedPreferences("history", MODE_PRIVATE);
@@ -102,7 +102,7 @@ public class SearchActivity extends Activity implements View.OnClickListener {
             rl_history.setVisibility(View.VISIBLE);
             historyAdapter = new HistoryAdapter(this, historyAll);
             ilv_history_content.setAdapter(historyAdapter);
-        }
+        }*/
     }
 
     private void initView() {

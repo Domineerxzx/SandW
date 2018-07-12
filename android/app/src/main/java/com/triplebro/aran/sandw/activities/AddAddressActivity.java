@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.triplebro.aran.sandw.R;
 import com.triplebro.aran.sandw.beans.AddAddressInfoBean;
@@ -117,6 +118,17 @@ public class AddAddressActivity extends Activity implements View.OnClickListener
                 break;
             case R.id.bt_add_address:
                 //TODO 添加地址信息到服务器
+                if(et_address_name.getText().toString().length() == 0||
+                        et_address_postcode.getText().toString().length() == 0||
+                        et_address_surname.getText().toString().length() == 0||
+                        et_address_detailed.getText().toString().length() == 0||
+                        et_address_telephone.getText().toString().length() == 0||
+                        tv_address_area.getText().toString().length() == 0||
+                        tv_address_area_province.getText().toString().length() == 0||
+                        et_address_area_city.getText().toString().length() == 0){
+                    Toast.makeText(this, "输入不能为空！！！", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 addAddressInfoBean = new AddAddressInfoBean();
                 addAddressInfoBean.setName(et_address_name.getText().toString().trim());
                 addAddressInfoBean.setPostCode(et_address_postcode.getText().toString().trim());
